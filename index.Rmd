@@ -1,0 +1,68 @@
+---
+title: "Article Long Title"
+author:
+  - name: Gregory Macfarlane
+    email: gregmacfarlane@byu.edu
+    affiliation: Brigham Young University
+    footnote: 1
+  - name: Cosmo Cougar
+    email: bob@example.com
+    affiliation: Brigham Young University
+  - name: Masters Student
+    email: cat@example.com
+    affiliation: Brigham Young University
+    footnote: 2
+address:
+  - code: Brigham Young University
+    address: Civil and Environmental Engineering Department, 430 Engineering Building, Provo, Utah 84602
+  - code: Another University
+    address: Some Other Place
+footnote:
+  - code: 1
+    text: "Corresponding Author"
+  - code: 2
+    text: "Present affiliation: some nice job"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: article
+journal: "Submitted to Journal"
+bibliography: [book.bib]
+csl: elsevier-harvard-italics.csl
+link-citations: yes
+abstract: |
+  This is where the abstract should go.
+description: "A short description"
+layout: "3p, authoryear"
+keywords:
+  - Accessibility
+  - Passive Data
+  - Location Choice
+---
+
+# Introduction {#intro}
+
+
+This repository serves as a template both in how to write a report, and how
+to do so in RStudio and Bookdown. The parent repository is available as a free
+template at [https://github.com/byu-transpolab/template_bookdown](https://github.com/byu-transpolab/template_bookdown).
+
+The advice in this document comes from numerous sources. Some of it is my own, some
+has been shared by others. Particular note belongs to:
+
+  - Laurie Garrow
+  - Lisa Rosenstein
+  - Kara Kockelman
+  
+The introduction of your report is not simply an "introduction", but rather a 
+**motivation** of why your project matters. What is the cost of not solving 
+this problem? What have been previous attempts to solve this problem? The *why*
+is more important than the *what*. Why is this article worthy of archiving?
+
+A three or four-paragraph structure can work well here.
+
+  1. Identify the problem and why it matters.
+  2. A high-level overview of some previous attempts to solve it, and why those 
+  attempts were limited (this might be two paragraphs).
+  2. Describe the approach (very briefly), and provide an overview of what is 
+  to come. "In this paper we present ..."
+  

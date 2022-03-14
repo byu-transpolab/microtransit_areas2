@@ -1,0 +1,8 @@
+# Conclusions
+
+This section need not be overly long. You should address any limitations of your
+results, such as dependence on underlying assumptions or geographic scope. 
+You should also provide a map for future research.
+
+Finally, you should underline the contributions of this work and any practical 
+relevance.

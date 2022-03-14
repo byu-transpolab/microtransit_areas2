@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+*.aux
+*.log
+*.spl
+
+_bookdown_files/
+_targets/

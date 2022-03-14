@@ -1,0 +1,91 @@
+# Methods
+
+```{r setup, include = FALSE}
+# load R libraries here; the `include` flag in the chunk options above tells
+# whether to print the results or not. Usually you don't want to print the
+# library statements, or any code on the pdf.
+
+# Main Packages ========
+# I use these in every doc
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(modelsummary)
+
+options(dplyr.summarise.inform = FALSE)
+
+# Other packages ------
+# These sometimes get used, and sometimes don't.
+library(mlogit)
+
+# Instructions and options =========
+# prints missing data in tables as blank space
+options(knitr.kable.NA = '') 
+# tells kableExtra to not load latex table packages in the chunk output
+options(kableExtra.latex.load_packages = FALSE) 
+
+# round and format numbers that get printed in the text of the article.
+inline_hook <- function(x) {
+  if (is.numeric(x)) {
+    format(x, digits = 3, big.mark = ",")
+  } else x
+}
+knitr::knit_hooks$set(inline = inline_hook)
+
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+
+# options for latex-only output
+if(knitr::is_latex_output()) {
+  knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+} 
+
+```
+
+In this chapter, you describe the approach you have taken on the problem. This 
+usually involves a discussion about both the data you used and the models you
+applied.
+
+## Data
+
+Discuss where you got your data, how you cleaned it, any assumptions you made.
+
+```{r load_data}
+data("Car", package = "mlogit")
+car_mlogit <- Car %>%
+  mutate(choice = gsub("choice", "", choice)) %>%
+  dfidx( varying = 5:70, shape = "wide", choice = "choice", sep = "")
+```
+
+Often there will be a table describing summary statistics of your dataset.
+Table \@ref(tab:datasummary) shows a nice table using the [`datasummary`](https://vincentarelbundock.github.io/modelsummary/articles/datasummary.html) 
+functions in the `modelsummary` package.
+
+```{r datasummary}
+datasummary_balance(
+  ~type, 
+  data = car_mlogit %>% 
+    select(type, fuel, price, range, size), 
+  dinm = FALSE,
+  title = "Descriptive Statistics of Dataset"
+  )
+```
+
+## Models
+
+If your work is mostly a new model, you probably will have introduced some
+details in the literature review. But this is where you describe the
+mathematical construction of your model, the variables it uses, and other
+things. Some methods are so common (linear regression) that it is unnecessary to
+explore them in detail. But others will need to be described, often with
+mathematics.  For example, the probability of a multinomial logit model is
+
+\begin{equation}
+  P_i(X_{in}) = \frac{e^{X_{in}\beta_i}}{\sum_{j \in J}e^{X_{jn}\beta_j}}
+  (\#eq:mnl)
+\end{equation}
+
+Use [LaTeX mathematics](https://www.overleaf.com/learn/latex/mathematical_expressions). 
+You'll want to number display equations so that you can
+refer to them later in the manuscript. Other simpler math can be described inline,
+like saying that $i, j \in J$. Details on using equations in bookdown are available
+[here](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html).

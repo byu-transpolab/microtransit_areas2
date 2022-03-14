@@ -1,0 +1,20 @@
+# Literature
+
+Here is a review of existing methods. Use the `bookdown` [@xie2015] package
+referencing system to make it easy on yourself.
+
+The literature review is not simply a "review" or a list of what has been 
+done in the past. This needs to a thoughtful synthesis that accomplishes two
+things:
+
+  - Shows that you understand the previous efforts that other people have
+    made on this problem.
+  - Identifies the limitation or the gap in those previous efforts. 
+  
+You will have already mentioned this gap in the introduction, but here you need
+to build a solid case for why what you are doing is a meaningful contribution.
+    
+Literature reviews do not have a specific guidelines for length or number of
+citations. It's more about making a rhetorical argument; if it's a new problem
+then the review can be shorter. But you'll need to refer to previous attempts at
+the problem, the methods you are trying, and other things.

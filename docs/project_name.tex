@@ -1,0 +1,358 @@
+\documentclass[3p, authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
+%%% Begin My package additions %%%%%%%%%%%%%%%%%%%
+\usepackage[hyphens]{url}
+
+  \journal{Submitted to Journal} % Sets Journal name
+
+
+\usepackage{lineno} % add
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%% end my additions to header
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \usepackage{fontspec}
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\bibliographystyle{elsarticle-harv}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={Article Long Title},
+            colorlinks=false,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+
+\setcounter{secnumdepth}{5}
+% Pandoc toggle for numbering sections (defaults to be off)
+
+% Pandoc citation processing
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+% for Pandoc 2.8 to 2.10.1
+\newenvironment{cslreferences}%
+  {}%
+  {\par}
+% For Pandoc 2.11+
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+% Pandoc header
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+
+
+\begin{document}
+\begin{frontmatter}
+
+  \title{Article Long Title}
+    \author[Brigham Young University]{Gregory Macfarlane\corref{1}}
+   \ead{gregmacfarlane@byu.edu} 
+    \author[Brigham Young University]{Cosmo Cougar}
+   \ead{bob@example.com} 
+    \author[Brigham Young University]{Masters Student\corref{2}}
+   \ead{cat@example.com} 
+      \address[Brigham Young University]{Civil and Environmental Engineering Department, 430 Engineering Building, Provo, Utah 84602}
+    \address[Another University]{Some Other Place}
+      \cortext[1]{Corresponding Author}
+    \cortext[2]{Present affiliation: some nice job}
+  
+  \begin{abstract}
+  This is where the abstract should go.
+  \end{abstract}
+   \begin{keyword} Accessibility Passive Data Location Choice\end{keyword}
+ \end{frontmatter}
+
+\hypertarget{intro}{%
+\section{Introduction}\label{intro}}
+
+This repository serves as a template both in how to write a report, and how
+to do so in RStudio and Bookdown. The parent repository is available as a free
+template at \url{https://github.com/byu-transpolab/template_bookdown}.
+
+The advice in this document comes from numerous sources. Some of it is my own, some
+has been shared by others. Particular note belongs to:
+
+\begin{itemize}
+\tightlist
+\item
+  Laurie Garrow
+\item
+  Lisa Rosenstein
+\item
+  Kara Kockelman
+\end{itemize}
+
+The introduction of your report is not simply an ``introduction,'' but rather a
+\textbf{motivation} of why your project matters. What is the cost of not solving
+this problem? What have been previous attempts to solve this problem? The \emph{why}
+is more important than the \emph{what}. Why is this article worthy of archiving?
+
+A three or four-paragraph structure can work well here.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Identify the problem and why it matters.
+\item
+  A high-level overview of some previous attempts to solve it, and why those
+  attempts were limited (this might be two paragraphs).
+\item
+  Describe the approach (very briefly), and provide an overview of what is
+  to come. ``In this paper we present \ldots{}''
+\end{enumerate}
+
+\hypertarget{literature}{%
+\section{Literature}\label{literature}}
+
+Here is a review of existing methods. Use the \texttt{bookdown} (\protect\hyperlink{ref-xie2015}{Xie, 2015}) package
+referencing system to make it easy on yourself.
+
+The literature review is not simply a ``review'' or a list of what has been
+done in the past. This needs to a thoughtful synthesis that accomplishes two
+things:
+
+\begin{itemize}
+\tightlist
+\item
+  Shows that you understand the previous efforts that other people have
+  made on this problem.
+\item
+  Identifies the limitation or the gap in those previous efforts.
+\end{itemize}
+
+You will have already mentioned this gap in the introduction, but here you need
+to build a solid case for why what you are doing is a meaningful contribution.
+
+Literature reviews do not have a specific guidelines for length or number of
+citations. It's more about making a rhetorical argument; if it's a new problem
+then the review can be shorter. But you'll need to refer to previous attempts at
+the problem, the methods you are trying, and other things.
+
+\hypertarget{methods}{%
+\section{Methods}\label{methods}}
+
+In this chapter, you describe the approach you have taken on the problem. This
+usually involves a discussion about both the data you used and the models you
+applied.
+
+\hypertarget{data}{%
+\subsection{Data}\label{data}}
+
+Discuss where you got your data, how you cleaned it, any assumptions you made.
+
+Often there will be a table describing summary statistics of your dataset.
+Table \ref{tab:datasummary} shows a nice table using the \href{https://vincentarelbundock.github.io/modelsummary/articles/datasummary.html}{\texttt{datasummary}}
+functions in the \texttt{modelsummary} package.
+
+\begin{table}
+
+\caption{\label{tab:datasummary}Descriptive Statistics of Dataset}
+\centering
+\begin{tabular}[t]{llrrrrrrrrrrrr}
+\toprule
+\multicolumn{2}{c}{ } & \multicolumn{2}{c}{regcar (N=10930)} & \multicolumn{2}{c}{sportuv (N=1048)} & \multicolumn{2}{c}{sportcar (N=880)} & \multicolumn{2}{c}{stwagon (N=4446)} & \multicolumn{2}{c}{truck (N=5628)} & \multicolumn{2}{c}{van (N=4992)} \\
+\cmidrule(l{3pt}r{3pt}){3-4} \cmidrule(l{3pt}r{3pt}){5-6} \cmidrule(l{3pt}r{3pt}){7-8} \cmidrule(l{3pt}r{3pt}){9-10} \cmidrule(l{3pt}r{3pt}){11-12} \cmidrule(l{3pt}r{3pt}){13-14}
+  &    & Mean & Std. Dev. & Mean  & Std. Dev.  & Mean   & Std. Dev.   & Mean    & Std. Dev.    & Mean     & Std. Dev.     & Mean      & Std. Dev.     \\
+\midrule
+price &  & 4.2 & 1.9 & 4.7 & 1.9 & 4.8 & 2.2 & 4.1 & 1.9 & 4.2 & 2.0 & 4.2 & 1.9\\
+range &  & 237.2 & 94.5 & 241.6 & 94.7 & 233.6 & 96.7 & 238.7 & 94.3 & 238.2 & 93.1 & 236.8 & 94.7\\
+size &  & 2.4 & 0.8 & 2.1 & 1.0 & 1.4 & 1.0 & 2.3 & 0.8 & 2.4 & 0.8 & 2.5 & 0.7\\
+\midrule
+ &  & N & Pct. & N & Pct. & N & Pct. & N & Pct. & N & Pct. & N & Pct.\\
+fuel & gasoline & 2704 & 24.7 & 280 & 26.7 & 218 & 24.8 & 1096 & 24.7 & 1413 & 25.1 & 1247 & 25.0\\
+ & methanol & 2729 & 25.0 & 246 & 23.5 & 225 & 25.6 & 1091 & 24.5 & 1445 & 25.7 & 1216 & 24.4\\
+ & cng & 2767 & 25.3 & 260 & 24.8 & 238 & 27.0 & 1109 & 24.9 & 1360 & 24.2 & 1282 & 25.7\\
+ & electric & 2730 & 25.0 & 262 & 25.0 & 199 & 22.6 & 1150 & 25.9 & 1410 & 25.1 & 1247 & 25.0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\hypertarget{models}{%
+\subsection{Models}\label{models}}
+
+If your work is mostly a new model, you probably will have introduced some
+details in the literature review. But this is where you describe the
+mathematical construction of your model, the variables it uses, and other
+things. Some methods are so common (linear regression) that it is unnecessary to
+explore them in detail. But others will need to be described, often with
+mathematics. For example, the probability of a multinomial logit model is
+
+\begin{equation}
+  P_i(X_{in}) = \frac{e^{X_{in}\beta_i}}{\sum_{j \in J}e^{X_{jn}\beta_j}}
+  \label{eq:mnl}
+\end{equation}
+
+Use \href{https://www.overleaf.com/learn/latex/mathematical_expressions}{LaTeX mathematics}.
+You'll want to number display equations so that you can
+refer to them later in the manuscript. Other simpler math can be described inline,
+like saying that \(i, j \in J\). Details on using equations in bookdown are available
+\href{https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html}{here}.
+
+\hypertarget{applications}{%
+\section{Applications}\label{applications}}
+
+This section might be called ``Results'' instead of ``Applications,'' depending
+on what it is that you are working on. But you'll probably say something like
+``The initial model estimation results are given in Table \ref{tab:estimation-results}.''
+That table is created with the \texttt{modelsummary()} package and function.
+
+\begin{table}
+
+\caption{\label{tab:estimation-results}Model Estimation Results}
+\centering
+\begin{tabular}[t]{lcc}
+\toprule
+  & Model 1 & Model 2\\
+\midrule
+typesportuv & \num{0.833} (\num{5.945}) & \num{0.815} (\num{5.805})\\
+ & (\num{0.140}) & (\num{0.140})\\
+typesportcar & \num{0.614} (\num{4.192}) & \num{0.628} (\num{4.259})\\
+ & (\num{0.146}) & (\num{0.147})\\
+typestwagon & \num{-1.415} (\num{-22.979}) & \num{-1.428} (\num{-23.119})\\
+ & (\num{0.062}) & (\num{0.062})\\
+typetruck & \num{-1.002} (\num{-20.600}) & \num{-1.010} (\num{-20.673})\\
+ & (\num{0.049}) & (\num{0.049})\\
+typevan & \num{-0.812} (\num{-17.431}) & \num{-0.806} (\num{-17.183})\\
+ & (\num{0.047}) & (\num{0.047})\\
+price & \num{-0.221} (\num{-8.475}) & \num{-0.191} (\num{-7.130})\\
+ & (\num{0.026}) & (\num{0.027})\\
+range &  & \num{0.003} (\num{18.923})\\
+ &  & (\num{0.000})\\
+\midrule
+Num.Obs. & \num{4654} & \num{4654}\\
+AIC & \num{15460.9} & \num{15075.0}\\
+BIC &  & \\
+Log.Lik. & \num{-7724.469} & \num{-7530.510}\\
+rho2 & \num{-0.052} & \num{-0.026}\\
+rho20 & \num{0.074} & \num{0.097}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+With those results presented, you can go into a discussion of what they mean.
+first, discuss the actual results that are shown in the table, and then any
+interesting or unintuitive observations.
+
+\hypertarget{additional-analysis}{%
+\subsection{Additional Analysis}\label{additional-analysis}}
+
+Usually, it is good to use your model for something.
+
+\begin{itemize}
+\tightlist
+\item
+  Hypothetical policy analysis
+\item
+  Statistical validation effort
+\item
+  Equity or impact analysis
+\end{itemize}
+
+If the analysis is substantial, it might become its own top-level section.
+
+\hypertarget{conclusions}{%
+\section{Conclusions}\label{conclusions}}
+
+This section need not be overly long. You should address any limitations of your
+results, such as dependence on underlying assumptions or geographic scope.
+You should also provide a map for future research.
+
+Finally, you should underline the contributions of this work and any practical
+relevance.
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-xie2015}{}}%
+Xie, Y., 2015. Dynamic documents with {R} and knitr, 2nd ed. Chapman; Hall/CRC, Boca Raton, Florida.
+
+\end{CSLReferences}
+
+
+\end{document}
