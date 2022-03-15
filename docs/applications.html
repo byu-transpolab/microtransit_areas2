@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 4 Applications | Article Long Title</title>
+  <title> 4 Applications | Simulating and prioritizing service areas for regionally exclusive microtransit operations.</title>
   <meta name="description" content="A short description" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 4 Applications | Article Long Title" />
+  <meta property="og:title" content=" 4 Applications | Simulating and prioritizing service areas for regionally exclusive microtransit operations." />
   <meta property="og:type" content="book" />
   
   
@@ -16,14 +16,14 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 4 Applications | Article Long Title" />
+  <meta name="twitter:title" content=" 4 Applications | Simulating and prioritizing service areas for regionally exclusive microtransit operations." />
   
   <meta name="twitter:description" content="A short description" />
   
 
 
 
-<meta name="date" content="2022-01-07" />
+<meta name="date" content="2022-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,7 +167,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Short Title</a></li>
+<li><a href="./">Microtransit Areas</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -195,7 +195,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Article Long Title</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Simulating and prioritizing service areas for regionally exclusive microtransit operations.</a>
           </h1>
         </div>
 
@@ -209,12 +209,12 @@ div.csl-indent {
 on what it is that you are working on. But you’ll probably say something like
 “The initial model estimation results are given in Table <a href="applications.html#tab:estimation-results">4.1</a>.”
 That table is created with the <code>modelsummary()</code> package and function.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="applications.html#cb3-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(choice <span class="sc">~</span> type <span class="sc">+</span> price <span class="sc">|</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">data =</span> car_mlogit)</span>
-<span id="cb3-2"><a href="applications.html#cb3-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">update</span>(model1, .<span class="sc">~</span>. <span class="sc">+</span> range)</span>
-<span id="cb3-3"><a href="applications.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="applications.html#cb3-4" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;Model 1&quot;</span> <span class="ot">=</span> model1, <span class="st">&quot;Model 2&quot;</span> <span class="ot">=</span> model2)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="applications.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(models, <span class="at">estimate =</span> <span class="st">&quot;{estimate} ({statistic})&quot;</span>,</span>
-<span id="cb4-2"><a href="applications.html#cb4-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;Model Estimation Results&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="applications.html#cb4-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(choice <span class="sc">~</span> type <span class="sc">+</span> price <span class="sc">|</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">data =</span> car_mlogit)</span>
+<span id="cb4-2"><a href="applications.html#cb4-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">update</span>(model1, .<span class="sc">~</span>. <span class="sc">+</span> range)</span>
+<span id="cb4-3"><a href="applications.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="applications.html#cb4-4" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;Model 1&quot;</span> <span class="ot">=</span> model1, <span class="st">&quot;Model 2&quot;</span> <span class="ot">=</span> model2)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="applications.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(models, <span class="at">estimate =</span> <span class="st">&quot;{estimate} ({statistic})&quot;</span>,</span>
+<span id="cb5-2"><a href="applications.html#cb5-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">&quot;Model Estimation Results&quot;</span>)</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:estimation-results">Table 4.1: </span>Model Estimation Results
@@ -506,7 +506,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["project_name.pdf", "project_name.epub"],
+"download": ["microtransit_areas.pdf", "microtransit_areas.epub"],
 "search": {
 "engine": "fuse",
 "options": null

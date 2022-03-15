@@ -1,22 +1,29 @@
 ---
-title: "Article Long Title"
+title: "Simulating and prioritizing service areas for regionally exclusive microtransit operations."
 author:
   - name: Gregory Macfarlane
     email: gregmacfarlane@byu.edu
-    affiliation: Brigham Young University
+    affiliation: BYU
     footnote: 1
-  - name: Cosmo Cougar
-    email: bob@example.com
-    affiliation: Brigham Young University
-  - name: Masters Student
-    email: cat@example.com
-    affiliation: Brigham Young University
-    footnote: 2
+  - name: S. Hayden Atchley
+    email: shaydenatch@gmail.com
+    affiliation: BYU
+  - name: Christopher S. Day
+    email: christophersday@gmail.com
+    affiliation: BYU
+  - name: Gregory Erhardt
+    email: greg.erhardt@uky.edu
+    affiliation: UKY
+  - name: Zach Needell
+    email: zaneedell@lbl.gov
+    affiliation: LBNL
 address:
-  - code: Brigham Young University
-    address: Civil and Environmental Engineering Department, 430 Engineering Building, Provo, Utah 84602
-  - code: Another University
-    address: Some Other Place
+  - code: BYU
+    address: Brigham Young University, Civil and Construction Engineering Department
+  - code: UKY
+    address: University of Kentucky, Department of Civil Engineering
+  - code: LBNL
+    address: Lawrence Berkeley National Laboratory
 footnote:
   - code: 1
     text: "Corresponding Author"

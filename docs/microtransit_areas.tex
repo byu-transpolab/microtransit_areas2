@@ -52,7 +52,7 @@
 \hypersetup{breaklinks=true,
             bookmarks=true,
             pdfauthor={},
-            pdftitle={Article Long Title},
+            pdftitle={Simulating and prioritizing service areas for regionally exclusive microtransit operations.},
             colorlinks=false,
             urlcolor=blue,
             linkcolor=magenta,
@@ -120,21 +120,28 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
+\usepackage{siunitx}
+\newcolumntype{d}{S[input-symbols = ()]}
 
 
 
 \begin{document}
 \begin{frontmatter}
 
-  \title{Article Long Title}
-    \author[Brigham Young University]{Gregory Macfarlane\corref{1}}
+  \title{Simulating and prioritizing service areas for regionally exclusive microtransit operations.}
+    \author[BYU]{Gregory Macfarlane\corref{1}}
    \ead{gregmacfarlane@byu.edu} 
-    \author[Brigham Young University]{Cosmo Cougar}
-   \ead{bob@example.com} 
-    \author[Brigham Young University]{Masters Student\corref{2}}
-   \ead{cat@example.com} 
-      \address[Brigham Young University]{Civil and Environmental Engineering Department, 430 Engineering Building, Provo, Utah 84602}
-    \address[Another University]{Some Other Place}
+    \author[BYU]{S. Hayden Atchley}
+   \ead{shaydenatch@gmail.com} 
+    \author[BYU]{Christopher S. Day}
+   \ead{christophersday@gmail.com} 
+    \author[UKY]{Gregory Erhardt}
+   \ead{greg.erhardt@uky.edu} 
+    \author[LBNL]{Zach Needell}
+   \ead{zaneedell@lbl.gov} 
+      \address[BYU]{Brigham Young University, Civil and Construction Engineering Department}
+    \address[UKY]{University of Kentucky, Department of Civil Engineering}
+    \address[LBNL]{Lawrence Berkeley National Laboratory}
       \cortext[1]{Corresponding Author}
     \cortext[2]{Present affiliation: some nice job}
   
@@ -247,6 +254,29 @@ fuel & gasoline & 2704 & 24.7 & 280 & 26.7 & 218 & 24.8 & 1096 & 24.7 & 1413 & 2
  & cng & 2767 & 25.3 & 260 & 24.8 & 238 & 27.0 & 1109 & 24.9 & 1360 & 24.2 & 1282 & 25.7\\
  & electric & 2730 & 25.0 & 262 & 25.0 & 199 & 22.6 & 1150 & 25.9 & 1410 & 25.1 & 1247 & 25.0\\
 \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+
+\caption{\label{tab:areas-vehicles}Estimated Vehicle Requirements}
+\centering
+\begin{tabular}[t]{l|r|r|r|r|r|r|r}
+\hline
+Area & Population & Households & Area [sq km] & Area / S.SLCO & Est. Vehicles: Area & Households / S.SLCO & Est. Vehicles: Households\\
+\hline
+Davis & 101506 & 32741 & 77.26 & 0.43 & 6 & 0.47 & 6\\
+\hline
+Lehi & 95664 & 24757 & 70.49 & 0.39 & 5 & 0.35 & 5\\
+\hline
+South SL Co & 246020 & 70099 & 181.35 & 1.00 & 12 & 1.00 & 12\\
+\hline
+South SL Co: East & 91678 & 27985 & 58.94 & 0.32 & 4 & 0.40 & 5\\
+\hline
+South SL Co: West & 193336 & 54412 & 139.54 & 0.77 & 10 & 0.78 & 10\\
+\hline
+Westside SLC & 87671 & 29909 & 41.46 & 0.23 & 3 & 0.43 & 6\\
+\hline
 \end{tabular}
 \end{table}
 
