@@ -8,31 +8,21 @@ library(tarchetypes)
 # and tar_read(summary) to view the results.
 
 # Set target-specific options such as packages.
-tar_option_set(packages = c("tidyverse", "bookdown"))
+tar_option_set(packages = c("tidyverse", "bookdown", "sf", "tidycensus", "ggspatial"))
+options(tigris_use_cache = TRUE)
 
 # Define custom functions and other global objects.
 # This is where you write source(\"R/functions.R\")
 # if you keep your functions in external scripts.
-source("R/functions.R")
+source("R/maps.R")
 
 
 data_targets <- tar_plan(
-  data =  data.frame(x = sample.int(100), y = sample.int(100)),
-  summary = summ(data) # Call your custom functions as needed.
+  tar_target(area_shp, "data/areas.geojson", format = "file"),
+  tar_target(areas, st_read(area_shp) %>% st_transform(26912)),
+  tar_target(area_pop, get_census_pop(areas)),
+  tar_target(loading, area_loading(area_pop))
 )
 
 
 
-# Targets necessary to build the book / article
-book_targets <- tar_plan(
-  report = bookdown::render_book(input = ".", output_yaml = "_output.yml", 
-                                 config_file = "_bookdown.yml")
-)
-
-
-
-# run all targets
-tar_plan(
-  data = data_targets, 
-  book = book_targets
-)

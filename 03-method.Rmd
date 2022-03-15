@@ -70,6 +70,24 @@ datasummary_balance(
   )
 ```
 
+```{r areas-vehicles}
+tar_load(loading)
+
+kbl(loading %>% 
+      select(-housing_units) %>%
+      mutate(
+        area = as.numeric(area) / 1e6,
+        area_share = as.numeric(area_share),
+        area_vehicles = as.numeric(area_vehicles)), caption = "Estimated Vehicle Requirements",
+    col.names = c("Area", "Population", "Households", "Area [sq km]", "Area / S.SLCO", "Est. Vehicles: Area",
+                  "Households / S.SLCO", "Est. Vehicles: Households"),
+    digits = 2
+) %>%
+  kable_styling()
+```
+
+
+
 ## Models
 
 If your work is mostly a new model, you probably will have introduced some
@@ -89,3 +107,7 @@ You'll want to number display equations so that you can
 refer to them later in the manuscript. Other simpler math can be described inline,
 like saying that $i, j \in J$. Details on using equations in bookdown are available
 [here](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html).
+
+
+
+
