@@ -1,20 +1,4 @@
-make_map <- function(areas){
-  
-  pal <- wes_palette("Zissou1", 6, type = "continuous")
-  
-  ggplot(areas, aes(fill = name)) + 
-    annotation_map_tile("cartolight", zoom = 12) +
-    geom_sf(alpha = 0.5) +
-    scale_fill_manual("Area Name", values = pal) + 
-  theme(
-    axis.text.x=element_blank(),
-    axis.text.y=element_blank(),axis.ticks=element_blank(),
-    axis.title.x=element_blank(),
-    axis.title.y=element_blank(),
-    legend.text=element_text(size=8), #change font size of legend text
-    legend.title=element_text(size=8)
-  )
-}
+
 
 #' Get the population of census tracts
 #' 
