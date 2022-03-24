@@ -93,7 +93,7 @@ kbl(loading %>%
 
 ```{r areas-map}
 tar_load(areas)
-pal <- wes_palette("Zissou1", 6, type = "continuous")
+pal <- wes_palette("Zissou1", nrow(areas), type = "continuous")
 if(knitr::is_html_output()){
   # interactive map for web
   leaflet(areas %>% st_transform(4326)) %>%
