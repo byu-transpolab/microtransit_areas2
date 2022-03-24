@@ -116,6 +116,20 @@ if(knitr::is_html_output()){
 }
 ```
 
+```{r scenarios}
+tribble(
+  ~Scenario, ~	Zones,
+  "Existing",	"South SL Co, Westside",
+  "Split", 	"South SL Co: West, South SL Co: East, Westside",
+  "A",	"Existing + Davis",
+  "B",	"Existing + Lehi",
+  "C",	"Existing + Sandy",
+  "D",	"Existing + Davis, Lehi, Sandy",
+) %>%
+  kbl() %>%
+  kable_styling()
+```
+
 
 ## Models
 
