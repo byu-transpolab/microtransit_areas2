@@ -1,75 +1,195 @@
 ---
-title: "Simulating and prioritizing service areas for regionally exclusive microtransit operations."
+title: Simulating and prioritizing service areas for regionally exclusive microtransit
+  operations.
 author:
-  - name: Gregory Macfarlane
-    email: gregmacfarlane@byu.edu
-    affiliation: BYU
-    footnote: 1
-  - name: S. Hayden Atchley
-    email: shaydenatch@gmail.com
-    affiliation: BYU
-  - name: Christopher S. Day
-    email: christophersday@gmail.com
-    affiliation: BYU
-  - name: Gregory Erhardt
-    email: greg.erhardt@uky.edu
-    affiliation: UKY
-  - name: Zach Needell
-    email: zaneedell@lbl.gov
-    affiliation: LBNL
-address:
-  - code: BYU
-    address: Brigham Young University, Civil and Construction Engineering Department
-  - code: UKY
-    address: University of Kentucky, Department of Civil Engineering
-  - code: LBNL
-    address: Lawrence Berkeley National Laboratory
-footnote:
-  - code: 1
-    text: "Corresponding Author"
-  - code: 2
-    text: "Present affiliation: some nice job"
+- name: Gregory Macfarlane
+  email: gregmacfarlane@byu.edu
+  affiliation: BYU
+  footnote: 1
+- name: S. Hayden Atchley
+  email: shaydenatch@gmail.com
+  affiliation: BYU
+- name: Christopher S. Day
+  email: christophersday@gmail.com
+  affiliation: BYU
+- name: Gregory Erhardt
+  email: greg.erhardt@uky.edu
+  affiliation: UKY
+- name: Zach Needell
+  email: zaneedell@lbl.gov
+  affiliation: LBNL
 date: "`r Sys.Date()`"
+footnote:
+- code: 1
+  text: Corresponding Author
+- code: 2
+  text: 'Present affiliation: some nice job'
+address:
+- code: BYU
+  address: Brigham Young University, Civil and Construction Engineering Department
+- code: UKY
+  address: University of Kentucky, Department of Civil Engineering
+- code: LBNL
+  address: Lawrence Berkeley National Laboratory
 site: bookdown::bookdown_site
 documentclass: article
-journal: "Submitted to Journal"
-bibliography: [book.bib]
+journal: Submitted to Journal
+bibliography: book.bib
 csl: elsevier-harvard-italics.csl
 link-citations: yes
 abstract: |
   This is where the abstract should go.
-description: "A short description"
-layout: "3p, authoryear"
+description: A short description
+layout: 3p, authoryear
 keywords:
-  - Accessibility
-  - Passive Data
-  - Location Choice
+- Accessibility
+- Passive Data
+- Location Choice
 ---
 
-# Introduction {#intro}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
+```{r load_packages, include=FALSE}
+if(!require(pacman)) install.packages("pacman")
+pacman::p_load(data.table, tidyverse, remotes)
+install_github("atchley-sha/R-packageSHA") #a few formatting functions
+library(packageSHA)
+```
 
-This repository serves as a template both in how to write a report, and how
-to do so in RStudio and Bookdown. The parent repository is available as a free
-template at [https://github.com/byu-transpolab/template_bookdown](https://github.com/byu-transpolab/template_bookdown).
+```{r source_functions}
+source("R/event_handler.R")
+```
 
-The advice in this document comes from numerous sources. Some of it is my own, some
-has been shared by others. Particular note belongs to:
+```{r load_coltypes}
+event_cols <- read_csv("data/event_cols.csv", col_names = F)
+coltypes <- set_names(pull(event_cols, 2), pull(event_cols ,1))
+```
 
-  - Laurie Garrow
-  - Lisa Rosenstein
-  - Kara Kockelman
+```{r set_cols}
+cols <- c("person",
+          "vehicle",
+          "time",
+          "type",
+          "mode",
+          "legMode",
+          "vehicleType",
+          "vehicle",
+          "arrivalTime",
+          "departureTime",
+          "departTime",
+          "length",
+          "numPassengers",
+          "actType",
+          "personalVehicleAvailable"
+)
+```
+
+```{r read_data}
+rh_info <- read_csv("data/rh_info.csv")
+# ex1 <- read_csv("data/existing_1.csv", col_types = coltypes) %>%
+#   format_events(cols)
+# ex5 <- read_csv("data/existing_5.csv", col_types = coltypes) %>%
+#   format_events(cols)
+# b1 <- read_csv("data/b_1.csv", col_types = coltypes) %>%
+#   format_events(cols)
+# b5 <- read_csv("data/b_5.csv", col_types = coltypes) %>%
+#   format_events(cols)
+# 
+# write_csv(ex1, "data/ex1.csv")
+# write_csv(ex5, "data/ex5.csv")
+# write_csv(b1, "data/b1.csv")
+# write_csv(b5, "data/b5.csv")
+
+# a1 <- read_csv("data/a_1.csv", col_types = coltypes) %>%
+#   format_events(cols)
+# a5 <- read_csv("data/a_5.csv", col_types = coltypes) %>%
+#   format_events(cols)
+# sp1 <- read_csv("data/split_1.csv", col_types = coltypes) %>%
+#   format_events(cols)
+# sp5 <- read_csv("data/split_5.csv", col_types = coltypes) %>%
+#   format_events(cols)
+
+# write_csv(a1, "data/a1.csv")
+# write_csv(a5, "data/a5.csv")
+# write_csv(sp1, "data/sp1.csv")
+# write_csv(sp5, "data/sp5.csv")
+
+ex1 <- read_csv("data/ex1.csv", col_types = coltypes)
+ex5 <- read_csv("data/ex5.csv", col_types = coltypes)
+b1 <- read_csv("data/b1.csv", col_types = coltypes)
+b5 <- read_csv("data/b5.csv", col_types = coltypes)
+
+a1 <- read_csv("data/a1.csv", col_types = coltypes)
+a5 <- read_csv("data/a5.csv", col_types = coltypes)
+sp1 <- read_csv("data/sp1.csv", col_types = coltypes)
+sp5 <- read_csv("data/sp5.csv", col_types = coltypes)
+
+events_list <- list(Existing_1 = ex1,
+                    Existing_5 = ex5,
+                    Split_1 = sp1,
+                    Split_5 = sp5,
+                    A_1 = a1,
+                    A_5 = a5,
+                    B_1 = b1,
+                    B_5 = b5
+                    ) 
   
-The introduction of your report is not simply an "introduction", but rather a 
-**motivation** of why your project matters. What is the cost of not solving 
-this problem? What have been previous attempts to solve this problem? The *why*
-is more important than the *what*. Why is this article worthy of archiving?
+```
 
-A three or four-paragraph structure can work well here.
 
-  1. Identify the problem and why it matters.
-  2. A high-level overview of some previous attempts to solve it, and why those 
-  attempts were limited (this might be two paragraphs).
-  2. Describe the approach (very briefly), and provide an overview of what is 
-  to come. "In this paper we present ..."
-  
+Analysis
+=========================
+
+```{r}
+all_join(events_list, mode_choice, "mode", "mode") %>% 
+  my_kbl()
+all_join(events_list, rh_pass, "numPassengers", "num_passengers") %>% 
+  my_kbl()
+
+reserve_times <- all_join(events_list, rh_times, "rhReserveOutcome", "Outcome")
+reserve_times %>% 
+  pivot_longer(-1, "scenario") %>% 
+  ggplot(aes(x = scenario, y = value, fill = Outcome)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label = round(value,2)),
+            position = position_dodge(width = 0.9),
+            vjust = - 0.2) +
+  theme_minimal() +
+  labs(title = "Median time between rh reservation and outcome", 
+       y = "Time (min)",
+       x = "Scenario")
+
+for(i in 1:length(events_list)){
+  rh_travel_times(events_list[[i]]) %>% 
+    {ggplot(., aes(x = area, y = travelTime)) +
+    geom_boxplot(na.rm = T) +
+        labs(x = "Zone",
+             y = "Travel time (min)",
+             title = paste("Travel times in",
+                           names(events_list)[i],
+                           "scenario"))} %>% 
+    print()
+}  
+```
+
+```{r}
+rh_info <- rh_info %>% 
+  mutate(shift_start = str_replace(shifts, "\\{(\\d+):\\d+\\}", "\\1") %>% 
+           as.numeric(),
+         shift_end = str_replace(shifts,"\\{\\d+:(\\d+)\\}", "\\1") %>% 
+           as.numeric(),
+         operating_hours = (shift_end - shift_start) / 3600) %>% 
+  select(Area, fleetSize, operating_hours)
+
+
+all_join(events_list, rh_utilization, "area", "Area", rh_info) %>% 
+  my_kbl()
+```
+
+
+
+
+
+
