@@ -1,0 +1,8 @@
+Area,fleetSize,shifts,vehicleType,rideHailManagerId
+Westside SLC,8,{14400:87300},micro,GlobalRHM
+South SL Co,17,{14400:87300},micro,GlobalRHM
+South SL Co: East,7,{14400:87300},micro,GlobalRHM
+South SL Co: West,14,{14400:87300},micro,GlobalRHM
+Davis,8,{14400:87300},micro,GlobalRHM
+Lehi,7,{14400:87300},micro,GlobalRHM
+Sandy,16,{14400:87300},micro,GlobalRHM
