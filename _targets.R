@@ -1,5 +1,8 @@
 library(targets)
 library(tarchetypes)
+library(future)
+library(future.apply)
+library(furrr)
 # This is an example _targets.R file. Every
 # {targets} pipeline needs one.
 # Use tar_script() to create _targets.R and tar_edit()
