@@ -25,6 +25,8 @@ source("R/event_handler.R")
 source("R/data_helpers.R")
 source("R/data_viz.R")
 
+# note: a script to copy the files from Box is in the sh/ folder
+
 
 data_targets <- tar_plan(
   # tar_target(area_shp, "data/areas.geojson", format = "file"),
@@ -33,24 +35,28 @@ data_targets <- tar_plan(
   # tar_target(loading, area_loading(area_pop)),
   
   ###Event handler data
-  tar_target(ex1, "data/Existing_1.csv", format = "file"),
-  tar_target(ex5, "data/Existing_5.csv", format = "file"),
-  tar_target(sp1, "data/Split_1.csv", format = "file"),
-  tar_target(sp5, "data/Split_5.csv", format = "file"),
-  tar_target(a1, "data/A_1.csv", format = "file"),
-  tar_target(a5, "data/A_5.csv", format = "file"),
-  tar_target(b1, "data/B_1.csv", format = "file"),
-  tar_target(b5, "data/B_5.csv", format = "file"),
+  tar_target(ex1, "data/Exist_1.csv.gz", format = "file"),
+  tar_target(ex5, "data/Exist_5.csv.gz", format = "file"),
+  tar_target(sp1, "data/Split_1.csv.gz", format = "file"),
+  tar_target(sp5, "data/Split_5.csv.gz", format = "file"),
+  tar_target(a1, "data/A_1.csv.gz", format = "file"),
+  tar_target(a5, "data/A_5.csv.gz", format = "file"),
+  tar_target(b1, "data/B_1.csv.gz", format = "file"),
+  tar_target(b5, "data/B_5.csv.gz", format = "file"),
+  tar_target(c1, "data/C_1.csv.gz", format = "file"),
+  tar_target(d1, "data/D_1.csv.gz", format = "file"),
   
   ###Scenarios list
-  scenario_list = list("Existing 1pct" = ex1,
-                       "Existing 5pct" = ex5,
-                       "Split 1pct" = sp1,
-                       "Split 5pct" = sp5,
-                       "A 1pct" = a1,
-                       "A 5pct" = a5,
-                       "B 1pct" = b1,
-                       "B 5pct" = b5
+  scenario_list = list("Existing 1 it" = ex1,
+                       "Existing 5 it" = ex5,
+                       "Split 1 it" = sp1,
+                       "Split 5 it" = sp5,
+                       "A 1 it" = a1,
+                       "A 5 it" = a5,
+                       "B 1 it" = b1,
+                       "B 5 it" = b5,
+                       "C 1 it" = c1,
+                       "D 1 it" = d1
   ),
   
   ###Important columns
