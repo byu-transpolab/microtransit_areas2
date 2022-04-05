@@ -31,3 +31,115 @@ Usually, it is good to use your model for something.
   - Equity or impact analysis
   
 If the analysis is substantial, it might become its own top-level section.
+
+
+```{r requests}
+tar_load(reserve_disag)
+
+reserve_disag %>%
+  filter(grepl("5", scenario)) %>%
+  mutate(scenario = gsub(" 5 it", "", scenario )) %>%
+ggplot(aes(x = rhReserveTime / 60, fill = rhReserveOutcome)) + 
+  geom_density(alpha = 0.5) + 
+  facet_wrap(~scenario) + 
+  xlab("Time to Handle or Reject [minutes]") +
+  ylab("Density") + 
+  scale_fill_manual(name = "Request Outcome", 
+                    values = wes_palette("Zissou1")[c(1, 5)])
+```
+
+
+```{r utilization}
+tar_load(utilization_disag)
+
+
+utilization_disag %>%
+  filter(grepl("5", scenario)) %>%
+  group_by(scenario, area, passengers) %>%
+  summarise(
+    passenger_time = sum(elapsed, na.rm = TRUE)
+  ) %>%
+  group_by(scenario, area)  %>%
+  left_join(rh_info, by = c("area" = "Area")) %>%
+  summarize(
+    utilization = sum(passengers * passenger_time) / 
+      (sum(passenger_time) - (6 * 3600 * fleetSize))
+  )  %>%
+  mutate(scenario = gsub(" 5 it", "", scenario ))  %>%
+  ggplot(aes(x = area, y = utilization)) + 
+  geom_col() + 
+  facet_wrap(~scenario, scales = "free_x") + 
+  scale_y_continuous(labels = scales::percent_format()) + 
+  xlab("Ride Hail Region") + 
+  ylab("Utilization [pax hr / svc hr]" )
+```
+
+
+```{r ridership}
+tar_load(ridership)
+ppl <- read_csv("data/persons.csv", col_types = list(personId = col_character()))
+
+tar_load(areas)
+
+overall <- ppl %>%
+  sample_frac(0.1) %>%
+  st_as_sf(coords = c("locationX", "locationY"), crs = 26912) %>%
+  st_join(areas) %>%
+  filter(!is.na(name)) %>%
+  st_set_geometry(NULL) %>%
+  group_by(area = name) %>% 
+  summarise(
+    `Female %` = sum(isFemale) / n(),
+    `Mean Income / 100k` = mean(income)/1e5,
+    `Auto 0 %` = sum(autoWorkRatio == "no_auto") / n(),
+    `Auto Insuffcient %` = sum(autoWorkRatio == "auto_deficient") / n(),
+    `Auto Sufficient %` = sum(autoWorkRatio == "auto_sufficient") / n()
+  )  %>%
+  pivot_longer(
+    cols = `Female %`:`Auto Sufficient %`,
+    names_to = "variable",
+    values_to = "statistic"
+  ) %>%
+  mutate(
+    result = "Population",
+    scenario = "Population"
+  )
+
+riders <- ridership %>%
+  inner_join(ppl, by = c("person" = "personId")) %>%
+  group_by(scenario, area) %>%
+  summarise(
+    `Female %` = sum(isFemale) / n(),
+    `Mean Income / 100k` = mean(income)/1e5,
+    `Auto 0 %` = sum(autoWorkRatio == "no_auto") / n(),
+    `Auto Insuffcient %` = sum(autoWorkRatio == "auto_deficient") / n(),
+    `Auto Sufficient %` = sum(autoWorkRatio == "auto_sufficient") / n()
+  )  %>%
+  pivot_longer(
+    cols = `Female %`:`Auto Sufficient %`,
+    names_to = "variable",
+    values_to = "statistic"
+  ) %>%
+  mutate(
+    result = "BEAM",
+  ) %>%
+  filter(grepl("5", scenario))
+
+
+bind_rows(overall, riders) %>%
+  filter(area != "Sandy") %>%
+ggplot(aes(x = variable, y = statistic, color = scenario, pch = result)) + 
+  geom_point(size = 3) +
+  facet_wrap(~area, scales = "free_x") + 
+  xlab("Demographic Variable") + 
+  ylab("Share (ish)") + 
+  scale_color_manual(name = "Scenario", values = wes_palette("Darjeeling1", 5)) + 
+  scale_shape_manual(name = "Data Source", values = c(1, 8))
+  
+  
+
+
+```
+
+
+
