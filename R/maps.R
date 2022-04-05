@@ -36,7 +36,7 @@ get_census_pop <- function(areas){
       )
 }
 
-area_loading <- function(area_pop){
+area_loading <- function(area_pop, soslc_load = 17){
   
   index_slco <- which(area_pop$name == "South SL Co")
   
@@ -47,13 +47,13 @@ area_loading <- function(area_pop){
       
       # compute area as ratio to south slco
       area_share = area / area[index_slco],
-      area_vehicles = ceiling(area_share * 12),
+      area_vehicles = ceiling(area_share * soslc_load),
       
       # compute share of hh
       household_share = households / households[index_slco],
       
       # vehicles
-      hh_vehicles = ceiling(12 * household_share)
+      hh_vehicles = ceiling(soslc_load * household_share)
       
     )  %>%
     st_set_geometry(NULL)
