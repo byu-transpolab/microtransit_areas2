@@ -17,6 +17,7 @@ tar_option_set(packages = c("tidyverse",
                             "tidycensus",
                             "ggspatial",
                             "data.table",
+                            "gtfstools",
                             "ragg"))
 options(tigris_use_cache = TRUE)
 
@@ -27,6 +28,7 @@ source("R/maps.R")
 source("R/event_handler.R")
 source("R/data_helpers.R")
 source("R/data_viz.R")
+source("R/analysis.R")
 
 # note: a script to copy the files from Box is in the sh/ folder
 
