@@ -2,8 +2,9 @@
 #' 
 #' @param events_raw Events to be formatted
 #' @param cols Vector of colnames to keep
-format_events <- function(events_raw, cols){
+read_events <- function(events_raw, cols){
   events <- events_raw %>% 
+    read_csv() %>% 
     select(all_of(cols)) %>% 
     mutate(
       travelTime = arrivalTime - departureTime,
@@ -14,24 +15,6 @@ format_events <- function(events_raw, cols){
   
   events
 }
-
-
-#' join tibbles
-all_join <- function(events_list, func, join_col, col_1_name, ...){
-  
-  events <- map(events_list, func, ...)
-  
-  full <- events[[1]]
-  
-  for(i in 2:length(events_list)){
-    full <- full %>% 
-      full_join(events[[i]], by = join_col)
-  }
-  
-  full %>% 
-    `colnames<-`(c(col_1_name, names(events_list)))
-}
-
 
 
 #### Functions ####
@@ -111,4 +94,19 @@ rh_utilization <- function(events, rh_info){
   
   rhUtil
 }
+
+
+#' format rh info
+format_rh_info <- function(rh_raw){
+  rh_info <- rh_raw %>% 
+    read_csv() %>% 
+    mutate(shift_start = str_replace(shifts, "\\{(\\d+):\\d+\\}", "\\1") %>% 
+             as.numeric(),
+           shift_end = str_replace(shifts,"\\{\\d+:(\\d+)\\}", "\\1") %>% 
+             as.numeric(),
+           operating_hours = (shift_end - shift_start) / 3600) %>% 
+    select(Area, fleetSize, operating_hours)
   
+  rh_info
+}
+
