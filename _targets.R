@@ -23,6 +23,7 @@ options(tigris_use_cache = TRUE)
 source("R/maps.R")
 source("R/event_handler.R")
 source("R/data_helpers.R")
+source("R/data_viz.R")
 
 
 data_targets <- tar_plan(
@@ -42,14 +43,14 @@ data_targets <- tar_plan(
   tar_target(b5, "data/B_5.csv", format = "file"),
   
   ###Scenarios list
-  scenario_list = list("Existing 1%" = ex1,
-                       "Existing 5%" = ex5,
-                       "Split 1%" = sp1,
-                       "Split 5%" = sp5,
-                       "A 1%" = a1,
-                       "A 5%" = a5,
-                       "B 1%" = b1,
-                       "B 5%" = b5
+  scenario_list = list("Existing 1pct" = ex1,
+                       "Existing 5pct" = ex5,
+                       "Split 1pct" = sp1,
+                       "Split 5pct" = sp5,
+                       "A 1pct" = a1,
+                       "A 5pct" = a5,
+                       "B 1pct" = b1,
+                       "B 5pct" = b5
   ),
   
   ###Important columns

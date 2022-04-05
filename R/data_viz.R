@@ -1,6 +1,6 @@
 #' Plot rh reserve times
 plot_reserve_times <- function(reserve_times){
-  reserve_times %>% 
+  plot <- reserve_times %>% 
   pivot_longer(-1, "scenario") %>% 
   ggplot(aes(x = scenario, y = value, fill = Outcome)) +
   geom_col(position = "dodge") +
@@ -11,6 +11,14 @@ plot_reserve_times <- function(reserve_times){
   labs(title = "Median time between rh reservation and outcome", 
        y = "Time (min)",
        x = "Scenario")
+  
+  ggsave(paste0("output/plots/reserve_times.png"),
+         plot,
+         width = 8, height = 4, units = "in",
+         device = ragg::agg_png, scaling = 1,
+         bg = "white")
+  
+  plot
 }
 
 
@@ -27,7 +35,7 @@ plot_travel_times <- function(events_list){
                              "scenario"))
       }
     print(plot)
-    ggsave(paste0("travel_times_", names(events_list)[i], ".png"),
+    ggsave(paste0("output/plots/travel_times_", names(events_list)[i], ".png"),
            plot,
            width = 8, height = 4, units = "in",
            device = ragg::agg_png, scaling = 1,
