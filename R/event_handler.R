@@ -110,3 +110,37 @@ format_rh_info <- function(rh_raw){
   rh_info
 }
 
+
+#' find connections from rh to transit
+rh_transit_connections <- function(events){
+  test1 <- events %>% 
+    filter(
+      type %in% c("PersonEntersVehicle",
+                  "PersonLeavesVehicle"),
+      str_detect(vehicle, "(?:gtfs|rideHail)")
+    ) %>% 
+    arrange(person, time) %>% 
+    filter((str_detect(vehicle, "rideHail") &
+           str_detect(lead(vehicle), "gtfs")) |
+             (str_detect(lag(vehicle), "rideHail") &
+                str_detect(vehicle, "gtfs")) |
+             (str_detect(vehicle, "rideHail") &
+                str_detect(lead(vehicle), "gtfs")) |
+             (str_detect(lag(vehicle), "rideHail") &
+                str_detect(vehicle, "gtfs")))
+  
+  
+  arranged <- events %>% 
+    arrange(person, time)
+  filtered <- arranged %>% 
+    filter((type == "PersonLeavesVehicle" &
+              lead(type) == "PersonEntersVehicle") | 
+             (lag(type) == "PersonLeavesVehicle" &
+                type == "PersonEntersVehicle"))
+  test2 <- filtered %>% 
+    filter((str_detect(vehicle, "rideHail") &
+              str_detect(lead(vehicle), "gtfs")) |
+             (str_detect(lag(vehicle), "rideHail") &
+                str_detect(vehicle, "gtfs")))
+    
+}

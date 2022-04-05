@@ -1,7 +1,7 @@
 #' sets column types by name
 get_coltypes <- function(event_cols){
   coltypes <- read_csv(event_cols, col_names = F)
-  set_names(pull(coltypes, 2), pull(coltypes ,1))
+  coltypes <- set_names(pull(coltypes, 2), pull(coltypes ,1))
   coltypes
 }
 
