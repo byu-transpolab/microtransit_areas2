@@ -110,6 +110,7 @@ analysis_targets <- tar_plan(
   reserve_disag = make_reserve_times(events_list),
   utilization_disag = make_utilization(events_list),
   ridership = make_ridership(events_list),
+  firstlast = make_firstlast(events_list)
   
 )
 

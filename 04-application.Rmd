@@ -138,8 +138,33 @@ ggplot(aes(x = variable, y = statistic, color = scenario, pch = result)) +
   
   
 
+```{r first-last}
+tar_load(firstlast) 
+
+fl_share <- left_join(
+  ridership %>% 
+    group_by(scenario, area) %>% tally() %>%
+    rename(total = n),
+  firstlast %>% 
+    group_by(scenario, area) %>% tally() %>%
+    rename(transfer = n),
+  by = c("scenario", "area")
+)  %>%
+  mutate(
+    transfer = ifelse(is.na(transfer), 0, transfer),
+    share = transfer / total 
+  )
+
+fl_share %>%
+  filter(grepl("5", scenario)) %>%
+  filter(!grepl("C", scenario)) %>%
+  filter(!grepl("D", scenario)) %>%
+  mutate(scenario = gsub(" 5 it", "", scenario)) %>%
+ggplot(aes(x = area, y = share)) +
+  geom_col() +
+  facet_wrap(~scenario, scales = "free_x") + 
+  scale_y_continuous(labels = scales::percent) + 
+  xlab("Area") + ylab("Percent with transit connection")
 
 ```
-
-
 

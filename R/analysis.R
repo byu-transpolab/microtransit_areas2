@@ -78,3 +78,50 @@ make_ridership <- function(events_list){
   
   ri
 }
+
+
+
+make_firstlast <- function(events_list){
+  fl <- future_lapply(events_list, function(events) {
+    
+    # people who leave a ridehail and enter a transit vehicle
+    first <- events %>% 
+      filter(
+        type %in% c("PersonEntersVehicle",
+                    "PersonLeavesVehicle"),
+        str_detect(vehicle, "rideHail") | str_detect(vehicle, "gtfs")
+      ) %>% 
+      arrange(person, time) %>% 
+      select(person:type) %>% 
+      filter(type == "PersonLeavesVehicle" & lead(type) == "PersonEntersVehicle",
+             str_detect(vehicle, "rideHail") & str_detect(lead(vehicle), "gtfs"),
+             person == lead(person)) %>%
+      separate(vehicle, c("vehicle_number", "area"), sep = "@")  %>%
+      mutate(transfer = "rh to transit")
+    
+    # people who leave a transit vehicle and enter a ridehail 
+    last <-  events %>% 
+      filter(
+        type %in% c("PersonEntersVehicle",
+                    "PersonLeavesVehicle"),
+        str_detect(vehicle, "rideHail") | str_detect(vehicle, "gtfs")
+      ) %>% 
+      arrange(person, time) %>% 
+      select(person:type) %>% 
+      filter(lag(type) == "PersonLeavesVehicle" & type == "PersonEntersVehicle",
+             str_detect(lag(vehicle), "gtfs") & str_detect(vehicle, "rideHail"),
+             person == lag(person)) %>%
+      separate(vehicle, c("vehicle_number", "area"), sep = "@")  %>%
+      mutate(
+        transfer = "transit to rh",
+        
+      ) 
+      
+    
+    bind_rows(first, last)
+  }) %>%
+    bind_rows(.id = "scenario")
+  
+  fl
+  
+}
