@@ -38,6 +38,8 @@ tar_load(reserve_disag)
 
 reserve_disag %>%
   filter(grepl("5", scenario)) %>%
+  filter(!grepl("C", scenario)) %>%
+  filter(!grepl("D", scenario)) %>%
   mutate(scenario = gsub(" 5 it", "", scenario )) %>%
 ggplot(aes(x = rhReserveTime / 60, fill = rhReserveOutcome)) + 
   geom_density(alpha = 0.5) + 
@@ -55,6 +57,8 @@ tar_load(utilization_disag)
 
 utilization_disag %>%
   filter(grepl("5", scenario)) %>%
+  filter(!grepl("C", scenario)) %>%
+  filter(!grepl("D", scenario)) %>%
   group_by(scenario, area, passengers) %>%
   summarise(
     passenger_time = sum(elapsed, na.rm = TRUE)
@@ -128,15 +132,19 @@ riders <- ridership %>%
 
 bind_rows(overall, riders) %>%
   filter(area != "Sandy") %>%
+  filter(!grepl("C", scenario)) %>%
+  filter(!grepl("D", scenario)) %>%
+  mutate(scenario = gsub(" 5 it", "", scenario)) %>%
 ggplot(aes(x = variable, y = statistic, color = scenario, pch = result)) + 
   geom_point(size = 3) +
   facet_wrap(~area, scales = "free_x") + 
   xlab("Demographic Variable") + 
   ylab("Share (ish)") + 
-  scale_color_manual(name = "Scenario", values = wes_palette("Darjeeling1", 5)) + 
+  scale_color_manual(name = "Scenario", values = wes_palette("Zissou1", 5, type = "continuous")) + 
   scale_shape_manual(name = "Data Source", values = c(1, 8))
-  
-  
+
+```
+
 
 ```{r first-last}
 tar_load(firstlast) 
