@@ -9,7 +9,7 @@ get_coltypes <- function(event_cols){
 #' join tibbles
 all_join <- function(events_list, func, join_col, col_1_name, ...){
   
-  events <- map(events_list, func, ...)
+  events <- future_map(events_list, func, ...)
   
   full <- events[[1]]
   

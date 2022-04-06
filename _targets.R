@@ -90,7 +90,7 @@ data_targets <- tar_plan(
   rh_info = format_rh_info(rh_info_path),
   
   b5events = read_csv(b5, col_types = coltypes),
-  events_list = map(scenario_list, read_events, cols)
+  events_list = future_map(scenario_list, read_events, cols)
 )
 
 
