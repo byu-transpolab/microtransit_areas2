@@ -111,36 +111,47 @@ format_rh_info <- function(rh_raw){
 }
 
 
-#' find connections from rh to transit
-rh_transit_connections <- function(events){
-  test1 <- events %>% 
+#' count transfers from rh to transit
+count_rh_transit_transfers <- function(events){
+  transfers <- events %>% 
     filter(
       type %in% c("PersonEntersVehicle",
                   "PersonLeavesVehicle"),
-      str_detect(vehicle, "(?:gtfs|rideHail)")
+      str_detect(vehicle, "rideHail") | str_detect(vehicle, "gtfs")
     ) %>% 
     arrange(person, time) %>% 
-    filter((str_detect(vehicle, "rideHail") &
-           str_detect(lead(vehicle), "gtfs")) |
-             (str_detect(lag(vehicle), "rideHail") &
-                str_detect(vehicle, "gtfs")) |
-             (str_detect(vehicle, "rideHail") &
-                str_detect(lead(vehicle), "gtfs")) |
-             (str_detect(lag(vehicle), "rideHail") &
-                str_detect(vehicle, "gtfs")))
+    select(person:type) %>% 
+    filter(type == "PersonLeavesVehicle" & lead(type) == "PersonEntersVehicle",
+           str_detect(vehicle, "rideHail") & str_detect(lead(vehicle), "gtfs"),
+           person == lead(person))
   
+  count <- transfers %>% 
+    separate(vehicle, c("vehicle_number", "area"), sep = "@") %>%
+    group_by(area) %>% 
+    summarize(n = n())
   
-  arranged <- events %>% 
-    arrange(person, time)
-  filtered <- arranged %>% 
-    filter((type == "PersonLeavesVehicle" &
-              lead(type) == "PersonEntersVehicle") | 
-             (lag(type) == "PersonLeavesVehicle" &
-                type == "PersonEntersVehicle"))
-  test2 <- filtered %>% 
-    filter((str_detect(vehicle, "rideHail") &
-              str_detect(lead(vehicle), "gtfs")) |
-             (str_detect(lag(vehicle), "rideHail") &
-                str_detect(vehicle, "gtfs")))
-    
+  count
+}
+
+
+#' count transfers from transit to rh
+count_transit_rh_transfers <- function(events){
+  transfers <- events %>% 
+    filter(
+      type %in% c("PersonEntersVehicle",
+                  "PersonLeavesVehicle"),
+      str_detect(vehicle, "rideHail") | str_detect(vehicle, "gtfs")
+    ) %>% 
+    arrange(person, time) %>% 
+    select(person:type) %>% 
+    filter(lag(type) == "PersonLeavesVehicle" & type == "PersonEntersVehicle",
+           str_detect(lag(vehicle), "gtfs") & str_detect(vehicle, "rideHail"),
+           person == lag(person))
+  
+  count <- transfers %>% 
+    separate(vehicle, c("vehicle_number", "area"), sep = "@") %>%
+    group_by(area) %>% 
+    summarize(n = n())
+  
+  count
 }
