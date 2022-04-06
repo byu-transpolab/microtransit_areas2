@@ -1,5 +1,8 @@
 library(targets)
 library(tarchetypes)
+library(future)
+library(future.apply)
+library(furrr)
 # This is an example _targets.R file. Every
 # {targets} pipeline needs one.
 # Use tar_script() to create _targets.R and tar_edit()
@@ -14,6 +17,7 @@ tar_option_set(packages = c("tidyverse",
                             "tidycensus",
                             "ggspatial",
                             "data.table",
+                            "gtfstools",
                             "ragg"))
 options(tigris_use_cache = TRUE)
 
@@ -24,6 +28,7 @@ source("R/maps.R")
 source("R/event_handler.R")
 source("R/data_helpers.R")
 source("R/data_viz.R")
+source("R/analysis.R")
 
 # note: a script to copy the files from Box is in the sh/ folder
 
@@ -94,17 +99,28 @@ analysis_targets <- tar_plan(
   num_passengers = all_join(events_list, rh_pass, "numPassengers", "num_passengers"),
   reserve_times = all_join(events_list, rh_times, "rhReserveOutcome", "Outcome"),
   utilization = all_join(events_list, rh_utilization, "area", "Area", rh_info),
+
   rh_to_transit = all_join(events_list, count_rh_transit_transfers, "area", "Area"),
   transit_to_rh = all_join(events_list, count_transit_rh_transfers, "area", "Area"),
   rh_transit_tot = rbind(rh_to_transit, transit_to_rh) %>%
     group_by(Area) %>%
-    summarize_all(sum, na.rm = T)
+    summarize_all(sum, na.rm = T),
+  
+  # disaggregated
+  reserve_disag = make_reserve_times(events_list),
+  utilization_disag = make_utilization(events_list),
+  ridership = make_ridership(events_list),
+  
 )
 
 
 viz_targets <- tar_plan(
   viz_reserve_times = plot_reserve_times(reserve_times),
-  viz_travel_times = plot_travel_times(events_list)
+  viz_travel_times = plot_travel_times(events_list),
+  
+  tar_target(gtfs_file, "data/gtfs.zip", format = "file"),
+  rail_lines = get_rail_lines(gtfs_file),
+  
 )
 
 

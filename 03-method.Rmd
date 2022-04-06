@@ -13,6 +13,7 @@ library(kableExtra)
 library(modelsummary)
 library(targets)
 library(wesanderson)
+theme_set(theme_bw())
 
 options(dplyr.summarise.inform = FALSE)
 
@@ -93,12 +94,14 @@ kbl(loading %>%
 
 ```{r areas-map}
 tar_load(areas)
+areas <- areas[1:6,]
 pal <- wes_palette("Zissou1", nrow(areas), type = "continuous")
-if(knitr::is_html_output()){
+if(!knitr::is_latex_output()){
   # interactive map for web
   leaflet(areas %>% st_transform(4326)) %>%
+    addPolylines(data = lines, color = "grey") %>%
     addProviderTiles(providers$CartoDB) %>%
-    addPolygons(label = ~name, color = pal)
+    addPolygons(color = pal) 
 } else {
   # static map for pdf
   ggplot(areas, aes(fill = name)) + 

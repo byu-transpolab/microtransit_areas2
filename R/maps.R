@@ -59,3 +59,38 @@ area_loading <- function(area_pop, soslc_load = 17){
     st_set_geometry(NULL)
   
 }
+
+
+#' Extract rail line shapes from the UTA GTFS file
+#' 
+#' 
+#' @param gtfs_file path to the UTA gtfs, downloadable at https://gtfsfeed.rideuta.com
+get_rail_lines <- function(gtfs_file){
+  gtfs <- read_gtfs(gtfs_file)
+  
+  rail_services <- gtfs$routes %>% as_tibble() %>% filter(grepl("Line", route_long_name) | 
+                                           grepl("FrontRunner", route_long_name))
+  
+  rail_trips <- gtfs$trips %>% filter(route_id %in% rail_services$route_id) %>%
+    group_by(route_id) %>% slice(6)
+  
+  
+  convert_shapes_to_sf(gtfs) %>% 
+    filter(shape_id %in% rail_trips$shape_id) %>%
+    left_join(rail_trips) %>%
+    left_join(rail_services)
+  
+}
+
+#' A basic leaflet map of the UTA system
+#' 
+#' Uses the colors encoded in the GTFS file!
+rail_map <- function(rail_lines){
+  
+  colors <- colorFactor(palette = paste("#", lines$route_color, sep = ""), levels = lines$route_long_name)
+    
+  leaflet(lines) %>%
+    addProviderTiles(providers$CartoDB) %>%
+    addPolylines(color = ~colors(route_long_name))
+  
+}
