@@ -1,0 +1,13 @@
+Month,Avg wkday ridership,Utilization,Avg wait time (minutes)
+DEC,224,1.33,9
+JAN,334,2,11
+FEB,392,2.31,12
+MAR,316,1.88,11
+APR,275,1.52,10
+MAY,105,0.67,8
+JUN,162,1.1,9
+JUL,155,1.1,9
+AUG,193,1.5,12
+SEP,214,1.6,12
+OCT,200,1.7,13
+NOV,169,1.7,13
