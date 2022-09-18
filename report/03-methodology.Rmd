@@ -1,0 +1,46 @@
+# Methodology
+
+## Overview
+
+This chapter describes the methodology we followed to generate the simulation scenarios. First, we will provide background information on BEAM itself, including the modifications to use geofencing for microtransit vehicles. This is followed by descriptions of the BEAM scenarios we developed for this research.
+
+
+## BEAM
+
+Adaptive algorithm
+
+Ride hailing versus transit
+
+### Geofencing Modifications
+
+Adjusted ride hail matching algorithm to exclude requests from locations outside of a point.
+
+
+## Scenario Description
+
+A BEAM scenario consists of the following:
+
+- A description of transportation supply in the form of highway networks, transit services, and ride hail vehicles.
+- A description of travel demand, or the trips and activities for a synthetic population.
+- A configuration describing how the scenario operates and which modules are included.
+
+### Networks
+
+Open
+
+### Demand
+
+BEAM requires an input file representing trips and daily activities occurring in the region.
+
+Synthetic population is developed in PopulationSim
+
+Skims for transportation modes converted from WFRC / MAG model
+
+ActivitySim
+
+### Configuration
+
+
+## Summary
+
+Be smart about the figures and tables you include. Figures should be high resolution, and tables should always be table objects. If your table is an image of a table, I will place three pins in the voodoo dolls I keep for each of my RA’s.

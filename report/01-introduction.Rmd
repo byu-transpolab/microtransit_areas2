@@ -1,0 +1,28 @@
+# Introduction
+
+## Problem Statement
+
+In November of 2019, the Utah Transit Authority (UTA) began a partnership with VIA, a private mobility company. Under this partnership, UTA has supplemented its fixed-route services in south Salt Lake County with on-demand shuttles hailed through a mobile application. So-called “microtransit” offerings of this kind have the potential to efficiently extend UTA services into low-density areas and function as last-mile services for the regular fixed-route rail and bus network. UTA is interested in examining other areas where microtransit services can be effectively deployed.
+
+
+## Objectives
+
+The primary objective of this research project is to identify possible geographic areas along the Wasatch Front where an on-demand microtransit system might most effectively operate. To do this, the research team will implement an on-demand microtransit system within a multi-agent simulation of daily activity patterns for the Wasatch Front Region. This simulation is presently under construction for other UDOT-sponsored research projects aimed at evaluating the potential effects of an on-demand transit system aimed at wheelchair users, and an additional USDOT-funded project to examine techniques to optimize microtransit services.
+
+A secondary objective of this research will be to provide a template for UDOT and UTA to examine projects of this kind with a microsimulation model. Utah has invested a great deal of resources into fixed route, high-capacity transit lines such as UVX, TRAX, and FrontRunner. These services perform well and have relatively high ridership statistics, but many people not directly near the stations can have difficulty accessing them. UTA will use this research to identify other places on the Wasatch Front where microtransit offerings could be successful. UDOT could also use this methodology to study the potential effectiveness of such services in other areas, such as Logan, Moab, and Cedar City.
+
+
+## Scope
+
+This analysis is being developed using BEAM: the modeling framework for Behavior, Energy, Autonomy, and Mobility developed by Lawrence Berkeley National Laboratory. This research takes the BEAM model as given, modifying only those parameters and implementations that are necessary to conduct the current analysis. For example, we will modify the BEAM code to enable geo-fenced microtransit operations, which are a critical component of the current research. We will not attempt to modify BEAM’s multi-modal pathfinding algorithms, which may affect the current research but must be taken as given under the scope of this project.
+
+## Outline of Report
+
+The report is organized into the following chapters:
+
+1. **Introduction:** This chapter.
+2. **Literature Review:** An overview of previous efforts to understand microtransit systems and forecast their operations.
+3. **Methodology:** Methods and data used to create the initial microsimulation scenario in the Salt Lake City region.
+4. **Existing On-Demand Deployment:** Also, results of the simulation applied to the existing VIA deployment.
+5. **Candidate Regions:** An evaluation of three additional regions selected by UTA and UDOT for simulation analysis.
+6. **Recommendations and Conclusions**
