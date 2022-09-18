@@ -5,15 +5,14 @@
 .RData
 .Ruserdata
 
+_bookdown_files/
+_targets/
+
 *.aux
 *.log
 *.spl
 
 rosm.cache
-
 *.DS_Store
 
-_bookdown_files/
-_targets/
-
-data
+data/
