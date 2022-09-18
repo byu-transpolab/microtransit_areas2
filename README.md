@@ -1,12 +1,23 @@
 Welcome! 
 
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). 
+# microtransit_areas
 
-This template provides a skeleton file structure that you can edit to create your book. 
+<!-- badges: start -->
+<!-- badges: end -->
 
-The contents inside the .Rmd files provide some pointers to help you get started, but feel free to also delete the content in each file and start fresh.
+### Abstract
+A number of regions have begun operating microtransit systems to support first
+and last mile transit access.  In this paper, we modify the ridehailing request
+handling algorithm in the BEAM microscopic simulation engine to accomodate
+geographically resetricted microstransit operations. We then examine the
+ridership operating characteristics for one existing and three proposed
+geofenced service regions in Salt Lake County, Utah. We find that the simulation
+generates realistic ridership statistics and wait times, subject to errors
+likely to be corrected with more thorough choice model calibration. We also
+found that expanding microtransit services to Sandy or West Jordan might be
+effective, but might be less so for the area near SLC International Airport.
 
-Additional resources:
+## Reprodution
 
 The **bookdown** book: https://bookdown.org/yihui/bookdown/
 
