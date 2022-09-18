@@ -4,4 +4,4 @@ output_dir: docs
 rmd_subdir: report
 language:
   ui:
-    chapter_name: " "
+    chapter_name: "Chapter "
