@@ -1,0 +1,10 @@
+# Ignore everything
+/*
+
+# Except for:
+!.gitignore
+!rh_fleets/
+!Zones
+!Zones/**
+!eventCols.csv
+!UTAODpilotinfo.csv

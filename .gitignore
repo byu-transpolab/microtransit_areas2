@@ -14,5 +14,3 @@ _targets/
 
 rosm.cache
 *.DS_Store
-
-data/
