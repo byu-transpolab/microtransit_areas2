@@ -3,7 +3,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-]{book}
+]{article}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -117,56 +117,41 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 \usepackage{siunitx}
+
+% \usepackage{ragged2e}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\usepackage[]{natbib}
-\bibliographystyle{plainnat}
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={A Minimal Book Example},
-  pdfauthor={John Doe},
+  pdftitle={Article Long Title},
   pdfkeywords={Accessibility, Passive Data, Location Choice},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{A Minimal Book Example}
-\author{John Doe}
+\title{Article Long Title}
+\author{true \and true \and true}
 \date{2022-09-17}
 
-\usepackage{amsthm}
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}{Lemma}[chapter]
-\newtheorem{corollary}{Corollary}[chapter]
-\newtheorem{proposition}{Proposition}[chapter]
-\newtheorem{conjecture}{Conjecture}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[chapter]
-\theoremstyle{definition}
-\newtheorem{example}{Example}[chapter]
-\theoremstyle{definition}
-\newtheorem{exercise}{Exercise}[chapter]
-\theoremstyle{definition}
-\newtheorem{hypothesis}{Hypothesis}[chapter]
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
+\begin{abstract}
+This is where the abstract should go.
+\end{abstract}
 
 {
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 \tableofcontents
 }
 \hypertarget{about}{%
-\chapter{About}\label{about}}
+\section{About}\label{about}}
 
 This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports; for example, a math equation \(a^2 + b^2 = c^2\).
 
 \hypertarget{usage}{%
-\section{Usage}\label{usage}}
+\subsection{Usage}\label{usage}}
 
 Each \textbf{bookdown} chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter \emph{must} start with a first-level heading: \texttt{\#\ A\ good\ chapter}, and can contain one (and only one) first-level heading.
 
@@ -175,7 +160,7 @@ Use second-level and higher headings within chapters like: \texttt{\#\#\ A\ shor
 The \texttt{index.Rmd} file is required, and is also your first book chapter. It will be the homepage when you render the book.
 
 \hypertarget{render-book}{%
-\section{Render book}\label{render-book}}
+\subsection{Render book}\label{render-book}}
 
 You can render the HTML version of this example book without changing anything:
 
@@ -198,7 +183,7 @@ Or build the book from the R console:
 To render this example to PDF as a \texttt{bookdown::pdf\_book}, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
 
 \hypertarget{preview-book}{%
-\section{Preview book}\label{preview-book}}
+\subsection{Preview book}\label{preview-book}}
 
 As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in ``Preview book'', or from the R console:
 
@@ -208,209 +193,203 @@ As you work, you may start a local server to live preview this HTML book. This p
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{hello-bookdown}{%
-\chapter{Hello bookdown}\label{hello-bookdown}}
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (\texttt{\#}) per .Rmd file.
+\hypertarget{problem-statement}{%
+\subsection{Problem Statement}\label{problem-statement}}
 
-\hypertarget{a-section}{%
-\section{A section}\label{a-section}}
+In November of 2019, the Utah Transit Authority (UTA) began a partnership with VIA, a private mobility company. Under this partnership, UTA has supplemented its fixed-route services in south Salt Lake County with on-demand shuttles hailed through a mobile application. So-called ``microtransit'' offerings of this kind have the potential to efficiently extend UTA services into low-density areas and function as last-mile services for the regular fixed-route rail and bus network. UTA is interested in examining other areas where microtransit services can be effectively deployed.
 
-All chapter sections start with a second-level (\texttt{\#\#}) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+\hypertarget{objectives}{%
+\subsection{Objectives}\label{objectives}}
 
-\hypertarget{an-unnumbered-section}{%
-\subsection*{An unnumbered section}\label{an-unnumbered-section}}
-\addcontentsline{toc}{subsection}{An unnumbered section}
+The primary objective of this research project is to identify possible geographic areas along the Wasatch Front where an on-demand microtransit system might most effectively operate. To do this, the research team will implement an on-demand microtransit system within a multi-agent simulation of daily activity patterns for the Wasatch Front Region. This simulation is presently under construction for other UDOT-sponsored research projects aimed at evaluating the potential effects of an on-demand transit system aimed at wheelchair users, and an additional USDOT-funded project to examine techniques to optimize microtransit services.
 
-Chapters and sections are numbered by default. To un-number a heading, add a \texttt{\{.unnumbered\}} or the shorter \texttt{\{-\}} at the end of the heading, like in this section.
+A secondary objective of this research will be to provide a template for UDOT and UTA to examine projects of this kind with a microsimulation model. Utah has invested a great deal of resources into fixed route, high-capacity transit lines such as UVX, TRAX, and FrontRunner. These services perform well and have relatively high ridership statistics, but many people not directly near the stations can have difficulty accessing them. UTA will use this research to identify other places on the Wasatch Front where microtransit offerings could be successful. UDOT could also use this methodology to study the potential effectiveness of such services in other areas, such as Logan, Moab, and Cedar City.
 
-\hypertarget{cross}{%
-\chapter{Cross-references}\label{cross}}
+\hypertarget{scope}{%
+\subsection{Scope}\label{scope}}
 
-Cross-references make it easier for your readers to find and link to elements in your book.
+This analysis is being developed using BEAM: the modeling framework for Behavior, Energy, Autonomy, and Mobility developed by Lawrence Berkeley National Laboratory. This research takes the BEAM model as given, modifying only those parameters and implementations that are necessary to conduct the current analysis. For example, we will modify the BEAM code to enable geo-fenced microtransit operations, which are a critical component of the current research. We will not attempt to modify BEAM's multi-modal pathfinding algorithms, which may affect the current research but must be taken as given under the scope of this project.
 
-\hypertarget{chapters-and-sub-chapters}{%
-\section{Chapters and sub-chapters}\label{chapters-and-sub-chapters}}
+\hypertarget{outline-of-report}{%
+\subsection{Outline of Report}\label{outline-of-report}}
 
-There are two steps to cross-reference any heading:
+The report is organized into the following chapters:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Label the heading: \texttt{\#\ Hello\ world\ \{\#nice-label\}}.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Leave the label off if you like the automated heading generated based on your heading title: for example, \texttt{\#\ Hello\ world} = \texttt{\#\ Hello\ world\ \{\#hello-world\}}.
-  \item
-    To label an un-numbered heading, use: \texttt{\#\ Hello\ world\ \{-\#nice-label\}} or \texttt{\{\#\ Hello\ world\ .unnumbered\}}.
-  \end{itemize}
+  \textbf{Introduction:} This chapter.
 \item
-  Next, reference the labeled heading anywhere in the text using \texttt{\textbackslash{}@ref(nice-label)}; for example, please see Chapter \ref{cross}.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    If you prefer text as the link instead of a numbered reference use: \protect\hyperlink{cross}{any text you want can go here}.
-  \end{itemize}
+  \textbf{Literature Review:} An overview of previous efforts to understand microtransit systems and forecast their operations.
+\item
+  \textbf{Methodology:} Methods and data used to create the initial microsimulation scenario in the Salt Lake City region.
+\item
+  \textbf{Existing On-Demand Deployment:} Also, results of the simulation applied to the existing VIA deployment.
+\item
+  \textbf{Candidate Regions:} An evaluation of three additional regions selected by UTA and UDOT for simulation analysis.
+\item
+  \textbf{Recommendations and Conclusions}
 \end{enumerate}
 
-\hypertarget{captioned-figures-and-tables}{%
-\section{Captioned figures and tables}\label{captioned-figures-and-tables}}
+\hypertarget{literature-review}{%
+\section{Literature Review}\label{literature-review}}
 
-Figures and tables \emph{with captions} can also be cross-referenced from elsewhere in your book using \texttt{\textbackslash{}@ref(fig:chunk-label)} and \texttt{\textbackslash{}@ref(tab:chunk-label)}, respectively.
+\hypertarget{overview}{%
+\subsection{Overview}\label{overview}}
 
-See Figure \ref{fig:nice-fig}.
+This chapter presents prior attempts in the academic and practical literature to understand, model, and predict ridership for on-demand transit systems. The literature highlights the power and flexibility of demand-based modeling. MATSim is an agent-based simulation that models individuals' behavior, and BEAM (an extension to MATSim) places even more focus on individuals. As our project deals with modeling the UTA on Demand by VIA pilot program in Salt Lake City, we additionally discuss the program and the results it has achieved so far. Ultimately, we conclude that we will be using BEAM to model this and other potential on-demand transit implementations.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{purposes-and-description-of-on-demand-transit}{%
+\subsection{Purposes and Description of On-Demand Transit}\label{purposes-and-description-of-on-demand-transit}}
 
-\begin{figure}
+One aspect of traditional public transit is that the routes are usually fixed. It is not always feasible to extend these fixed-route systems into less densely populated areas (at least, not in a way that would reasonably service most of the residents) due to the high costs of capital and operation and the relatively low ridership that would result (Mineta Transportation Institute, 2012). However, public transit has many benefits such as reduced carbon emissions per person-mile and less traffic congestion (Buchanan, 2019; Gershon, 2005), and the lack of transit options in many suburban areas requires residents to overwhelmingly use personal vehicles as their main form of transportation (Gershon, 2005). This raises the question of the most effective and efficient way to increase transit ridership and decrease dependence on personal vehicles in these areas.
 
-{\centering \includegraphics[width=0.8\linewidth]{microtransit_areas_files/figure-latex/nice-fig-1} 
+One possible solution is the introduction of microtransit services. Microtransit is a form of shared, on-demand transportation (ODT) in which passengers schedule rides and vehicle routing is updated in real time to efficiently transport its users. The vehicles used are usually a form of minibus that can hold several passengers at once (Shaheen et al., 2015). One key application of microtransit is for first- and last-mile transportation, connecting a wide area to the existing fixed-route network (Shaheen et al., 2015) and taking less time than walking or cycling. Decreasing this first/last mile travel time can increase job accessibility by allowing individuals to travel farther with the same travel time budget, and some microtransit services have been shown to decrease this time significantly (Kang \& Hamidi, 2019). Especially as smartphone ownership and usage continues to increase, microtransit is a promising option, as booking rides can be done within phone apps, making the user experience easier (Agatz et al., 2011).
 
-}
+\hypertarget{analysis-framework}{%
+\subsubsection{Analysis framework}\label{analysis-framework}}
 
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
+Alonso-González et al.~(2018) set out to create an analysis framework that can be used to evaluate ODT services, both in simulation and real-world application, in order to compare them to existing systems. The framework presented requires identifying several characteristics of the ODT system: coverage and routing, operating hours, vehicle characteristics, the booking system, and request acceptance criteria. Then several quantities are calculated or estimated, including generalized journey time and share of declined ODT trips as well as usage values. The ODT system is then compared with other modes such as fixed transit and walking/biking. The study concludes that a generalized cost of travel metric would be the most useful in comparing the ODT system against other options, as it was a good indicator of changes in mobility.
 
-Don't miss Table \ref{tab:nice-tab}.
+\hypertarget{previous-attempts-to-model-on-demand-transit}{%
+\subsection{Previous Attempts to Model On-Demand Transit}\label{previous-attempts-to-model-on-demand-transit}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(pressure, }\DecValTok{10}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+Due to the high potential of ODT/microtransit services, many models and simulations have been created. Vosooghi et al.~(2017) published a literature review discussing several simulation software packages: Azevedo et al.~(2016) used SimMobility to model an autonomous taxi network, MobiTroop was used by Heilig et al.~(2015) to simulate carsharing in the Stuttgart, Germany area, and MATSim has been used to develop a carsharing model in Berlin (Ciari et al., 2014) and analyze one in Zurich (Balać et al., 2015), and it was used to model a shared autonomous vehicle system (Fagnant \& Kockelman, 2014).
 
-\begin{table}
+Ronald et al.~(2017) looked at three software simulations in more detail: the basic simulation Delphi, the agent-based simulation MATSim, and the traffic microsimulation SUMOoD (SUMO on Demand). The study found that these simulations generally produced similar results with respect to number of vehicles and amount of demand, and noted that all simulations performed as expected based on real-world observations (Schofer et al., 2003). They are also quick to point out that results of these simulations might be optimistic if simplifications to routing are made or if using an undirected network, where a vehicle could pick up passengers on either side of a road no matter the direction of travel.
 
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rr}
-\toprule
-temperature & pressure\\
-\midrule
-0 & 0.0002\\
-20 & 0.0012\\
-40 & 0.0060\\
-60 & 0.0300\\
-80 & 0.0900\\
-\addlinespace
-100 & 0.2700\\
-120 & 0.7500\\
-140 & 1.8500\\
-160 & 4.2000\\
-180 & 8.8000\\
-\bottomrule
-\end{tabular}
-\end{table}
+\hypertarget{matsim-and-beam}{%
+\subsubsection{MATSim and BEAM}\label{matsim-and-beam}}
 
-\hypertarget{parts}{%
-\chapter{Parts}\label{parts}}
+MATSim (short for ``Multi-Agent Transport Simulation'') is an open-source framework for transportation modeling originally developed in Zurich. The framework simulates traffic flows and congestion on a microscopic level, and simulates demand by creating agents and following their daily schedules and decisions. It is designed to model a single day in large-scale scenarios, and uses an iterative process to have each agent optimize their schedule and consider factors such as route choice, mode choice, time choice, and destination choice (Horni et al., 2016). This is similar to how many people would likely use a transportation network: either trying several options and sticking with what works best for them, or using a routing service (such as Google Maps) to find their optimal route. It is important to note that this is different than finding the optimal solution for the whole system (which likely would lead to some agents individually being assigned very poor routing/mode choice/etc.); each individual tries to optimize their own travel, and MATSim outputs the overall equilibrium that results (Horni et al., 2016). MATSim has been used in numerous studies to model various scenarios: Bischoff \& Maciejewski (2016) simulated a city-wide replacement of personal vehicles with autonomous taxis in Berlin, Cyganski et al.~(2018) introduced autonomous vehicles and ODT to Brunswick via simulation, and Viergutz \& Schmidt (2019) modeled ODT vs public transit in the rural town of Colditz.
 
-You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file.
+BEAM, which stands for Behavior, Energy, Autonomy, and Mobility, is an extension to the MATSim framework, and is maintained by Lawrence Berkeley National Laboratory (BEAM - the Modeling Framework for Behavior, Energy, Autonomy, and Mobility, n.d.). The BEAM documentation (The BEAM Team, 2017) gives a description of some of its functions and purposes. The simulation is designed to simplify running full-scale transportation models, and places an emphasis on within-day agent mode choice and planning (as an example, after an agent requests a ODT vehicle, they may decide the wait time is too long and choose another mode). It is also intended to find the equilibrium point where resource markets (including road capacity and fleet availability) match the demand for service.
 
-Add a numbered part: \texttt{\#\ (PART)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
+\hypertarget{real-world-microtransit}{%
+\subsection{Real-World Microtransit}\label{real-world-microtransit}}
 
-Add an unnumbered part: \texttt{\#\ (PART\textbackslash{}*)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
+Microtransit/ODT has generally performed well in simulations; however, few ODT services have been implemented in the real world. Perhaps the most notable is Kutsuplus, which was implemented in Helsinki, Finland from 2102--2015. An official report of the system was created, but did not include an analysis regarding the mobility improvements compared with already-existing alternatives (Alonso-González et al., 2018; Kari, 2016).
 
-Add an appendix as a special kind of un-numbered part: \texttt{\#\ (APPENDIX)\ Other\ stuff\ \{-\}} (followed by \texttt{\#\ A\ chapter}). Chapters in an appendix are prepended with letters instead of numbers.
+\hypertarget{uta-on-demand-by-via}{%
+\subsubsection{UTA On Demand by VIA}\label{uta-on-demand-by-via}}
 
-\hypertarget{footnotes-and-citations}{%
-\chapter{Footnotes and citations}\label{footnotes-and-citations}}
+Another real-world microtransit implementation began in November 2019, when Utah Transit Authority (UTA) partnered with VIA to run a pilot microtransit service, UTA on Demand, in southern Salt Lake County (Robertson et al., 2020). The two main goals of this program were to expand access to public transit, providing first- and last-mile connections, and increase mobility for all users, even on trips not involving fixed-route transit. The purpose of the pilot program was to determine if microtransit would achieve these goals effectively (Office of Communications \& Marketing, 2019).
 
-\hypertarget{footnotes}{%
-\section{Footnotes}\label{footnotes}}
+As of the time of writing, monthly reports on the program are available from December 2019 through November 2020, as well as four quarterly reports. Several metrics were measured and compared to previously set goals in different areas, such as ridership, wait times, and cost per rider. At the end of the first quarter (December--February), the pilot program either met or was on track to meet the 6-month goals for each metric (Office of Communications \& Marketing, 2020a). However, due to the COVID-19 pandemic becoming prevalent in Utah beginning mid-March, significantly fewer people have utilized the service, and average ridership from March through November was significantly lower than the 6-month goals (Office of Communications \& Marketing, 2020c).
 
-Footnotes are put inside the square brackets after a caret \texttt{\^{}{[}{]}}. Like this one \footnote{This is a footnote.}.
+Though the pilot program did not meet the goals that were originally set, UTA renewed its contract with VIA for an additional year (Office of Communications \& Marketing, 2020c). This is in part because the program was projected to have met its 6-month goals in absence of the pandemic (Office of Communications \& Marketing, 2020b), and also more generally for continued evaluation and testing (Office of Communications \& Marketing, 2020c).
 
-\hypertarget{citations}{%
-\section{Citations}\label{citations}}
+In September 2020, UTA released a report detailing a possible expansion of microtransit services to other areas in Utah following the UTA on Demand pilot program (Robertson et al., 2020). Three characteristics were considered: Transit potential, reflecting population and employment density; transit need, reflecting socio-economic factors that indicate a higher propensity to use transit; and the existing transit service level, based on quality and quantity of transit already available in the area. Based on these characteristics, 19 zones were identified between Brigham City and Santaquin as areas that could potentially benefit from microtransit services. Ridership was estimated based on number of residents and number of workers employed within each zone, as well as a mode share score that VIA developed based on their internal demand model. The report makes no definitive recommendation regarding expanding microtransit services, but does present several results of the analysis for each zone, including how well microtransit would improve transit coverage, provide efficient transit, replace existing bus routes, and increase equity. The report also notes several considerations regarding accessibility (including paratransit) and operations, and that this study will inform UTA's future transit choices.
 
-Reference items in your bibliography file(s) using \texttt{@key}.
+\hypertarget{summary}{%
+\subsection{Summary}\label{summary}}
 
-For example, we are using the \textbf{bookdown} package \citep{R-bookdown} (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015} (this citation was added manually in an external file book.bib).
-Note that the \texttt{.bib} files need to be listed in the index.Rmd with the YAML \texttt{bibliography} key.
+Many different transportation simulation packages have been created and used in various situations. Part of this project involves developing a model that UTA can use for future research. Much of this work has been done previously in another UDOT-sponsored research project in developing a simulation including wheelchair-accessible microtransit vehicles. That project uses BEAM to develop its model, as BEAM effectively models individual user behavior in full-scale simulations. Because of this, we will be using BEAM as well in our research.
 
-The RStudio Visual Markdown Editor can also make it easier to insert citations: \url{https://rstudio.github.io/visual-markdown-editing/\#/citations}
+\hypertarget{methodology}{%
+\section{Methodology}\label{methodology}}
 
-\hypertarget{blocks}{%
-\chapter{Blocks}\label{blocks}}
+\hypertarget{overview-1}{%
+\subsection{Overview}\label{overview-1}}
 
-\hypertarget{equations}{%
-\section{Equations}\label{equations}}
+This chapter describes the methodology we followed to generate the simulation scenarios. First, we will provide background information on BEAM itself, including the modifications to use geofencing for microtransit vehicles. This is followed by descriptions of the BEAM scenarios we developed for this research.
 
-Here is an equation.
+\hypertarget{beam}{%
+\subsection{BEAM}\label{beam}}
 
-\begin{equation} 
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  \label{eq:binom}
-\end{equation}
+Adaptive algorithm
 
-You may refer to using \texttt{\textbackslash{}@ref(eq:binom)}, like see Equation \eqref{eq:binom}.
+Ride hailing versus transit
 
-\hypertarget{theorems-and-proofs}{%
-\section{Theorems and proofs}\label{theorems-and-proofs}}
+\hypertarget{geofencing-modifications}{%
+\subsubsection{Geofencing Modifications}\label{geofencing-modifications}}
 
-Labeled theorems can be referenced in text using \texttt{\textbackslash{}@ref(thm:tri)}, for example, check out this smart theorem \ref{thm:tri}.
+Adjusted ride hail matching algorithm to exclude requests from locations outside of a point.
 
-\begin{theorem}
-\protect\hypertarget{thm:tri}{}\label{thm:tri}For a right triangle, if \(c\) denotes the \emph{length} of the hypotenuse
-and \(a\) and \(b\) denote the lengths of the \textbf{other} two sides, we have
-\[a^2 + b^2 = c^2\]
-\end{theorem}
+\hypertarget{scenario-description}{%
+\subsection{Scenario Description}\label{scenario-description}}
 
-Read more here \url{https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html}.
+A BEAM scenario consists of the following:
 
-\hypertarget{callout-blocks}{%
-\section{Callout blocks}\label{callout-blocks}}
+\begin{itemize}
+\tightlist
+\item
+  A description of transportation supply in the form of highway networks, transit services, and ride hail vehicles.
+\item
+  A description of travel demand, or the trips and activities for a synthetic population.
+\item
+  A configuration describing how the scenario operates and which modules are included.
+\end{itemize}
 
-The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: \url{https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html}
+\hypertarget{networks}{%
+\subsubsection{Networks}\label{networks}}
 
-\hypertarget{sharing-your-book}{%
-\chapter{Sharing your book}\label{sharing-your-book}}
+Open
 
-\hypertarget{publishing}{%
-\section{Publishing}\label{publishing}}
+\hypertarget{demand}{%
+\subsubsection{Demand}\label{demand}}
 
-HTML books can be published online, see: \url{https://bookdown.org/yihui/bookdown/publishing.html}
+BEAM requires an input file representing trips and daily activities occurring in the region.
 
-\hypertarget{pages}{%
-\section{404 pages}\label{pages}}
+Synthetic population is developed in PopulationSim
 
-By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a \texttt{\_404.Rmd} or \texttt{\_404.md} file to your project root and use code and/or Markdown syntax.
+Skims for transportation modes converted from WFRC / MAG model
 
-\hypertarget{metadata-for-sharing}{%
-\section{Metadata for sharing}\label{metadata-for-sharing}}
+ActivitySim
 
-Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the \texttt{index.Rmd} YAML. To setup, set the \texttt{url} for your book and the path to your \texttt{cover-image} file. Your book's \texttt{title} and \texttt{description} are also used.
+\hypertarget{configuration}{%
+\subsubsection{Configuration}\label{configuration}}
 
-This \texttt{gitbook} uses the same social sharing data across all chapters in your book- all links shared will look the same.
+\hypertarget{summary-1}{%
+\subsection{Summary}\label{summary-1}}
 
-Specify your book's source repository on GitHub using the \texttt{edit} key under the configuration options in the \texttt{\_output.yml} file, which allows users to suggest an edit by linking to a chapter's source file.
+Be smart about the figures and tables you include. Figures should be high resolution, and tables should always be table objects. If your table is an image of a table, I will place three pins in the voodoo dolls I keep for each of my RA's.
 
-Read more about the features of this output format here:
+\hypertarget{existing-scenario-evaluation}{%
+\section{Existing Scenario Evaluation}\label{existing-scenario-evaluation}}
 
-\url{https://pkgs.rstudio.com/bookdown/reference/gitbook.html}
+\hypertarget{overview-2}{%
+\subsection{Overview}\label{overview-2}}
 
-Or use:
+Text
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{?bookdown}\SpecialCharTok{::}\NormalTok{gitbook}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{summary-2}{%
+\subsection{Summary}\label{summary-2}}
 
+More Text
 
-  \bibliography{book.bib,packages.bib}
+\hypertarget{candidate-region-evaluation}{%
+\section{Candidate Region Evaluation}\label{candidate-region-evaluation}}
+
+\hypertarget{overview-3}{%
+\subsection{Overview}\label{overview-3}}
+
+Yet more text
+
+\hypertarget{summary-3}{%
+\subsection{Summary}\label{summary-3}}
+
+Other, more different text
+
+\hypertarget{recommendations}{%
+\section{Recommendations}\label{recommendations}}
+
+\hypertarget{overview-4}{%
+\subsection{Overview}\label{overview-4}}
+
+Will we ever run out of text?
+
+\hypertarget{summary-4}{%
+\subsection{Summary}\label{summary-4}}
+
+Of course not
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
 
 \end{document}
