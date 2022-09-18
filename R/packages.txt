@@ -1,0 +1,16 @@
+devtools
+flextable
+kableExtra
+knitr
+magrittr
+pacman
+pracma
+tidyverse
+xtable
+scales
+foreign
+data.table
+sf
+ggspatial
+ggthemes
+wesanderson
