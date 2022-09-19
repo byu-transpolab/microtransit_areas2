@@ -61,72 +61,10 @@ div.abstract{
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -225,11 +163,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="overview-2" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Overview<a href="existing-scenario-evaluation.html#overview-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from November? 2019November? 2020. In order to assess the performance of our BEAM simulations when compared with real-world observed data, we compared the results of the two on several metrics:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="existing-scenario-evaluation.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tar_make(existing_comparison)</span></span>
-<span id="cb1-2"><a href="existing-scenario-evaluation.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-3"><a href="existing-scenario-evaluation.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># tar_read(existing_comparison) %&gt;% </span></span>
-<span id="cb1-4"><a href="existing-scenario-evaluation.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   kbl(booktabs == TRUE) %&gt;% </span></span>
-<span id="cb1-5"><a href="existing-scenario-evaluation.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   kable_styling()</span></span></code></pre></div>
+<pre><code>## qs v0.25.4.
+## ✔ skip target D
+## ✔ skip target EX
+## ✔ skip target B_fleet
+## ✔ skip target UTAOD
+## ✔ skip target A_fleet
+## ✔ skip target C_fleet
+## ✔ skip target D_fleet
+## ✔ skip target EX_fleet
+## ✔ skip target good_months
+## ✔ skip target event_cols
+## ✔ skip target A
+## ✔ skip target B
+## ✔ skip target C
+## ✔ skip target fleets
+## ✔ skip target UTA
+## ✔ skip target scenarios
+## ✔ skip target total_riders
+## ✔ skip target average_wait_times
+## ✔ skip target utilization
+## ✔ skip target existing_comparison
+## ✔ skip pipeline: 0.069 seconds</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Ridership
+</th>
+<th style="text-align:right;">
+Utilization
+</th>
+<th style="text-align:right;">
+Avg. wait time (min)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+UTA Observed Data
+</td>
+<td style="text-align:right;">
+347.3333
+</td>
+<td style="text-align:right;">
+2.063333
+</td>
+<td style="text-align:right;">
+11.33333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BEAM ‘Existing’ Scenario
+</td>
+<td style="text-align:right;">
+667.0000
+</td>
+<td style="text-align:right;">
+1.317531
+</td>
+<td style="text-align:right;">
+9.92500
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="summary-2" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Summary<a href="existing-scenario-evaluation.html#summary-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>

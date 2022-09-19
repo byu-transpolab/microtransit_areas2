@@ -33,46 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -323,15 +283,42 @@ Be smart about the figures and tables you include. Figures should be high resolu
 
 UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from November? 2019\textendash November? 2020. In order to assess the performance of our BEAM simulations when compared with real-world observed data, we compared the results of the two on several metrics:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# tar\_make(existing\_comparison)}
-\CommentTok{\# }
-\CommentTok{\# tar\_read(existing\_comparison) \%\textgreater{}\% }
-\CommentTok{\#   kbl(booktabs == TRUE) \%\textgreater{}\% }
-\CommentTok{\#   kable\_styling()}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+## qs v0.25.4.
+## ✔ skip target D
+## ✔ skip target EX
+## ✔ skip target B_fleet
+## ✔ skip target UTAOD
+## ✔ skip target A_fleet
+## ✔ skip target C_fleet
+## ✔ skip target D_fleet
+## ✔ skip target EX_fleet
+## ✔ skip target good_months
+## ✔ skip target event_cols
+## ✔ skip target A
+## ✔ skip target B
+## ✔ skip target C
+## ✔ skip target fleets
+## ✔ skip target UTA
+## ✔ skip target scenarios
+## ✔ skip target total_riders
+## ✔ skip target average_wait_times
+## ✔ skip target utilization
+## ✔ skip target existing_comparison
+## ✔ skip pipeline: 0.071 seconds
+\end{verbatim}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{lrrr}
+\toprule
+  & Ridership & Utilization & Avg. wait time (min)\\
+\midrule
+UTA Observed Data & 347.3333 & 2.063333 & 11.33333\\
+BEAM 'Existing' Scenario & 667.0000 & 1.317531 & 9.92500\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \hypertarget{summary-2}{%
 \subsection{Summary}\label{summary-2}}
@@ -358,13 +345,76 @@ TODO: add and reference that file here (it exists, just not in this repo yet)
 
 And the results of our simulations:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# tar\_make(all\_comparisons)}
-\CommentTok{\# }
-\CommentTok{\# tar\_read(all\_comparisons)}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+## qs v0.25.4.
+## ✔ skip target D
+## ✔ skip target EX
+## ✔ skip target B_fleet
+## ✔ skip target UTAOD
+## ✔ skip target A_fleet
+## ✔ skip target C_fleet
+## ✔ skip target D_fleet
+## ✔ skip target EX_fleet
+## ✔ skip target good_months
+## ✔ skip target event_cols
+## ✔ skip target A
+## ✔ skip target B
+## ✔ skip target C
+## ✔ skip target fleets
+## ✔ skip target UTA
+## ✔ skip target scenarios
+## ✔ skip target fleet_sizes
+## ✔ skip target total_riders
+## ✔ skip target average_wait_times
+## ✔ skip target utilization
+## ✔ skip target ridership_comparison
+## ✔ skip target wait_time_comparison
+## ✔ skip target utilization_comparison
+## ✔ skip target existing_comparison
+## ✔ skip target all_comparisons
+## ✔ skip pipeline: 0.075 seconds
+\end{verbatim}
+
+\begin{verbatim}
+## $`Existing comparison`
+## # A tibble: 2 x 4
+##   ` `                      Ridership Utilization `Avg. wait time (min)`
+##   <chr>                        <dbl>       <dbl>                  <dbl>
+## 1 UTA Observed Data             347.        2.06                  11.3 
+## 2 BEAM 'Existing' Scenario      667         1.32                   9.93
+## 
+## $`Ridership comparison`
+## # A tibble: 5 x 3
+##   Scenario Entering Leaving
+##   <chr>       <int>   <int>
+## 1 existing      667     642
+## 2 A             932     899
+## 3 B             833     801
+## 4 C            1079    1038
+## 5 D            1571    1515
+## 
+## $`Utilization comparison`
+## # A tibble: 5 x 3
+##   Scenario Utilization `Fleet size`
+##   <chr>          <dbl>        <int>
+## 1 existing        1.32           25
+## 2 A               1.39           33
+## 3 B               1.29           32
+## 4 C               1.30           41
+## 5 D               1.39           56
+## 
+## $`Wait time comparison`
+## # A tibble: 7 x 6
+##   Quantile existing     A      B      C     D
+##   <chr>       <dbl> <dbl>  <dbl>  <dbl> <dbl>
+## 1 0%           1.13  0.95  0.867  0.783  0.55
+## 2 10%          3.67  3.53  3.37   3.31   3.47
+## 3 25%          5.77  5.68  5.7    5.57   5.54
+## 4 50%          9.93  9.72 10.2    9.95   9.77
+## 5 75%         13.5  13.4  13.4   13.3   13.1 
+## 6 90%         15.5  15.5  15.5   15.6   15.4 
+## 7 100%        19.2  21.1  18.3   18.9   18.3
+\end{verbatim}
 
 \hypertarget{summary-3}{%
 \subsection{Summary}\label{summary-3}}
