@@ -1,7 +1,4 @@
-about
-usage
-render-book
-preview-book
+fig:map
 introduction
 problem-statement
 objectives

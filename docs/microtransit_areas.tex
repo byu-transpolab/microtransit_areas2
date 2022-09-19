@@ -117,6 +117,20 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 \usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -131,7 +145,7 @@
 
 \title{Article Long Title}
 \author{true \and true \and true}
-\date{2022-09-17}
+\date{2022-09-19}
 
 \begin{document}
 \maketitle
@@ -143,54 +157,6 @@ This is where the abstract should go.
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
-\hypertarget{about}{%
-\section{About}\label{about}}
-
-This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports; for example, a math equation \(a^2 + b^2 = c^2\).
-
-\hypertarget{usage}{%
-\subsection{Usage}\label{usage}}
-
-Each \textbf{bookdown} chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter \emph{must} start with a first-level heading: \texttt{\#\ A\ good\ chapter}, and can contain one (and only one) first-level heading.
-
-Use second-level and higher headings within chapters like: \texttt{\#\#\ A\ short\ section} or \texttt{\#\#\#\ An\ even\ shorter\ section}.
-
-The \texttt{index.Rmd} file is required, and is also your first book chapter. It will be the homepage when you render the book.
-
-\hypertarget{render-book}{%
-\subsection{Render book}\label{render-book}}
-
-You can render the HTML version of this example book without changing anything:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Find the \textbf{Build} pane in the RStudio IDE, and
-\item
-  Click on \textbf{Build Book}, then select your output format, or select ``All formats'' if you'd like to use multiple formats from the same book source files.
-\end{enumerate}
-
-Or build the book from the R console:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{render\_book}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-To render this example to PDF as a \texttt{bookdown::pdf\_book}, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
-
-\hypertarget{preview-book}{%
-\subsection{Preview book}\label{preview-book}}
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in ``Preview book'', or from the R console:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{serve\_book}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
@@ -238,6 +204,8 @@ The report is organized into the following chapters:
 
 \hypertarget{overview}{%
 \subsection{Overview}\label{overview}}
+
+TODO: fix references
 
 This chapter presents prior attempts in the academic and practical literature to understand, model, and predict ridership for on-demand transit systems. The literature highlights the power and flexibility of demand-based modeling. MATSim is an agent-based simulation that models individuals' behavior, and BEAM (an extension to MATSim) places even more focus on individuals. As our project deals with modeling the UTA on Demand by VIA pilot program in Salt Lake City, we additionally discuss the program and the results it has achieved so far. Ultimately, we conclude that we will be using BEAM to model this and other potential on-demand transit implementations.
 
@@ -353,7 +321,17 @@ Be smart about the figures and tables you include. Figures should be high resolu
 \hypertarget{overview-2}{%
 \subsection{Overview}\label{overview-2}}
 
-Text
+UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from November? 2019\textendash November? 2020. In order to assess the performance of our BEAM simulations when compared with real-world observed data, we compared the results of the two on several metrics:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# tar\_make(existing\_comparison)}
+\CommentTok{\# }
+\CommentTok{\# tar\_read(existing\_comparison) \%\textgreater{}\% }
+\CommentTok{\#   kbl(booktabs == TRUE) \%\textgreater{}\% }
+\CommentTok{\#   kable\_styling()}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{summary-2}{%
 \subsection{Summary}\label{summary-2}}
@@ -366,7 +344,27 @@ More Text
 \hypertarget{overview-3}{%
 \subsection{Overview}\label{overview-3}}
 
-Yet more text
+We created several scenarios with microtransit fleets in various areas. A map of these areas is given below:
+
+\begin{figure}
+\centering
+\includegraphics{microtransit_areas_files/figure-latex/map-1.pdf}
+\caption{\label{fig:map}Ridehail zones in Salt Lake County.}
+\end{figure}
+
+The combinations of areas in each scenario is given:
+
+TODO: add and reference that file here (it exists, just not in this repo yet)
+
+And the results of our simulations:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# tar\_make(all\_comparisons)}
+\CommentTok{\# }
+\CommentTok{\# tar\_read(all\_comparisons)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{summary-3}{%
 \subsection{Summary}\label{summary-3}}
