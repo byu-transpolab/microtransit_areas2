@@ -37,10 +37,10 @@ TODO: add and reference that file here (it exists, just not in this repo yet)
 
 And the results of our simulations:
 
-```{r, echo=TRUE}
-# tar_make(all_comparisons)
-# 
-# tar_read(all_comparisons)
+```{r}
+tar_make(all_comparisons)
+
+tar_read(all_comparisons)
 ```
 
 
