@@ -15,7 +15,8 @@ library(qs)
 # Set target-specific options such as packages.
 tar_option_set(
   packages = c(
-    "tidyverse", "data.table", "R.utils", "archive", "magrittr", "sf"),
+    "tidyverse", "data.table", "R.utils", "archive", "magrittr", "sf",
+    "ggspatial", "kableExtra"),
   garbage_collection = TRUE,
   format = "qs")
 
@@ -68,6 +69,7 @@ data_targets <- tar_plan(
   
   #Names and types of cols to keep for events files
   event_cols = c(
+    # TODO: read this from file
     person = "character",
     time = "numeric",
     type = "character",
@@ -168,8 +170,8 @@ viz_targets <- tar_plan(
 
 
 render_targets <- tar_plan(
-    report = bookdown::render_book(
-      input = ".", output_yaml = "_output.yml", config_file = "_bookdown.yml")
+    # report = bookdown::render_book(
+    #   input = ".", output_yaml = "_output.yml", config_file = "_bookdown.yml")
 )
 
 ########### Run all targets ####################################################

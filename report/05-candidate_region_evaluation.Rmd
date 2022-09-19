@@ -1,0 +1,50 @@
+# Candidate Region Evaluation
+
+## Overview
+
+We created several scenarios with microtransit fleets in various areas. A map of these areas is given below:
+
+```{r load_shapefiles}
+# TODO: move to targets pipeline
+SLCSouth <- read_sf("data/Zones/SLCSouth/SLCSouth_polygon.shp") %>% st_transform(crs = 3857)
+Airport <- read_sf("data/Zones/WestCity/WestCity_polygon.shp") %>% st_transform(crs = 3857)
+Sandy <- read_sf("data/Zones/Sandy/Sandy_polygon.shp") %>% st_transform(crs = 3857)
+Jordan <- read_sf("data/Zones/WestJordan/WestJordan_polygon.shp") %>% st_transform(crs = 3857)
+```
+
+```{r map, fig.cap="Ridehail zones in Salt Lake County."}
+# TODO: move to targets pipeline
+pal <- wesanderson::wes_palette("Moonrise2")
+colors <- c("SLCSouth" = pal[1],
+            "Airport" = pal[2],
+            "Sandy" = pal[3],
+            "West Jordan" = pal[4])
+ggplot() + 
+  annotation_map_tile("cartolight", zoom = 12) + 
+  coord_sf(crs = 3857) +
+  geom_sf(data = Airport, aes(fill = "Airport"), inherit.aes = F, alpha = 0.8) +
+  geom_sf(data = Sandy, aes(fill = "Sandy"), inherit.aes = F, alpha = 0.8) +
+  geom_sf(data = Jordan, aes(fill = "West Jordan"), inherit.aes = F, alpha = 0.8) +
+  geom_sf(data = SLCSouth, aes(fill = "SLCSouth"), inherit.aes = F, alpha = 0.8) +
+  theme_map() +
+  scale_fill_manual(name = "Zones", values = colors)
+```
+
+
+The combinations of areas in each scenario is given:
+
+TODO: add and reference that file here (it exists, just not in this repo yet)
+
+And the results of our simulations:
+
+```{r, echo=TRUE}
+# tar_make(all_comparisons)
+# 
+# tar_read(all_comparisons)
+```
+
+
+
+## Summary
+
+Other, more different text
