@@ -12,11 +12,12 @@ library(readr)
 library(purrr)
 library(qs)
 
+# Read package list from file
+package_list <- readLines("package_list.txt")
+
 # Set target-specific options such as packages.
 tar_option_set(
-  packages = c(
-    "tidyverse", "data.table", "R.utils", "archive", "magrittr", "sf",
-    "ggspatial", "kableExtra"),
+  packages = package_list,
   garbage_collection = TRUE,
   format = "qs")
 
@@ -68,29 +69,9 @@ data_targets <- tar_plan(
   
   
   #Names and types of cols to keep for events files
-  event_cols = c(
-    # TODO: read this from file
-    person = "character",
-    time = "numeric",
-    type = "character",
-    actType = "character",
-    tourPurpose = "character",
-    arrivalTime = "integer",
-    departureTime = "integer",
-    legMode = "character",
-    mode = "character",
-    currentTourMode = "character",
-    vehicleType = "character",
-    vehicle = "character",
-    numPassengers = "integer",
-    startX = "numeric",
-    startY = "numeric",
-    location = "integer",
-    links = "character",
-    linkTravelTime = "character",
-    length = "numeric",
-    reason = "character"
-  ),
+  tar_target(event_cols_file, "data/eventCols.csv", format = "file"),
+  event_cols = get_event_cols(event_cols_file),
+
   
   #### UTA On Demand ##########################
   
@@ -182,10 +163,3 @@ tar_plan(
   viz_targets,
   render_targets
 )
-
-
-# # Run all targets
-# tar_plan(
-#   data = data_targets, 
-#   book = book_targets
-# )

@@ -1,0 +1,8 @@
+tidyverse
+data.table
+R.utils
+sf
+kableExtra
+ggspatial
+ggthemes
+wesanderson

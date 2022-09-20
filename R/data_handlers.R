@@ -24,3 +24,14 @@ get_fleet_sizes <- function(fleets){
   map(fleets, nrow) %>% 
     unlist()
 }
+
+
+get_event_cols <- function(cols_list){
+  filtered <- read_csv(cols_list) %>% 
+    filter(include == "y")
+  
+  cols <- filtered$type
+  names(cols) <- filtered$col_name
+  
+  cols
+}
