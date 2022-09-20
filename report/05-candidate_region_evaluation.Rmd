@@ -30,7 +30,30 @@ ggplot() +
   scale_fill_manual(name = "Zones", values = colors)
 ```
 
-
+```{r areas-map}
+# tar_load(areas)
+# pal <- wes_palette("Zissou1", 6, type = "continuous")
+# if(knitr::is_html_output()){
+#   # interactive map for web
+#   leaflet(areas %>% st_transform(4326)) %>%
+#     addProviderTiles(providers$CartoDB) %>%
+#     addPolygons(label = ~name, color = pal)
+# } else {
+#   # static map for pdf
+#   ggplot(areas, aes(fill = name)) + 
+#     annotation_map_tile("cartolight", zoom = 12) +
+#     geom_sf(alpha = 0.5) +
+#     scale_fill_manual("Area Name", values = pal) + 
+#     theme(
+#       axis.text.x=element_blank(),
+#       axis.text.y=element_blank(),axis.ticks=element_blank(),
+#       axis.title.x=element_blank(),
+#       axis.title.y=element_blank(),
+#       legend.text=element_text(size=8), #change font size of legend text
+#       legend.title=element_text(size=8)
+#     )
+# }
+```
 The combinations of areas in each scenario is given:
 
 TODO: add and reference that file here (it exists, just not in this repo yet)
