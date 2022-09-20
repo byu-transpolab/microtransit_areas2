@@ -29,7 +29,8 @@ r_files <- c(
   "R/data_handlers.R",
   "R/summarize_events.R",
   "R/UTAOD_comparison.R",
-  "R/prelim_comparison.R"
+  "R/prelim_comparison.R",
+  "R/maps.R"
 )
 purrr::map(r_files, source)
 
@@ -85,6 +86,34 @@ data_targets <- tar_plan(
     filter(Month %in% good_months) %>%
     pivot_uta(),
   
+  
+  #### Zones #################################
+  
+  tar_target(SLCSouth_file, "data/Zones/SLCSouth/SLCSouth_polygon.shp", format = "file"),
+  tar_target(WestCity_file, "data/Zones/WestCity/WestCity_polygon.shp", format = "file"),
+  tar_target(Sandy_file, "data/Zones/Sandy/Sandy_polygon.shp", format = "file"),
+  tar_target(WestJordan_file, "data/Zones/WestJordan/WestJordan_polygon.shp", format = "file"),
+  
+  crs = 3587,
+  
+  SLCSouth = read_shapefile(SLCSouth_file, crs),
+  WestCity = read_shapefile(WestCity_file, crs),
+  Sandy = read_shapefile(Sandy_file, crs),
+  WestJordan = read_shapefile(WestJordan_file, crs),
+  
+  
+  #### Check for modification of Rmd files ###
+  
+  tar_target(fileindex, "index.Rmd", format = "file"),
+  tar_target(file1, "report/01-introduction.Rmd", format = "file"),
+  tar_target(file2, "report/02-literature_review.Rmd", format = "file"),
+  tar_target(file3, "report/03-methodology.Rmd", format = "file"),
+  tar_target(file4, "report/04-results.Rmd", format = "file"),
+  tar_target(file5, "report/05-recommendations.Rmd", format = "file"),
+  tar_target(file6, "report/06-references.Rmd", format = "file"),
+  
+  report_files = list(fileindex, file1, file2, file3, file4, file5, file6)
+  
 )
 
 
@@ -122,6 +151,8 @@ analysis_targets <- tar_plan(
 
 viz_targets <- tar_plan(
   
+  areas_map = make_areas_map(crs, SLCSouth, WestCity, Sandy, WestJordan),
+  
   existing_comparison = compare_existing(
     UTA, total_riders$existing,
     utilization$existing,
@@ -151,8 +182,7 @@ viz_targets <- tar_plan(
 
 
 render_targets <- tar_plan(
-    # report = bookdown::render_book(
-    #   input = ".", output_yaml = "_output.yml", config_file = "_bookdown.yml")
+    report = make_report(all_comparisons, areas_map, report_files)
 )
 
 ########### Run all targets ####################################################

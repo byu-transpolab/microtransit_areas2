@@ -55,8 +55,4 @@ knitr::opts_chunk$set(
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
-
-# TODO: move library loading entirely to targets pipeline
-pacman::p_load(
-targets, knitr, kableExtra, tidyverse, ggspatial, ggthemes, wesanderson, sf)
 ```

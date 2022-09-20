@@ -35,3 +35,18 @@ get_event_cols <- function(cols_list){
   
   cols
 }
+
+#' Ability to force specific targets to run before rendering
+make_report <- function(...){
+  bookdown::render_book(
+  input = ".",
+  output_yaml = "_output.yml",
+  config_file = "_bookdown.yml")
+}
+
+
+#' Read and transform shapefiles
+read_shapefile <- function(sf, crs){
+  read_sf(sf) %>% 
+    st_transform(crs = crs)
+}
