@@ -4,7 +4,6 @@
 
 In November of 2019, the Utah Transit Authority (UTA) began a partnership with VIA, a private mobility company. Under this partnership, UTA has supplemented its fixed-route services in south Salt Lake County with on-demand shuttles hailed through a mobile application. So-called “microtransit” offerings of this kind have the potential to efficiently extend UTA services into low-density areas and function as last-mile services for the regular fixed-route rail and bus network. UTA is interested in examining other areas where microtransit services can be effectively deployed.
 
-
 ## Objectives
 
 The primary objective of this research project is to identify possible geographic areas along the Wasatch Front where an on-demand microtransit system might most effectively operate. To do this, the research team will implement an on-demand microtransit system within a multi-agent simulation of daily activity patterns for the Wasatch Front Region. This simulation is presently under construction for other UDOT-sponsored research projects aimed at evaluating the potential effects of an on-demand transit system aimed at wheelchair users, and an additional USDOT-funded project to examine techniques to optimize microtransit services.
