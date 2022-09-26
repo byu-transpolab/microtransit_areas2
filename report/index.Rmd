@@ -56,5 +56,8 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
 
+targets::tar_config_unset("store")
 targets::tar_config_set("store" = here::here(targets::tar_config_get("store")))
 ```
+
+
