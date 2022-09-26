@@ -5,24 +5,24 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Results | Article Long Title</title>
-  <meta name="description" content="A short description" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Results | Article Long Title" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="A short description" />
+  <meta property="og:description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
   <meta name="github-repo" content="byu-transpolab/something" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Results | Article Long Title" />
   
-  <meta name="twitter:description" content="A short description" />
+  <meta name="twitter:description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
   
 
 
 
-<meta name="date" content="2022-09-20" />
+<meta name="date" content="2022-09-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -66,6 +66,28 @@ div.abstract{
 
 
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -116,11 +138,11 @@ div.abstract{
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#scenario-description"><i class="fa fa-check"></i><b>3.3</b> Scenario Description</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="methodology.html"><a href="methodology.html#networks"><i class="fa fa-check"></i><b>3.3.1</b> Networks</a></li>
-<li class="chapter" data-level="3.3.2" data-path="methodology.html"><a href="methodology.html#demand"><i class="fa fa-check"></i><b>3.3.2</b> Demand</a></li>
+<li class="chapter" data-level="3.3.1" data-path="methodology.html"><a href="methodology.html#demand"><i class="fa fa-check"></i><b>3.3.1</b> Demand</a></li>
+<li class="chapter" data-level="3.3.2" data-path="methodology.html"><a href="methodology.html#networks"><i class="fa fa-check"></i><b>3.3.2</b> Networks</a></li>
 <li class="chapter" data-level="3.3.3" data-path="methodology.html"><a href="methodology.html#configuration"><i class="fa fa-check"></i><b>3.3.3</b> Configuration</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#scenarios"><i class="fa fa-check"></i><b>3.4</b> Scenarios</a></li>
+<li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#scenario-configuration"><i class="fa fa-check"></i><b>3.4</b> Scenarios</a></li>
 <li class="chapter" data-level="3.5" data-path="methodology.html"><a href="methodology.html#summary-1"><i class="fa fa-check"></i><b>3.5</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>4</b> Results</a>
@@ -159,8 +181,11 @@ div.abstract{
 <h1><span class="header-section-number">Chapter 4</span> Results<a href="results.html#results" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="existing-scenario-evaluation" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Existing scenario evaluation<a href="results.html#existing-scenario-evaluation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from December 2019November 2020. In order to assess the performance of our BEAM simulations when compared with real-world observed data, we compared the results of the two on several metrics:</p>
+<p>UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from December 2019–November 2020. In order to assess the performance of our BEAM simulations when compared with real-world observed data, we compared the results of the two on several metrics (Table <a href="results.html#tab:existing-comparison">4.1</a>).</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:existing-comparison">Table 4.1: </span>Comparison of Observed Data with ‘Existing’ BEAM Scenario
+</caption>
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -182,13 +207,13 @@ Avg. wait time (min)
 UTA Observed Data
 </td>
 <td style="text-align:right;">
-347.3333
+347.33
 </td>
 <td style="text-align:right;">
-2.063333
+2.06
 </td>
 <td style="text-align:right;">
-11.33333
+11.33
 </td>
 </tr>
 <tr>
@@ -196,22 +221,340 @@ UTA Observed Data
 BEAM ‘Existing’ Scenario
 </td>
 <td style="text-align:right;">
-667.0000
+667.00
 </td>
 <td style="text-align:right;">
-1.317531
+1.32
 </td>
 <td style="text-align:right;">
-9.92500
+9.93
 </td>
 </tr>
 </tbody>
 </table>
 <p>It is clear from this comparison that BEAM did not perfectly model microtransit, over-predicting ridership by almost a factor of 2. Interestingly, however, utilization is predicted at significantly less than the observed value. This is almost certainly due to the difference in vehicle shifts. Utilization is measured as passengers per vehicle per hour of operation, and our scenarios specify ridehail fleets that operate nearly all day. It is likely that the actual vehicles are in operation for less of the day, and not all vehicles may be in operation at all times. If we take ‘hours of operation’ to be the actual time spent driving, with or without a passenger, then the predicted utilization jumps to &lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;####. {{{This is larger than the observed value by a factor of ###}}}.</p>
-<p>The fact that BEAM so over-predicts microtransit ridership is likely due in part to the sample size. Since we used 20% population samples as our inputs to BEAM, …. We did reduce the network capacity to 20% to account for this, but we did not scale down the ridehail fleets, as it was unclear how best to do so. By dividing the observed ridership by the predicted ridership, we obtained what we assume to be a rough approximation of the appropriate fleet scaling factor, in this case, about ###. We also assume that this factor is applicable to all of our scenarios, and so scaled down ridership and associated metrics accordingly for those as well, to offer a better approximation of estimated ridership.</p>
+<p>The fact that BEAM so over-predicts microtransit ridership is likely due in part to the sample size. Since we used 20% population samples as our inputs to BEAM, there was an overabundance of microtransit vehicles relative to the population. We did reduce the network capacity to 20% to account for this, but we did not scale down the ridehail fleets, as it was unclear how best to do so. By dividing the observed ridership by the predicted ridership, we obtained what we assume to be a rough approximation of the appropriate fleet scaling factor, in this case, about ###.
+<!-- We also assume that this factor is applicable to all of our scenarios, and so scaled down ridership and associated metrics accordingly for those as well, to offer a better approximation of estimated ridership. --></p>
 </div>
 <div id="candidate-scenario-comparison" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Candidate scenario comparison<a href="results.html#candidate-scenario-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We then ran each of our scenarios as described in section <a href="methodology.html#scenario-configuration">3.4</a>, and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes &lt;&gt;<Other metrics>&lt;&gt;. These comparisons are given in Tables <a href="results.html#tab:ridership-compare">4.2</a>–<a href="results.html#tab:wait-time-compare">4.4</a>.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ridership-compare">Table 4.2: </span>Comparison of Weekday Ridership Across Scenarios
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Scenario
+</th>
+<th style="text-align:right;">
+Entering
+</th>
+<th style="text-align:right;">
+Leaving
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+existing
+</td>
+<td style="text-align:right;">
+667
+</td>
+<td style="text-align:right;">
+642
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+932
+</td>
+<td style="text-align:right;">
+899
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+833
+</td>
+<td style="text-align:right;">
+801
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+1079
+</td>
+<td style="text-align:right;">
+1038
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:right;">
+1571
+</td>
+<td style="text-align:right;">
+1515
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:util-compare">Table 4.3: </span>Comparison of Utilization Across Scenarios
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Scenario
+</th>
+<th style="text-align:right;">
+Utilization
+</th>
+<th style="text-align:right;">
+Fleet size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+existing
+</td>
+<td style="text-align:right;">
+1.32
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+1.39
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+1.29
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+1.30
+</td>
+<td style="text-align:right;">
+41
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:right;">
+1.39
+</td>
+<td style="text-align:right;">
+56
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:wait-time-compare">Table 4.4: </span>Comparison of Wait Times Across Scenarios
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Scenario
+</th>
+<th style="text-align:right;">
+0%
+</th>
+<th style="text-align:right;">
+10%
+</th>
+<th style="text-align:right;">
+25%
+</th>
+<th style="text-align:right;">
+50%
+</th>
+<th style="text-align:right;">
+75%
+</th>
+<th style="text-align:right;">
+90%
+</th>
+<th style="text-align:right;">
+100%
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+existing
+</td>
+<td style="text-align:right;">
+1.13
+</td>
+<td style="text-align:right;">
+3.67
+</td>
+<td style="text-align:right;">
+5.77
+</td>
+<td style="text-align:right;">
+9.93
+</td>
+<td style="text-align:right;">
+13.47
+</td>
+<td style="text-align:right;">
+15.52
+</td>
+<td style="text-align:right;">
+19.17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.95
+</td>
+<td style="text-align:right;">
+3.53
+</td>
+<td style="text-align:right;">
+5.68
+</td>
+<td style="text-align:right;">
+9.72
+</td>
+<td style="text-align:right;">
+13.37
+</td>
+<td style="text-align:right;">
+15.50
+</td>
+<td style="text-align:right;">
+21.12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+0.87
+</td>
+<td style="text-align:right;">
+3.37
+</td>
+<td style="text-align:right;">
+5.70
+</td>
+<td style="text-align:right;">
+10.18
+</td>
+<td style="text-align:right;">
+13.42
+</td>
+<td style="text-align:right;">
+15.48
+</td>
+<td style="text-align:right;">
+18.27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.78
+</td>
+<td style="text-align:right;">
+3.31
+</td>
+<td style="text-align:right;">
+5.57
+</td>
+<td style="text-align:right;">
+9.95
+</td>
+<td style="text-align:right;">
+13.28
+</td>
+<td style="text-align:right;">
+15.56
+</td>
+<td style="text-align:right;">
+18.92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:right;">
+0.55
+</td>
+<td style="text-align:right;">
+3.47
+</td>
+<td style="text-align:right;">
+5.54
+</td>
+<td style="text-align:right;">
+9.77
+</td>
+<td style="text-align:right;">
+13.14
+</td>
+<td style="text-align:right;">
+15.39
+</td>
+<td style="text-align:right;">
+18.32
+</td>
+</tr>
+</tbody>
+</table>
+<p>It is clear that in the scenarios with more ridehail vehicles available, ridership greatly increases. Interestingly, utilization does not vary much at all, which implies that at least in these specific scenarios there is a roughly linear relationship between number of vehicles and number of riders. Wait times also hardly are affected in the various scenarios.</p>
 </div>
 <div id="summary-2" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Summary<a href="results.html#summary-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -256,7 +599,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/report/04-results.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-results.Rmd",
 "text": "Edit"
 },
 "history": {

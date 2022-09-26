@@ -5,24 +5,24 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Article Long Title</title>
-  <meta name="description" content="A short description" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Article Long Title" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="A short description" />
+  <meta property="og:description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
   <meta name="github-repo" content="byu-transpolab/something" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Article Long Title" />
   
-  <meta name="twitter:description" content="A short description" />
+  <meta name="twitter:description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
   
 
 
 
-<meta name="date" content="2022-09-20" />
+<meta name="date" content="2022-09-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -66,6 +66,28 @@ div.abstract{
 
 
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -116,11 +138,11 @@ div.abstract{
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#scenario-description"><i class="fa fa-check"></i><b>3.3</b> Scenario Description</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="methodology.html"><a href="methodology.html#networks"><i class="fa fa-check"></i><b>3.3.1</b> Networks</a></li>
-<li class="chapter" data-level="3.3.2" data-path="methodology.html"><a href="methodology.html#demand"><i class="fa fa-check"></i><b>3.3.2</b> Demand</a></li>
+<li class="chapter" data-level="3.3.1" data-path="methodology.html"><a href="methodology.html#demand"><i class="fa fa-check"></i><b>3.3.1</b> Demand</a></li>
+<li class="chapter" data-level="3.3.2" data-path="methodology.html"><a href="methodology.html#networks"><i class="fa fa-check"></i><b>3.3.2</b> Networks</a></li>
 <li class="chapter" data-level="3.3.3" data-path="methodology.html"><a href="methodology.html#configuration"><i class="fa fa-check"></i><b>3.3.3</b> Configuration</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#scenarios"><i class="fa fa-check"></i><b>3.4</b> Scenarios</a></li>
+<li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#scenario-configuration"><i class="fa fa-check"></i><b>3.4</b> Scenarios</a></li>
 <li class="chapter" data-level="3.5" data-path="methodology.html"><a href="methodology.html#summary-1"><i class="fa fa-check"></i><b>3.5</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>4</b> Results</a>
@@ -172,10 +194,10 @@ Brigham Young University<br>
 Brigham Young University<br>
 <a class="author_email" href="mailto:#"><a href="mailto:cat@example.com" class="email">cat@example.com</a></a>
 </address>
-<p class="date"><em>2022-09-20</em></p>
+<p class="date"><em>2022-09-26</em></p>
 <div class="abstract">
 <p class="abstract">Abstract</p>
-<p>This is where the abstract should go.</p>
+<p>A number of regions have begun operating microtransit systems to support first and last mile transit access. In this paper, we modify the ridehailing request handling algorithm in the BEAM microscopic simulation engine to accomodate geographically resetricted microstransit operations. We then examine the ridership operating characteristics for one existing and three proposed geofenced service regions in Salt Lake County, Utah. We find that the simulation generates realistic ridership statistics and wait times, subject to errors likely to be corrected with more thorough choice model calibration. We also found that expanding microtransit services to Sandy or West Jordan might be effective, but might be less so for the area near SLC International Airport.</p>
 </div>
 </div>
 <div id="introduction" class="section level1 hasAnchor" number="1">
@@ -183,6 +205,8 @@ Brigham Young University<br>
 <div id="problem-statement" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Problem Statement<a href="introduction.html#problem-statement" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In November of 2019, the Utah Transit Authority (UTA) began a partnership with VIA, a private mobility company. Under this partnership, UTA has supplemented its fixed-route services in south Salt Lake County with on-demand shuttles hailed through a mobile application. So-called “microtransit” offerings of this kind have the potential to efficiently extend UTA services into low-density areas and function as last-mile services for the regular fixed-route rail and bus network. UTA is interested in examining other areas where microtransit services can be effectively deployed.</p>
+<p>In September 2020, UTA released a report detailing a possible expansion of microtransit services to other areas in Utah following the UTA on Demand pilot program <span class="citation">(<a href="#ref-UTAreport" role="doc-biblioref">Robertson et al., 2020</a>)</span>. 19 zones were identified between Brigham City and Santaquin as areas that could potentially benefit from microtransit services. Ridership was estimated based on number of residents and number of workers employed within each zone, as well as a mode share score that VIA developed based on their internal demand model.</p>
+<p>We seek however to provide UTA and the Utah Department of Transportation (UDOT) with a microsimulation model they can use as a template to examine future similar projects. We want to know how the results of such a model would compare to those of UTA’s September 2020 report. Though UTA’s own report made no definitive recommendations regarding expansion of microtransit services, it may be useful in calibrating our simulation. We also seek to use our results (possibly in conjunction with those of UTA’s report) to make recommendations to UTA and UDOT regarding expansion of microtransit services.</p>
 </div>
 <div id="objectives" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Objectives<a href="introduction.html#objectives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -205,6 +229,12 @@ Brigham Young University<br>
 <li><strong>Recommendations and Conclusions</strong></li>
 </ol>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-UTAreport" class="csl-entry">
+Robertson, J., Callison, E., Taylor, R., 2020. <a href="https://www.rideuta.com/-/media/Files/About-UTA/Reports/2021/UTA_Microtransit_Consulting_Report_Final.ashx?la=en"><span>Utah Transit Authority Microtransit Planning Project</span></a>.
 </div>
 </div>
             </section>
@@ -244,7 +274,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/report/01-introduction.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-introduction.Rmd",
 "text": "Edit"
 },
 "history": {

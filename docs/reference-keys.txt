@@ -1,3 +1,7 @@
+tab:existing-comparison
+tab:ridership-compare
+tab:util-compare
+tab:wait-time-compare
 introduction
 problem-statement
 objectives
@@ -17,10 +21,10 @@ overview-1
 beam
 geofencing-modifications
 scenario-description
-networks
 demand
+networks
 configuration
-scenarios
+scenario-configuration
 summary-1
 results
 existing-scenario-evaluation
