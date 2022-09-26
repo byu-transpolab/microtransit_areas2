@@ -19,6 +19,8 @@ effective, but might be less so for the area near SLC International Airport.
 
 ## Reprodution
 
+This repository uses several R packages, including [flowme](https://github.com/edalfon/flowme/). Install this using `remotes::install_github("edalfon/flowme")`.
+
 The **bookdown** book: https://bookdown.org/yihui/bookdown/
 
 The **bookdown** package reference site: https://pkgs.rstudio.com/bookdown

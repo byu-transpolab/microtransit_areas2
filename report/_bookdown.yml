@@ -1,7 +1,6 @@
 book_filename: "microtransit_areas"
 delete_merged_file: true
-output_dir: docs
-rmd_subdir: report
+output_dir: "../docs"
 language:
   ui:
     chapter_name: "Chapter "

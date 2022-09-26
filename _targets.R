@@ -100,20 +100,6 @@ data_targets <- tar_plan(
   WestCity = read_shapefile(WestCity_file, crs),
   Sandy = read_shapefile(Sandy_file, crs),
   WestJordan = read_shapefile(WestJordan_file, crs),
-  
-  
-  #### Check for modification of Rmd files ###
-  
-  tar_target(fileindex, "index.Rmd", format = "file"),
-  tar_target(file1, "report/01-introduction.Rmd", format = "file"),
-  tar_target(file2, "report/02-literature_review.Rmd", format = "file"),
-  tar_target(file3, "report/03-methodology.Rmd", format = "file"),
-  tar_target(file4, "report/04-results.Rmd", format = "file"),
-  tar_target(file5, "report/05-recommendations.Rmd", format = "file"),
-  tar_target(file6, "report/06-references.Rmd", format = "file"),
-  
-  report_files = list(fileindex, file1, file2, file3, file4, file5, file6)
-  
 )
 
 
@@ -182,7 +168,7 @@ viz_targets <- tar_plan(
 
 
 render_targets <- tar_plan(
-    report = make_report(all_comparisons, areas_map, report_files)
+  flowme::tar_bookdown(input_dir = "report")
 )
 
 ########### Run all targets ####################################################

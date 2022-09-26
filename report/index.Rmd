@@ -26,23 +26,23 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: article
 layout: "3p, authoryear"
-bibliography: [book.bib]
+bibliography: [references.bib]
 csl: elsevier-harvard-italics.csl
 always_allow_html: true
-
 # url: your book url like https://bookdown.org/yihui/bookdown
 # cover-image: path to the social sharing image like images/cover.jpg
-
 link-citations: yes
 
 abstract: |
-  This is where the abstract should go.
-description: "A short description"
+  A number of regions have begun operating microtransit systems to support first and last mile transit access.  In this paper, we modify the ridehailing request handling algorithm in the BEAM microscopic simulation engine to accomodate geographically resetricted microstransit operations. We then examine the ridership operating characteristics for one existing and three proposed geofenced service regions in Salt Lake County, Utah. We find that the simulation generates realistic ridership statistics and wait times, subject to errors likely to be corrected with more thorough choice model calibration. We also found that expanding microtransit services to Sandy or West Jordan might be effective, but might be less so for the area near SLC International Airport.
+  
+description: "A paper about simulating geofenced microtransit in Salt Lake County"
 
 github-repo: byu-transpolab/something
 keywords:
-  - Accessibility
-  - Passive Data
+  - Accessibility,
+  - Microtransit,
+  - Passive Data,
   - Location Choice
 ---
 
@@ -55,4 +55,6 @@ knitr::opts_chunk$set(
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
+
+targets::tar_config_set("store" = here::here(targets::tar_config_get("store")))
 ```
