@@ -45,5 +45,9 @@ compare_wait_times <- function(wait){
   colnames(comparison) <- c(
     "Quantile", names(wait))
   
+  comparison <- comparison %>% 
+    pivot_longer(-Quantile, names_to = "Scenario") %>% 
+    pivot_wider(names_from = Quantile, values_from = value)
+  
   comparison
 }
