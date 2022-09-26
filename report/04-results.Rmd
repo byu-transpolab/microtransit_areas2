@@ -11,13 +11,36 @@ tar_read(existing_comparison) %>%
 
 It is clear from this comparison that BEAM did not perfectly model microtransit, over-predicting ridership by almost a factor of 2. Interestingly, however, utilization is predicted at significantly less than the observed value. This is almost certainly due to the difference in vehicle shifts. Utilization is measured as passengers per vehicle per hour of operation, and our scenarios specify ridehail fleets that operate nearly all day. It is likely that the actual vehicles are in operation for less of the day, and not all vehicles may be in operation at all times. If we take 'hours of operation' to be the actual time spent driving, with or without a passenger, then the predicted utilization jumps to <><><><>####. {{{This is larger than the observed value by a factor of ###}}}.
 
-The fact that BEAM so over-predicts microtransit ridership is likely due in part to the sample size. Since we used 20% population samples as our inputs to BEAM, .... We did reduce the network capacity to 20% to account for this, but we did not scale down the ridehail fleets, as it was unclear how best to do so. By dividing the observed ridership by the predicted ridership, we obtained what we assume to be a rough approximation of the appropriate fleet scaling factor, in this case, about ###. We also assume that this factor is applicable to all of our scenarios, and so scaled down ridership and associated metrics accordingly for those as well, to offer a better approximation of estimated ridership.
+The fact that BEAM so over-predicts microtransit ridership is likely due in part to the sample size. Since we used 20% population samples as our inputs to BEAM, .... We did reduce the network capacity to 20% to account for this, but we did not scale down the ridehail fleets, as it was unclear how best to do so. By dividing the observed ridership by the predicted ridership, we obtained what we assume to be a rough approximation of the appropriate fleet scaling factor, in this case, about ###.
+<!-- We also assume that this factor is applicable to all of our scenarios, and so scaled down ridership and associated metrics accordingly for those as well, to offer a better approximation of estimated ridership. -->
 
 
 ## Candidate scenario comparison
 We then ran each of our scenarios as described in section ###, and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes <><Other metrics><>. These comparisons are given in Tables ###\textendash ###.
 
-It is clear that in the
+```{r}
+tar_read(ridership_comparison) %>% 
+  kbl(booktabs = TRUE, digits = 0,
+      caption = "Comparison of Weekday Ridership Across Scenarios") %>% 
+  kable_styling()
+```
+
+```{r}
+tar_read(utilization_comparison) %>% 
+  kbl(booktabs = TRUE, digits = 2,
+      caption = "Comparison of Utilization Across Scenarios") %>% 
+  kable_styling()
+```
+
+```{r}
+tar_read(wait_time_comparison) %>% 
+  kbl(booktabs = TRUE, digits = 2,
+      caption = "Comparison of Wait Times Across Scenarios") %>% 
+  kable_styling()
+```
+
+
+It is clear that in the scenarios with more ridehail vehicles available, ridership greatly increases. Interestingly, utilization does not vary much at all, which implies that at least in these specific scenarios there is a roughly linear relationship between number of vehicles and number of riders. Wait times also hardly are affected in the various scenarios.
 
 ## Summary
 
