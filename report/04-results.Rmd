@@ -1,38 +1,46 @@
 # Results
 
 ## Existing scenario evaluation
-UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from December 2019\textendash November 2020. In order to assess the performance of our BEAM simulations when compared with real-world observed data, we compared the results of the two on several metrics:
+UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from December 2019--November 2020. In order to assess the performance of our BEAM simulations when compared with real-world observed data, we compared the results of the two on several metrics (Table \@ref(tab:existing-comparison)).
 
-```{r}
-tar_read(existing_comparison) %>%
-  kbl(booktabs = TRUE) %>%
+```{r existing-comparison}
+tar_load(existing_comparison)
+
+existing_comparison %>%
+  kbl(booktabs = TRUE, digits = 2,
+      caption = "Comparison of Observed Data with 'Existing' BEAM Scenario") %>%
   kable_styling()
 ```
 
+```{r}
+
+```
+
+
 It is clear from this comparison that BEAM did not perfectly model microtransit, over-predicting ridership by almost a factor of 2. Interestingly, however, utilization is predicted at significantly less than the observed value. This is almost certainly due to the difference in vehicle shifts. Utilization is measured as passengers per vehicle per hour of operation, and our scenarios specify ridehail fleets that operate nearly all day. It is likely that the actual vehicles are in operation for less of the day, and not all vehicles may be in operation at all times. If we take 'hours of operation' to be the actual time spent driving, with or without a passenger, then the predicted utilization jumps to <><><><>####. {{{This is larger than the observed value by a factor of ###}}}.
 
-The fact that BEAM so over-predicts microtransit ridership is likely due in part to the sample size. Since we used 20% population samples as our inputs to BEAM, .... We did reduce the network capacity to 20% to account for this, but we did not scale down the ridehail fleets, as it was unclear how best to do so. By dividing the observed ridership by the predicted ridership, we obtained what we assume to be a rough approximation of the appropriate fleet scaling factor, in this case, about ###.
+The fact that BEAM so over-predicts microtransit ridership is likely due in part to the sample size. Since we used 20% population samples as our inputs to BEAM, there was an overabundance of microtransit vehicles relative to the population. We did reduce the network capacity to 20% to account for this, but we did not scale down the ridehail fleets, as it was unclear how best to do so. By dividing the observed ridership by the predicted ridership, we obtained what we assume to be a rough approximation of the appropriate fleet scaling factor, in this case, about ###.
 <!-- We also assume that this factor is applicable to all of our scenarios, and so scaled down ridership and associated metrics accordingly for those as well, to offer a better approximation of estimated ridership. -->
 
 
 ## Candidate scenario comparison
-We then ran each of our scenarios as described in section ###, and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes <><Other metrics><>. These comparisons are given in Tables ###\textendash ###.
+We then ran each of our scenarios as described in section \@ref(scenario-configuration), and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes <><Other metrics><>. These comparisons are given in Tables \@ref(tab:ridership-compare)--\@ref(tab:wait-time-compare).
 
-```{r}
+```{r ridership-compare}
 tar_read(ridership_comparison) %>% 
   kbl(booktabs = TRUE, digits = 0,
       caption = "Comparison of Weekday Ridership Across Scenarios") %>% 
   kable_styling()
 ```
 
-```{r}
+```{r util-compare}
 tar_read(utilization_comparison) %>% 
   kbl(booktabs = TRUE, digits = 2,
       caption = "Comparison of Utilization Across Scenarios") %>% 
   kable_styling()
 ```
 
-```{r}
+```{r wait-time-compare}
 tar_read(wait_time_comparison) %>% 
   kbl(booktabs = TRUE, digits = 2,
       caption = "Comparison of Wait Times Across Scenarios") %>% 
