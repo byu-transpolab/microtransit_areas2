@@ -1,7 +1,6 @@
 # Results
 
 ## Existing scenario evaluation
-
 UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from December 2019\textendash November 2020. In order to assess the performance of our BEAM simulations when compared with real-world observed data, we compared the results of the two on several metrics:
 
 ```{r}
@@ -16,8 +15,9 @@ The fact that BEAM so over-predicts microtransit ridership is likely due in part
 
 
 ## Candidate scenario comparison
+We then ran each of our scenarios as described in section ###, and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes <><Other metrics><>. These comparisons are given in Tables ###\textendash ###.
 
-
+It is clear that in the
 
 ## Summary
 

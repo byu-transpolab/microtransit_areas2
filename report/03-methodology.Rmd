@@ -1,74 +1,53 @@
 # Methodology
 
 ## Overview
-
 This chapter describes the methodology we followed to generate the simulation scenarios. First, we will provide background information on BEAM itself, including the modifications to use geofencing for microtransit vehicles. This is followed by descriptions of the BEAM scenarios we developed for this research.
 
 
 ## BEAM
-
 Adaptive algorithm
 
 Ride hailing versus transit
 
-### Geofencing Modifications
+In this project, we are representing on-demand transit in BEAM as a pooled ridehail option. Agents request a pooled ridehail trip, and a ridehail vehicle services the request. BEAM contains internal algorithms to match ridehail requests with vehicles, and to intelligently pool multiple requests when feasible.
 
-We adapted BEAM to allow for geofencing of ridehail vehicles. BEAM natively has support for geofencing, but this is limited to specifying a radius from the vehicle's initial location. We need to specify polygonal regions in which the ridehail vehicles are allowed to operate, and so we needed to modify the BEAM code. BEAM will now check that a ridehail request originates and ends within the specified geofence, and only accept those requests that do.
+### Geofencing Modifications
+One part of many on-demand transit implementations\textemdash including the implementation in Salt Lake County\textemdash is a zone in which the vehicles may travel. BEAM natively offers some support for “geofencing” on-demand transit vehicles, but this is limited as an operating radius.
+
+We adapted BEAM to allow for geofencing of ridehail vehicles. We need to specify polygonal regions in which the ridehail vehicles are allowed to operate, and so we needed to modify the BEAM code. BEAM will now check that a ridehail request originates and ends within the specified geofence, and only accept those requests that do.
+
+<!-- The example scenarios in BEAM use San Francisco as the network for simulation. Figure 2 shows a map of (most of) the network, with a polygon representing the desired geofence. This particular polygon was created arbitrarily using ArcGIS, but any shapefile set up properly should work the same. Several attributes were added to the shapefile such as fleet size and vehicle type, and then R code was used to convert these attributes to an on-demand transit vehicle fleet (a .csv file listing each vehicle, its type, and the geofence it is constrained to in well-known text [wkt]). -->
 
 
 ## Scenario Description
-
 A BEAM scenario consists of the following:
 
 - A description of transportation supply in the form of highway networks, transit services, and ride hail vehicles.
 - A description of travel demand, or the trips and activities for a synthetic population.
 - A configuration describing how the scenario operates and which modules are included.
 
-### Networks
-
-Open
-
-### Demand
-
-BEAM requires an input file representing trips and daily activities occurring in the region.
-
-Synthetic population is developed in PopulationSim
-
-Skims for transportation modes converted from WFRC / MAG model
-
-ActivitySim
-
-### Configuration
-
-
-## Scenarios
-
-BEAM provides extensive documentation (https://beam.readthedocs.io/en/latest/) on setting up and running simulations, as well as converting MATSim scenarios to run in BEAM. A BEAM scenario requires the following inputs: 
+BEAM provides extensive documentation [][https://beam.readthedocs.io/en/latest/] on setting up and running simulations, as well as converting MATSim scenarios to run in BEAM. A BEAM scenario requires the following inputs: 
 
 - Scenario travel demand: A description of the trips and activities made by agents in the region
 - Scenario transportation supply: A highway network and additional transit services
 - BEAM scenario configurations, including methods for allocating ridehail requests to operators. 
 
-The scenario travel demand was created for the WAV and T-SCORE projects. We constructed a synthetic population representing the WFRC / MAG region in 2019 and supplied this synthetic population to the ActivitySim activity-based travel model platform. A calibration exercise adjusted ActivitySim parameters to generally reflect mode split and trip distribution statistics for the Wasatch Front area, though more close calibration to targets is certainly possible.
+### Demand
+The scenario travel demand was created for the WAV and T-SCORE projects. We constructed a synthetic population representing the WFRC / MAG region in 2019 and supplied this synthetic population to the ActivitySim activity-based travel model platform. A calibration exercise adjusted ActivitySim parameters to generally reflect mode split and trip distribution statistics for the Wasatch Front area, though more close calibration to targets is potentially possible.
 
+Skims for transportation modes converted from WFRC / MAG model
+
+### Networks
 Highway networks were retrieved from OpenStreetMap; this network is imperfect, but we were unable to develop a satisfactory all-streets network from the geospatial data available through AGRC. Efforts to create this network are ongoing as part of the T-SCORE project, and if a more suitable network is created this project could benefit from it. Transit services representing autumn 2019 were retrieved from UTA’s GTFS feed.
 
-In this project, we are representing on-demand transit in BEAM as a pooled ridehail option. Agents request a pooled ridehail trip, and a ridehail vehicle services the request. BEAM contains internal algorithms to match ridehail requests with vehicles, and to intelligently pool multiple requests when feasible. This is discussed more fully in the following subsection. The ridehail fleet may be specified by the user or generated by a procedural algorithm; currently we have run the Utah scenario only with a procedurally generated on-demand transit fleet. We look to the TAC to help us determine the correct specification for the ridehail fleet in these scenarios.
 
 
-GEOFENCING AND CUSTOM FLEETS One part of many on-demand transit implementations – including the implementation in Salt Lake County – is a zone in which the vehicles may travel. BEAM natively offers some support for “geofencing” on-demand transit vehicles, but this is limited as an operating radius. Work completed for this project adapted the BEAM geofencing infrastructure to use arbitrary polygons.
+### Configuration
 
-The example scenarios in BEAM use San Francisco as the network for simulation. Figure 2 shows a map of (most of) the network, with a polygon representing the desired geofence. This particular polygon was created arbitrarily using ArcGIS, but any shapefile set up properly should work the same. Several attributes were added to the shapefile such as fleet size and vehicle type, and then R code was used to convert these attributes to an on-demand transit vehicle fleet (a .csv file listing each vehicle, its type, and the geofence it is constrained to in well-known text [wkt]).
+## Scenarios
+We first needed to assess the performance of BEAM relative to real-world data. As UTA already has a ridehail pilot program underway, we reached out to find the fleet size and shifts for the ridehail vehicles. Shaina Quinn, a researcher at UTA's Office of Innovative Mobility Solutions, informed us that typically 12 ridehail vehicles provide service at a time. We found the shifts on UTA's website for the service [@SLCSouth]. Since we didn't have information on fleet size or shifts for any scenario except the existing pilot program, we used the same values for each additional study area as well.
 
-3 Figure 2. San Francisco with Geofence Polygon
-
-We modified the scenario configuration file in BEAM to accept this file as the on-demand transit fleet instead of a procedurally generated one, and ran the simulation. After some trial and error, we were able to get the expected result: on-demand transit vehicles stayed within the geofence, and other vehicles utilized the whole network. We visualized these results using Simunto’s VIA software. Figure 3 shows all vehicles, and Figure 3 shows only on-demand transit vehicles.
-
-Figure 3. Simulated vehicles in BEAM San Francisco scenario. Left: all vehicles (sample population). Right: ridehail vehicles, restricted to user-specified operating area. 
-
-
-
-We first needed to assess the performance of BEAM relative to real-world data. We created a scenario modeling UTA's pilot program from December 2019\textendash November 2020, and compared it to the data obtained from the pilot program. UTA reported several metrics, which are presented in <><><><>. Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.
+We created a BEAM scenario modeling this pilot program observed data. UTA reported several metrics, which are presented in Table <><><><>. Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.
 
 Our initial comparison of the reported metrics showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. We therefore needed to calibrate BEAM. Before calibrating BEAM itself, we focused on calibrating ActivitySim. ActivitySim has several coefficients that can be changed to affect both tour and trip mode choice. We calibrated ActivitySim to ####% ridehail in the overall mode split (tours). This was more than our ###% target, but we were unable to affect the mode split further.
 
@@ -85,5 +64,4 @@ Additionally, for each of these areas we defined a ridehail fleet, including fle
 
 
 ## Summary
-
 Be smart about the figures and tables you include. Figures should be high resolution, and tables should always be table objects. If your table is an image of a table, I will place three pins in the voodoo dolls I keep for each of my RA’s.
