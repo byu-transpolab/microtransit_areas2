@@ -30,7 +30,7 @@ The BEAM documentation (<><><>) lists the inputs required to run a BEAM scenario
 - A network
 - The definition of vehicle types
 - The personal vehicle fleet
-- The ODT fleet
+- The microtransit/ODT fleet
 - Transit data in the form of GTFS archives
 
 These requirements are explained in greater detail in the following sections. For a full specification of the inputs, see (<><>link to github readme?<><>).
@@ -54,13 +54,13 @@ A calibration exercise adjusted ActivitySim parameters to generally reflect mode
 Highway networks were retrieved from OpenStreetMap; this network is imperfect, but we were unable to develop a satisfactory all-streets network from the geospatial data available through AGRC. Efforts to create this network are ongoing as part of the T-SCORE project, and if a more suitable network is created this project could benefit from it. Transit services representing autumn 2019 were retrieved from UTA’s GTFS feed.
 
 ### Vehicle Fleets and Types
-Several files relate to the various vehicle fleets in the scenario. Central to these is a definition file containing the name and attributes of each vehicle type. We specified a personal vehicle fleet according to the auto ownership information given in the households file, and an ODT fleet based on each of the scenarios we included. Section (###ref###) contains more information on the specific ODT fleets we used.
+Several files relate to the various vehicle fleets in the scenario. Central to these is a definition file containing the name and attributes of each vehicle type. We specified a personal vehicle fleet according to the auto ownership information given in the households file, and a microtransit/ODT fleet based on each of the scenarios we included. Section (###ref###) contains more information on the specific fleets we used.
 
 We included transit data in the form of GTFS archives... ***Not sure of the details on this one either***
 
 
 ## Scenarios {#scenario-configuration}
-We first needed to assess the performance of BEAM relative to real-world data. As UTA already has a ridehail pilot program underway, we reached out to find the fleet size and shifts for the ridehail vehicles. Shaina Quinn, a researcher at UTA's Office of Innovative Mobility Solutions, informed us that typically 12 ridehail vehicles provide service at a time. We found the shifts on UTA's website for the service [@SLCSouth]. Since we didn't have information on fleet size or shifts for any scenario except the existing pilot program, we used the same values for each additional study area as well.
+We first needed to assess the performance of BEAM relative to real-world data. As UTA already has a microtransit ridehail pilot program underway, we reached out to find the fleet size and shifts for the microtransit vehicles. Shaina Quinn, a researcher at UTA's Office of Innovative Mobility Solutions, informed us that typically 12 microtransit vehicles provide service at a time. We found the shifts on UTA's website for the service [@SLCSouth]. Since we didn't have information on fleet size or shifts for any scenario except the existing pilot program, we used the same values for each additional study area as well.
 
 We created a BEAM scenario modeling this pilot program observed data. UTA reported several metrics, which are presented in Table <><><><>. Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.
 
@@ -68,11 +68,11 @@ Our initial comparison of the reported metrics showed that BEAM significantly ov
 
 _Don't know if I should include more details about calibration. Below is a super rough draft of that. If it is included, maybe it should go in the results section._
 
-_We therefore needed to run . Before calibrating BEAM itself, we focused on calibrating ActivitySim. ActivitySim has several coefficients that can be changed to affect both tour and trip mode choice. We calibrated ActivitySim to ####% ridehail in the overall mode split (tours). This was more than our ###% target, but we were unable to affect the mode split further._
+_We therefore needed to run . Before calibrating BEAM itself, we focused on calibrating ActivitySim. ActivitySim has several coefficients that can be changed to affect both tour and trip mode choice. We calibrated ActivitySim to ####% microtransit in the overall mode split (tours). This was more than our ###% target, but we were unable to affect the mode split further._
 
 _We then generated plans from ActivitySim again as our new input plans to BEAM. From there, we modified BEAM's coefficients in an attempt to again match our mode split target of ##%, with a 15???% scenario. We again were not able to reach our target, but we figured that the relative performance is more important anyway._
 
-In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the zones we analyzed is given in <><><><>. For each of these zones we defined a ridehail fleet, including fleet size and operating hours, which can be seen in <><><>. We were less concerned with modeling each of these zones individually, but rather how the addition of another zone would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in <><><><>.
+In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the zones we analyzed is given in <><><><>. For each of these zones we defined a microtransit fleet, including fleet size and operating hours, which can be seen in <><><>. We were less concerned with modeling each of these zones individually, but rather how the addition of another zone would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in <><><><>.
 
 Since the beginning of this project, UTA has started full-time microtransit service in the original pilot program area, as well as in the 'West City' area. As such, we included both of these areas in our 'Existing' scenario as well as most of the others. We also analyzed a 'split' scenario, in which the original south Salt Lake county area is divided into an east and west zone.
 
