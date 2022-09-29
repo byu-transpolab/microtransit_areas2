@@ -5,62 +5,78 @@ This chapter describes the methodology we followed to generate the simulation sc
 
 
 ## BEAM
+
 Adaptive algorithm
 
 Ride hailing versus transit
 
-In this project, we are representing on-demand transit in BEAM as a pooled ridehail option. Agents request a pooled ridehail trip, and a ridehail vehicle services the request. BEAM contains internal algorithms to match ridehail requests with vehicles, and to intelligently pool multiple requests when feasible.
+In this project, we are representing on-demand transit (ODT) in BEAM as a pooled ridehail option. Agents request a pooled ridehail trip, and a ridehail vehicle services the request. BEAM contains internal algorithms to match ridehail requests with vehicles, and to intelligently pool multiple requests when feasible.
 
 ### Geofencing Modifications
-One part of many on-demand transit implementations---including the implementation in Salt Lake County---is a zone in which the vehicles may travel. BEAM natively offers some support for “geofencing” on-demand transit vehicles, but this is limited as an operating radius.
+One part of many ODT implementations---including the implementation in Salt Lake County---is a zone in which the vehicles may travel. BEAM natively offers some support for “geofencing” ODT vehicles, but this is limited as an operating radius.
 
-We adapted BEAM to allow for geofencing of ridehail vehicles. We need to specify polygonal regions in which the ridehail vehicles are allowed to operate, and so we needed to modify the BEAM code. BEAM will now check that a ridehail request originates and ends within the specified geofence, and only accept those requests that do.
+We were able to adapt BEAM's implementation to allow a geofence in the form of an arbitrary polygon. BEAM will check that a request for ODT originates and ends within the specified geofence, and only accept those requests that do. We were also able to allow for multiple geofence polygons, with a fleet specific to each one.
 
-<!-- The example scenarios in BEAM use San Francisco as the network for simulation. Figure 2 shows a map of (most of) the network, with a polygon representing the desired geofence. This particular polygon was created arbitrarily using ArcGIS, but any shapefile set up properly should work the same. Several attributes were added to the shapefile such as fleet size and vehicle type, and then R code was used to convert these attributes to an on-demand transit vehicle fleet (a .csv file listing each vehicle, its type, and the geofence it is constrained to in well-known text [wkt]). -->
+As an example, Figures ###### show an implementation we tested with a San Francisco network, one of the default scenarios in BEAM (<><><>). Figure #### shows the polygon we used (chosen arbitrarily), and Figure #### highlights that the ODT vehicles are only traveling within the geofence. This visualization was done with Simunto's VIA software (##ref###).
 
 
 ## Scenario Description
-A BEAM scenario consists of the following:
+The BEAM documentation (<><><>) lists the inputs required to run a BEAM scenario. Our implementation of BEAM largely follows these requirements, though there are a few differences. The following is a list of the requirements for our implementation:
 
-- A description of transportation supply in the form of highway networks, transit services, and ride hail vehicles.
-- A description of travel demand, or the trips and activities for a synthetic population.
-- A configuration describing how the scenario operates and which modules are included.
+- A configuration file
+- A population file
+- A households file and a corresponding attributes file
+- A plans file
+- A network
+- The definition of vehicle types
+- The personal vehicle fleet
+- The ODT fleet
+- Transit data in the form of GTFS archives
 
-BEAM provides extensive documentation ([https://beam.readthedocs.io/en/latest/](https://beam.readthedocs.io/en/latest/)) on setting up and running simulations, as well as converting MATSim scenarios to run in BEAM. A BEAM scenario requires the following inputs: 
+These requirements are explained in greater detail in the following sections. For a full specification of the inputs, see (<><>link to github readme?<><>).
 
-- Scenario travel demand: A description of the trips and activities made by agents in the region
-- Scenario transportation supply: A highway network and additional transit services
-- BEAM scenario configurations, including methods for allocating ridehail requests to operators. 
+### Configuration File
+The configuration file lists nearly all of the parameters used in the scenario, including aspects such as the number of iterations to run and paths to the other relevant files. This is one of the few input files that differs between the various scenarios we ran, as inputs such as the population and network remained constant. The configuration file is the main file that BEAM uses to set up and run the given scenario.
 
-### Demand
-The scenario travel demand was created for the WAV and T-SCORE projects. We constructed a synthetic population representing the WFRC / MAG region in 2019 and supplied this synthetic population to the ActivitySim activity-based travel model platform. A calibration exercise adjusted ActivitySim parameters to generally reflect mode split and trip distribution statistics for the Wasatch Front area, though more close calibration to targets is potentially possible.
+### Population and Household Files
+The population, households, and household attributes files are all part of a synthetic population created for the WAV??? and T-SCORE??? projects, constructed to represent the WFRC/MAG region in 2019. The population file consists of an identifier for each member of the population along with attributes such as age, income, and value of time. This file also contains the ID of the household to which each person belongs. The households and household attributes files contain information for each household in the population, including location, size, and auto ownership.
 
-Skims for transportation modes converted from WFRC / MAG model
+### Plans File
+Skims for transportation modes converted from WFRC / MAG model ***This statement was included in the methodology outline, but I don't really know the details regarding the skims***
 
-### Networks
+We supplied the aforementioned synthetic population to the ActivitySim activity-based travel model platform, which created an initial travel demand in the form of a plans file. We set ActivitySim to model the demand for a single weekday. This plans file lists each person that made a trip during that day, as well as their corresponding plans, including information on the time, location, and nature of the attended activities, as well as the mode of transportation used for each leg of the trip.
+
+A calibration exercise adjusted ActivitySim parameters to generally reflect mode split and trip distribution statistics for the Wasatch Front area, though more close calibration to targets is potentially possible.
+
+### Network
+***I'm not sure on the details of where the network came from; the following is copied from a previous TAC memo.***
+
 Highway networks were retrieved from OpenStreetMap; this network is imperfect, but we were unable to develop a satisfactory all-streets network from the geospatial data available through AGRC. Efforts to create this network are ongoing as part of the T-SCORE project, and if a more suitable network is created this project could benefit from it. Transit services representing autumn 2019 were retrieved from UTA’s GTFS feed.
 
+### Vehicle Fleets and Types
+Several files relate to the various vehicle fleets in the scenario. Central to these is a definition file containing the name and attributes of each vehicle type. We specified a personal vehicle fleet according to the auto ownership information given in the households file, and an ODT fleet based on each of the scenarios we included. Section (###ref###) contains more information on the specific ODT fleets we used.
 
+We included transit data in the form of GTFS archives... ***Not sure of the details on this one either***
 
-### Configuration
 
 ## Scenarios {#scenario-configuration}
 We first needed to assess the performance of BEAM relative to real-world data. As UTA already has a ridehail pilot program underway, we reached out to find the fleet size and shifts for the ridehail vehicles. Shaina Quinn, a researcher at UTA's Office of Innovative Mobility Solutions, informed us that typically 12 ridehail vehicles provide service at a time. We found the shifts on UTA's website for the service [@SLCSouth]. Since we didn't have information on fleet size or shifts for any scenario except the existing pilot program, we used the same values for each additional study area as well.
 
 We created a BEAM scenario modeling this pilot program observed data. UTA reported several metrics, which are presented in Table <><><><>. Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.
 
-Our initial comparison of the reported metrics showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. We therefore needed to calibrate BEAM. Before calibrating BEAM itself, we focused on calibrating ActivitySim. ActivitySim has several coefficients that can be changed to affect both tour and trip mode choice. We calibrated ActivitySim to ####% ridehail in the overall mode split (tours). This was more than our ###% target, but we were unable to affect the mode split further.
+Our initial comparison of the reported metrics showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. After calibrating several of BEAM's internal coefficients, the results more closely matched the observed data, and so we retained those calibrated values for all of the scenarios we ran.
 
-We then generated plans from ActivitySim again as our new input plans to BEAM. From there, we modified BEAM's coefficients in an attempt to again match our mode split target of ##%, with a 15???% scenario. We again were not able to reach our target, but we figured that the relative performance is more important anyway.
+_Don't know if I should include more details about calibration. Below is a super rough draft of that. If it is included, maybe it should go in the results section._
 
-After comparing our BEAM model of the pilot program with the observed data, we created other scenarios to analyze. A map showing the zones we analyzed is given in <><><><>. We were less concerned with modeling each of these zones individually, but rather how the addition of another zone would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in <><><><>. Since the beginning of this project, UTA has started full-time microtransit service in the original pilot program area, as well as in the 'West City' area. As such, we included both of these areas in our 'Existing' scenario as well as all the others. We also analyzed a 'split' scenario, in which the original south Salt Lake county area is divided into an east and west zone.
+_We therefore needed to run . Before calibrating BEAM itself, we focused on calibrating ActivitySim. ActivitySim has several coefficients that can be changed to affect both tour and trip mode choice. We calibrated ActivitySim to ####% ridehail in the overall mode split (tours). This was more than our ###% target, but we were unable to affect the mode split further._
+
+_We then generated plans from ActivitySim again as our new input plans to BEAM. From there, we modified BEAM's coefficients in an attempt to again match our mode split target of ##%, with a 15???% scenario. We again were not able to reach our target, but we figured that the relative performance is more important anyway._
+
+In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the zones we analyzed is given in <><><><>. For each of these zones we defined a ridehail fleet, including fleet size and operating hours, which can be seen in <><><>. We were less concerned with modeling each of these zones individually, but rather how the addition of another zone would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in <><><><>.
+
+Since the beginning of this project, UTA has started full-time microtransit service in the original pilot program area, as well as in the 'West City' area. As such, we included both of these areas in our 'Existing' scenario as well as most of the others. We also analyzed a 'split' scenario, in which the original south Salt Lake county area is divided into an east and west zone.
 
 !!!Table of scenarios!!!
-
-Additionally, for each of these areas we defined a ridehail fleet, including fleet size and shifts. We entered all of this information into BEAM, and ran the scenarios.
-
-
-
 
 
 ## Summary
