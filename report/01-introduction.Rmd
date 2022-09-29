@@ -26,6 +26,5 @@ The report is organized into the following chapters:
 1. **Introduction:** This chapter.
 2. **Literature Review:** An overview of previous efforts to understand microtransit systems and forecast their operations.
 3. **Methodology:** Methods and data used to create the initial microsimulation scenario in the Salt Lake City region.
-4. **Existing On-Demand Deployment:** Also, results of the simulation applied to the existing VIA deployment.
-5. **Candidate Regions:** An evaluation of three additional regions selected by UTA and UDOT for simulation analysis.
-6. **Recommendations and Conclusions**
+4. **Results:** A comparison of initial BEAM modeling to observed data, and an evaluation of three additional regions selected by UTA and UDOT for simulation analysis.
+5. **Recommendations and Conclusions**
