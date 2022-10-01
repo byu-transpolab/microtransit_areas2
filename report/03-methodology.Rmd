@@ -17,11 +17,29 @@ One part of many ODT implementations---including the implementation in Salt Lake
 
 We were able to adapt BEAM's implementation to allow a geofence in the form of an arbitrary polygon. BEAM will check that a request for ODT originates and ends within the specified geofence, and only accept those requests that do. We were also able to allow for multiple geofence polygons, with a fleet specific to each one.
 
-As an example, Figures ###### show an implementation we tested with a San Francisco network, one of the default scenarios in BEAM (<><><>). Figure #### shows the polygon we used (chosen arbitrarily), and Figure #### highlights that the ODT vehicles are only traveling within the geofence. This visualization was done with Simunto's VIA software (##ref###).
+As an example, Figures \@ref(fig:sanfran-polygon) and \@ref(fig:via-visualization) show an implementation we tested with a San Francisco network, one of the default scenarios in BEAM [@beamdocs]. Figure \@ref(fig:sanfran-polygon) shows the polygon we used (chosen arbitrarily), and Figure \@ref(fig:via-visualization) highlights that the ODT vehicles are only traveling within the geofence. This visualization was done with Simunto's VIA software (##ref###).
+
+```{r sanfran-polygon}
+#| fig.cap="San Fransisco with example geofencing polygon."
+
+knitr::include_graphics("image/san_fransisco_polygon_example.png")
+```
+
+```{r via-visualization}
+#| fig.cap="Simulated vehicles in BEAM San Francisco scenario. Left: all vehicles (sample population). Right: ODT vehicles, restricted to user-specified operating area.",
+#| fig.show="hold",
+#| out.width="50%"
+
+knitr::include_graphics(c(
+  "image/all_vehicles_in_san_fransisco.png",
+  "image/odt_in_san_fransisco.png"))
+
+```
+
 
 
 ## Scenario Description
-The BEAM documentation (<><><>) lists the inputs required to run a BEAM scenario. Our implementation of BEAM largely follows these requirements, though there are a few differences. The following is a list of the requirements for our implementation:
+The BEAM documentation [@beamdocs] lists the inputs required to run a BEAM scenario. Our implementation of BEAM largely follows these requirements, though there are a few differences. The following is a list of the requirements for our implementation:
 
 - A configuration file
 - A population file
@@ -54,7 +72,7 @@ A calibration exercise adjusted ActivitySim parameters to generally reflect mode
 Highway networks were retrieved from OpenStreetMap; this network is imperfect, but we were unable to develop a satisfactory all-streets network from the geospatial data available through AGRC. Efforts to create this network are ongoing as part of the T-SCORE project, and if a more suitable network is created this project could benefit from it. Transit services representing autumn 2019 were retrieved from UTA’s GTFS feed.
 
 ### Vehicle Fleets and Types
-Several files relate to the various vehicle fleets in the scenario. Central to these is a definition file containing the name and attributes of each vehicle type. We specified a personal vehicle fleet according to the auto ownership information given in the households file, and a microtransit/ODT fleet based on each of the scenarios we included. Section (###ref###) contains more information on the specific fleets we used.
+Several files relate to the various vehicle fleets in the scenario. Central to these is a definition file containing the name and attributes of each vehicle type. We specified a personal vehicle fleet according to the auto ownership information given in the households file, and a microtransit/ODT fleet based on each of the scenarios we included. Section \@ref(scenario-configuration) contains more information on the specific fleets we used.
 
 We included transit data in the form of GTFS archives... ***Not sure of the details on this one either***
 
@@ -64,6 +82,10 @@ We first needed to assess the performance of BEAM relative to real-world data. A
 
 We created a BEAM scenario modeling this pilot program observed data. UTA reported several metrics, which are presented in Table <><><><>. Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.
 
+```{r uta-metrics}
+
+```
+
 Our initial comparison of the reported metrics showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. After calibrating several of BEAM's internal coefficients, the results more closely matched the observed data, and so we retained those calibrated values for all of the scenarios we ran.
 
 _Don't know if I should include more details about calibration. Below is a super rough draft of that. If it is included, maybe it should go in the results section._
@@ -72,11 +94,21 @@ _We therefore needed to run . Before calibrating BEAM itself, we focused on cali
 
 _We then generated plans from ActivitySim again as our new input plans to BEAM. From there, we modified BEAM's coefficients in an attempt to again match our mode split target of ##%, with a 15???% scenario. We again were not able to reach our target, but we figured that the relative performance is more important anyway._
 
-In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the zones we analyzed is given in <><><><>. For each of these zones we defined a microtransit fleet, including fleet size and operating hours, which can be seen in <><><>. We were less concerned with modeling each of these zones individually, but rather how the addition of another zone would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in <><><><>.
+In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the zones we analyzed is given in Figure \@ref(fig:zone-map). For each of these zones we defined a microtransit fleet, including fleet size and operating hours, which can be seen in Table \@ref(tab:zone-fleets). We were less concerned with modeling each of these zones individually, but rather how the addition of another zone would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in Table \@ref(tab:scenarios-info).
 
 Since the beginning of this project, UTA has started full-time microtransit service in the original pilot program area, as well as in the 'West City' area. As such, we included both of these areas in our 'Existing' scenario as well as most of the others. We also analyzed a 'split' scenario, in which the original south Salt Lake county area is divided into an east and west zone.
 
-!!!Table of scenarios!!!
+```{r zone-map}
+
+```
+
+```{r zone-fleets}
+
+```
+
+```{r scenarios-info}
+
+```
 
 
 ## Summary
