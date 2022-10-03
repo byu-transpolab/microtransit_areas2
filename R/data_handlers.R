@@ -50,3 +50,22 @@ read_shapefile <- function(sf, crs){
   read_sf(sf) %>% 
     st_transform(crs = crs)
 }
+
+
+get_zone_info <- function(zone_info){
+  
+  info <- read_csv(zone_info) %>% 
+    separate(shifts, c(NA, "startTime", "endTime", NA), remove = FALSE) %>% 
+    mutate(startTime = as.integer(startTime),
+           endTime = as.integer(endTime)) %>% 
+    select(Area, fleetSize, startTime, endTime) %>% 
+    mutate(startTime = startTime/3600,
+           endTime = endTime/3600) %>% 
+    rename(
+      "Fleet Size" = fleetSize,
+      "Shift Start (hour)" = startTime,
+      "Shift End (hour)" = endTime)
+  
+  info
+  
+}

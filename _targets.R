@@ -52,8 +52,10 @@ data_targets <- tar_plan(
   tar_target(C_fleet, "data/rh_fleets/rhFleet_C.csv", format = "file"),
   tar_target(D_fleet, "data/rh_fleets/rhFleet_D.csv", format = "file"),
   
-  tar_target(Pilot, "data/wfrc_pilot_events.csv.gz", format = "file"),
-  tar_target(Pilot_fleet, "data/rh_fleets/rhFleet_Pilot.csv", format = "file"),
+  tar_target(Pilot_file, "data/wfrc_pilot_events.csv.gz", format = "file"),
+  pilot = data.table::fread(file = Pilot_file, select = event_cols),
+  tar_target(Pilot_fleet_file, "data/rh_fleets/rhFleet_Pilot.csv", format = "file"),
+  pilot_fleet = read_ridehail_fleet(Pilot_fleet_file),
   
   scenarios = list(
     existing = data.table::fread(file = EX, select = event_cols),
@@ -74,6 +76,12 @@ data_targets <- tar_plan(
   ),
   
   fleet_sizes = get_fleet_sizes(fleets),
+  
+  tar_target(scenario_key_file, "data/scenario_key.csv", format = "file"),
+  scenario_key = read_csv(scenario_key_file),
+  
+  tar_target(zone_info_file, "data/zone_info.csv", format = "file"),
+  zone_info = get_zone_info(zone_info_file),
   
   
   #Names and types of cols to keep for events files
@@ -113,6 +121,11 @@ data_targets <- tar_plan(
 
 analysis_targets <- tar_plan(
   
+  #### UTA pilot info ########################
+  
+  UTA_table = make_uta_table(UTAOD, good_months),
+  
+  
   #### Ridehail events #######################
   
   ridehail_modes = c("ride_hail",
@@ -147,9 +160,10 @@ viz_targets <- tar_plan(
   areas_map = make_areas_map(crs, SLCSouth, WestCity, Sandy, WestJordan),
   
   existing_comparison = compare_existing(
-    UTA, total_riders$existing,
-    utilization$existing,
-    average_wait_times$existing),
+    UTA,
+    get_tot_rh_passengers(pilot),
+    get_rh_utilization(pilot, pilot_fleet),
+    get_avg_rh_wait_time(pilot)),
   
   ridership_comparison = compare_riders(
     total_riders),

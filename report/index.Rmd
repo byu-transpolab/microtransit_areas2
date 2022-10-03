@@ -1,15 +1,12 @@
 ---
-title: "Article Long Title"
+title: "Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM"
 author:
   - name: Gregory Macfarlane
     email: gregmacfarlane@byu.edu
     affiliation: Brigham Young University
     footnote: 1
-  - name: Cosmo Cougar
-    email: bob@example.com
-    affiliation: Brigham Young University
-  - name: Masters Student
-    email: cat@example.com
+  - name: Hayden Atchley
+    email: atchley.sha@gmail.com
     affiliation: Brigham Young University
     footnote: 2
 address:
@@ -26,7 +23,7 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: article
 layout: "3p, authoryear"
-bibliography: [references.bib]
+bibliography: [references.bib, packages.bib]
 csl: elsevier-harvard-italics.csl
 always_allow_html: true
 # url: your book url like https://bookdown.org/yihui/bookdown
@@ -38,7 +35,7 @@ abstract: |
   
 description: "A paper about simulating geofenced microtransit in Salt Lake County"
 
-github-repo: byu-transpolab/something
+github-repo: https://github.com/byu-transpolab/microtransit_areas(2)?
 keywords:
   - Accessibility,
   - Microtransit,

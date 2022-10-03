@@ -78,12 +78,16 @@ We included transit data in the form of GTFS archives... ***Not sure of the deta
 
 
 ## Scenarios {#scenario-configuration}
-We first needed to assess the performance of BEAM relative to real-world data. As UTA already has a microtransit ridehail pilot program underway, we reached out to find the fleet size and shifts for the microtransit vehicles. Shaina Quinn, a researcher at UTA's Office of Innovative Mobility Solutions, informed us that typically 12 microtransit vehicles provide service at a time. We found the shifts on UTA's website for the service [@SLCSouth]. Since we didn't have information on fleet size or shifts for any scenario except the existing pilot program, we used the same values for each additional study area as well.
+We first needed to assess the performance of BEAM relative to real-world data. As UTA already has a microtransit ODT pilot program underway, we reached out to find the fleet size and shifts for the microtransit vehicles. Shaina Quinn, a researcher at UTA's Office of Innovative Mobility Solutions, informed us that typically 12 microtransit vehicles provide service at a time. We found the shifts on UTA's website for the service [@SLCSouth]. Since we didn't have information on fleet size or shifts for any scenario except the existing pilot program, we used the same values for each additional study area as well.
 
-We created a BEAM scenario modeling this pilot program observed data. UTA reported several metrics, which are presented in Table <><><><>. Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.
+We created a BEAM scenario modeling this pilot program observed data. UTA reported several metrics, which are presented in Table \@ref(tab:uta-metrics). Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.
 
 ```{r uta-metrics}
-
+tar_read(UTA_table) %>% 
+  kbl(booktabs = TRUE, digits = c(0,0,2,1),
+      caption = "Metrics Reported by UTA for the ODT Pilot Program in Salt Lake County") %>% 
+  row_spec(row = 13:14, bold = TRUE) %>% 
+  kable_styling()
 ```
 
 Our initial comparison of the reported metrics showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. After calibrating several of BEAM's internal coefficients, the results more closely matched the observed data, and so we retained those calibrated values for all of the scenarios we ran.
@@ -94,20 +98,27 @@ _We therefore needed to run . Before calibrating BEAM itself, we focused on cali
 
 _We then generated plans from ActivitySim again as our new input plans to BEAM. From there, we modified BEAM's coefficients in an attempt to again match our mode split target of ##%, with a 15???% scenario. We again were not able to reach our target, but we figured that the relative performance is more important anyway._
 
-In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the zones we analyzed is given in Figure \@ref(fig:zone-map). For each of these zones we defined a microtransit fleet, including fleet size and operating hours, which can be seen in Table \@ref(tab:zone-fleets). We were less concerned with modeling each of these zones individually, but rather how the addition of another zone would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in Table \@ref(tab:scenarios-info).
+In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the areas we analyzed is given in Figure \@ref(fig:zone-map). For each of these areas we defined a microtransit fleet, including fleet size and operating hours, which can be seen in Table \@ref(tab:zone-fleets). We were less concerned with modeling each of these areas individually, but rather how the addition of another area would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in Table \@ref(tab:scenarios-info).
 
-Since the beginning of this project, UTA has started full-time microtransit service in the original pilot program area, as well as in the 'West City' area. As such, we included both of these areas in our 'Existing' scenario as well as most of the others. We also analyzed a 'split' scenario, in which the original south Salt Lake county area is divided into an east and west zone.
+Since the beginning of this project, UTA has started full-time microtransit service in the original pilot program area, as well as in the 'West City' area. As such, we included both of these areas in our 'Existing' scenario as well as most of the others. We also analyzed a 'split' scenario, in which the original south Salt Lake county area is divided into an east and west area.
 
 ```{r zone-map}
-
+#| fig.cap="Map of areas studied."
+tar_read(areas_map)
 ```
 
 ```{r zone-fleets}
-
+tar_read(zone_info) %>% 
+  kbl(booktabs = TRUE, digits = c(0,0,2,2),
+      caption = "Information on Fleets Used in Each Area") %>% 
+  kable_styling()
 ```
 
 ```{r scenarios-info}
-
+tar_read(scenario_key) %>% 
+  kbl(booktabs = TRUE,
+      caption = "Areas Corresponding to Each Scenario") %>% 
+  kable_styling()
 ```
 
 

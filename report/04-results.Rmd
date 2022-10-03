@@ -7,7 +7,7 @@ UTA, in partnership with VIA, ran a pilot program of microtransit service in sou
 tar_load(existing_comparison)
 
 existing_comparison %>%
-  kbl(booktabs = TRUE, digits = 2,
+  kbl(booktabs = TRUE, digits = c(0,0,2,1),
       caption = "Comparison of Observed Data with 'Existing' BEAM Scenario") %>%
   kable_styling()
 ```
@@ -16,6 +16,7 @@ existing_comparison %>%
 
 ```
 
+**What I wrote below is now wrong, I was using the 'existing' rather than the 'pilot' data for comparison. The 'pilot' comparison is basically spot-on, which I did not expect.**
 
 It is clear from this comparison that BEAM did not perfectly model microtransit, over-predicting ridership by almost a factor of 2. Interestingly, however, utilization is predicted at significantly less than the observed value. This is almost certainly due to the difference in vehicle shifts. Utilization is measured as passengers per vehicle per hour of operation, and our scenarios specify microtransit fleets that operate nearly all day. It is likely that the actual vehicles are in operation for less of the day, and not all vehicles may be in operation at all times. If we take 'hours of operation' to be the actual time spent driving, with or without a passenger, then the predicted utilization jumps to <><><><>####. {{{This is larger than the observed value by a factor of ###. It is clear that the actual operating vehicle-hours are somewhere in-between these two assumptions, but we have no information to clarify this.}}}
 
