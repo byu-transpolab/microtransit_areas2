@@ -39,19 +39,25 @@ purrr::map(r_files, source)
 data_targets <- tar_plan(
   
   tar_target(EX, "data/wfrc_existing_events.csv.gz", format = "file"),
+  tar_target(Split, "data/wfrc_split_events.csv.gz", format = "file"),
   tar_target(A, "data/wfrc_A_events.csv.gz", format = "file"),
   tar_target(B, "data/wfrc_B_events.csv.gz", format = "file"),
   tar_target(C, "data/wfrc_C_events.csv.gz", format = "file"),
   tar_target(D, "data/wfrc_D_events.csv.gz", format = "file"),
   
   tar_target(EX_fleet, "data/rh_fleets/rhFleet_Existing.csv", format = "file"),
+  tar_target(Split_fleet, "data/rh_fleets/rhFleet_Split.csv", format = "file"),
   tar_target(A_fleet, "data/rh_fleets/rhFleet_A.csv", format = "file"),
   tar_target(B_fleet, "data/rh_fleets/rhFleet_B.csv", format = "file"),
   tar_target(C_fleet, "data/rh_fleets/rhFleet_C.csv", format = "file"),
   tar_target(D_fleet, "data/rh_fleets/rhFleet_D.csv", format = "file"),
   
+  tar_target(Pilot, "data/wfrc_pilot_events.csv.gz", format = "file"),
+  tar_target(Pilot_fleet, "data/rh_fleets/rhFleet_Pilot.csv", format = "file"),
+  
   scenarios = list(
     existing = data.table::fread(file = EX, select = event_cols),
+    split = data.table::fread(file = Split, select = event_cols),
     A = data.table::fread(file = A, select = event_cols),
     B = data.table::fread(file = B, select = event_cols),
     C = data.table::fread(file = C, select = event_cols),
@@ -60,6 +66,7 @@ data_targets <- tar_plan(
   
   fleets = list(
     existing = read_ridehail_fleet(EX_fleet),
+    split = read_ridehail_fleet(Split_fleet),
     A = read_ridehail_fleet(A_fleet),
     B = read_ridehail_fleet(B_fleet),
     C = read_ridehail_fleet(C_fleet),
