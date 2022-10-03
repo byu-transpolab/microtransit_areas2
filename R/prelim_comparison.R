@@ -35,8 +35,14 @@ compare_utilization <- function(util, size){
 
 compare_wait_times <- function(wait){
   
-  comparison <- bind_rows(wait)
-  
+  times <- list()
+
+  for (i in names(wait)){
+    times[[as.character(i)]] <- wait[[i]]$times
+  }
+
+  comparison <- bind_rows(times)
+
   comparison
    
   # comparison <- tibble(names(wait[[1]]$times))
