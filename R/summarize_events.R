@@ -106,18 +106,19 @@ get_avg_rh_wait_time <- function(scenario, rh_veh_name = "rideHailVehicle"){
     type %in% c("ReserveRideHail", "PersonEntersVehicle")
   ][order(person, time)]
   
-  wait_time <- list()
+  # wait_time <- list()
   
-  wait_time[["times"]] <- scenario_arranged[
+  # wait_time[["times"]] <- scenario_arranged[
+  wait_time <- scenario_arranged[
     ,leadTime := lead(time) - time
   ][type == "ReserveRideHail" & lead(type) == "PersonEntersVehicle" &
       person == lead(person) & str_detect(lead(vehicle), rh_veh_name),
     leadTime] %>%
     magrittr::divide_by(60)
-  
-  wait_time[["quantiles"]] <- wait_time[["times"]] %>% 
-    quantile(na.rm = TRUE,
-             probs = c(0, .1, .25, .5, .75, .9, 1))
+  # 
+  # wait_time[["quantiles"]] <- wait_time[["times"]] %>% 
+  #   quantile(na.rm = TRUE,
+  #            probs = c(0, .1, .25, .5, .75, .9, 1))
   
   wait_time
 }

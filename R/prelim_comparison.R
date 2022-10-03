@@ -35,19 +35,23 @@ compare_utilization <- function(util, size){
 
 compare_wait_times <- function(wait){
   
-  comparison <- tibble(names(wait[[1]]$quantiles))
-  
-  for (i in wait){
-    comparison <- comparison %>% 
-      add_column(i$quantiles, .name_repair = "minimal")
-  }
-  
-  colnames(comparison) <- c(
-    "Quantile", names(wait))
-  
-  comparison <- comparison %>% 
-    pivot_longer(-Quantile, names_to = "Scenario") %>% 
-    pivot_wider(names_from = Quantile, values_from = value)
+  comparison <- bind_rows(wait)
   
   comparison
+   
+  # comparison <- tibble(names(wait[[1]]$times))
+  # 
+  # for (i in wait){
+  #   comparison <- comparison %>% 
+  #     add_column(i$quantiles, .name_repair = "minimal")
+  # }
+  # 
+  # colnames(comparison) <- c(
+  #   "Quantile", names(wait))
+  # 
+  # comparison <- comparison %>% 
+  #   pivot_longer(-Quantile, names_to = "Scenario") %>% 
+  #   pivot_wider(names_from = Quantile, values_from = value)
+  #
+  # comparison
 }
