@@ -4,25 +4,25 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Methodology | Article Long Title</title>
+  <title>Chapter 3 Methodology | Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM</title>
   <meta name="description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Methodology | Article Long Title" />
+  <meta property="og:title" content="Chapter 3 Methodology | Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
-  <meta name="github-repo" content="byu-transpolab/something" />
+  <meta name="github-repo" content="https://github.com/byu-transpolab/microtransit_areas(2)?" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Methodology | Article Long Title" />
+  <meta name="twitter:title" content="Chapter 3 Methodology | Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM" />
   
   <meta name="twitter:description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
   
 
 
 
-<meta name="date" content="2022-09-26" />
+<meta name="date" content="2022-10-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,9 +138,11 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#scenario-description"><i class="fa fa-check"></i><b>3.3</b> Scenario Description</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="methodology.html"><a href="methodology.html#demand"><i class="fa fa-check"></i><b>3.3.1</b> Demand</a></li>
-<li class="chapter" data-level="3.3.2" data-path="methodology.html"><a href="methodology.html#networks"><i class="fa fa-check"></i><b>3.3.2</b> Networks</a></li>
-<li class="chapter" data-level="3.3.3" data-path="methodology.html"><a href="methodology.html#configuration"><i class="fa fa-check"></i><b>3.3.3</b> Configuration</a></li>
+<li class="chapter" data-level="3.3.1" data-path="methodology.html"><a href="methodology.html#configuration-file"><i class="fa fa-check"></i><b>3.3.1</b> Configuration File</a></li>
+<li class="chapter" data-level="3.3.2" data-path="methodology.html"><a href="methodology.html#population-and-household-files"><i class="fa fa-check"></i><b>3.3.2</b> Population and Household Files</a></li>
+<li class="chapter" data-level="3.3.3" data-path="methodology.html"><a href="methodology.html#plans-file"><i class="fa fa-check"></i><b>3.3.3</b> Plans File</a></li>
+<li class="chapter" data-level="3.3.4" data-path="methodology.html"><a href="methodology.html#network"><i class="fa fa-check"></i><b>3.3.4</b> Network</a></li>
+<li class="chapter" data-level="3.3.5" data-path="methodology.html"><a href="methodology.html#vehicle-fleets-and-types"><i class="fa fa-check"></i><b>3.3.5</b> Vehicle Fleets and Types</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#scenario-configuration"><i class="fa fa-check"></i><b>3.4</b> Scenarios</a></li>
 <li class="chapter" data-level="3.5" data-path="methodology.html"><a href="methodology.html#summary-1"><i class="fa fa-check"></i><b>3.5</b> Summary</a></li>
@@ -169,7 +171,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Article Long Title</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM</a>
           </h1>
         </div>
 
@@ -187,50 +189,487 @@ div.csl-indent {
 <h2><span class="header-section-number">3.2</span> BEAM<a href="methodology.html#beam" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Adaptive algorithm</p>
 <p>Ride hailing versus transit</p>
-<p>In this project, we are representing on-demand transit in BEAM as a pooled ridehail option. Agents request a pooled ridehail trip, and a ridehail vehicle services the request. BEAM contains internal algorithms to match ridehail requests with vehicles, and to intelligently pool multiple requests when feasible.</p>
+<p>In this project, we are representing on-demand transit (ODT) in BEAM as a pooled ridehail option. Agents request a pooled ridehail trip, and a ridehail vehicle services the request. BEAM contains internal algorithms to match ridehail requests with vehicles, and to intelligently pool multiple requests when feasible.</p>
 <div id="geofencing-modifications" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Geofencing Modifications<a href="methodology.html#geofencing-modifications" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>One part of many on-demand transit implementations—including the implementation in Salt Lake County—is a zone in which the vehicles may travel. BEAM natively offers some support for “geofencing” on-demand transit vehicles, but this is limited as an operating radius.</p>
-<p>We adapted BEAM to allow for geofencing of ridehail vehicles. We need to specify polygonal regions in which the ridehail vehicles are allowed to operate, and so we needed to modify the BEAM code. BEAM will now check that a ridehail request originates and ends within the specified geofence, and only accept those requests that do.</p>
-<!-- The example scenarios in BEAM use San Francisco as the network for simulation. Figure 2 shows a map of (most of) the network, with a polygon representing the desired geofence. This particular polygon was created arbitrarily using ArcGIS, but any shapefile set up properly should work the same. Several attributes were added to the shapefile such as fleet size and vehicle type, and then R code was used to convert these attributes to an on-demand transit vehicle fleet (a .csv file listing each vehicle, its type, and the geofence it is constrained to in well-known text [wkt]). -->
+<p>One part of many ODT implementations—including the implementation in Salt Lake County—is a zone in which the vehicles may travel. BEAM natively offers some support for “geofencing” ODT vehicles, but this is limited as an operating radius.</p>
+<p>We were able to adapt BEAM’s implementation to allow a geofence in the form of an arbitrary polygon. BEAM will check that a request for ODT originates and ends within the specified geofence, and only accept those requests that do. We were also able to allow for multiple geofence polygons, with a fleet specific to each one.</p>
+<p>As an example, Figures <a href="methodology.html#fig:sanfran-polygon">3.1</a> and <a href="methodology.html#fig:via-visualization">3.2</a> show an implementation we tested with a San Francisco network, one of the default scenarios in BEAM <span class="citation">(<a href="#ref-beamdocs" role="doc-biblioref">The BEAM Team, 2017</a>)</span>. Figure <a href="methodology.html#fig:sanfran-polygon">3.1</a> shows the polygon we used (chosen arbitrarily), and Figure <a href="methodology.html#fig:via-visualization">3.2</a> highlights that the ODT vehicles are only traveling within the geofence. This visualization was done with Simunto’s VIA software (##ref###).</p>
+<div class="figure"><span style="display:block;" id="fig:sanfran-polygon"></span>
+<img src="image/san_fransisco_polygon_example.png" alt="San Fransisco with example geofencing polygon." width="520" />
+<p class="caption">
+Figure 3.1: San Fransisco with example geofencing polygon.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:via-visualization"></span>
+<img src="image/all_vehicles_in_san_fransisco.png" alt="Simulated vehicles in BEAM San Francisco scenario. Left: all vehicles (sample population). Right: ODT vehicles, restricted to user-specified operating area." width="50%" /><img src="image/odt_in_san_fransisco.png" alt="Simulated vehicles in BEAM San Francisco scenario. Left: all vehicles (sample population). Right: ODT vehicles, restricted to user-specified operating area." width="50%" />
+<p class="caption">
+Figure 3.2: Simulated vehicles in BEAM San Francisco scenario. Left: all vehicles (sample population). Right: ODT vehicles, restricted to user-specified operating area.
+</p>
+</div>
 </div>
 </div>
 <div id="scenario-description" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Scenario Description<a href="methodology.html#scenario-description" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A BEAM scenario consists of the following:</p>
+<p>The BEAM documentation <span class="citation">(<a href="#ref-beamdocs" role="doc-biblioref">The BEAM Team, 2017</a>)</span> lists the inputs required to run a BEAM scenario. Our implementation of BEAM largely follows these requirements, though there are a few differences. The following is a list of the requirements for our implementation:</p>
 <ul>
-<li>A description of transportation supply in the form of highway networks, transit services, and ride hail vehicles.</li>
-<li>A description of travel demand, or the trips and activities for a synthetic population.</li>
-<li>A configuration describing how the scenario operates and which modules are included.</li>
+<li>A configuration file</li>
+<li>A population file</li>
+<li>A households file and a corresponding attributes file</li>
+<li>A plans file</li>
+<li>A network</li>
+<li>The definition of vehicle types</li>
+<li>The personal vehicle fleet</li>
+<li>The microtransit/ODT fleet</li>
+<li>Transit data in the form of GTFS archives</li>
 </ul>
-<p>BEAM provides extensive documentation (<a href="https://beam.readthedocs.io/en/latest/">https://beam.readthedocs.io/en/latest/</a>) on setting up and running simulations, as well as converting MATSim scenarios to run in BEAM. A BEAM scenario requires the following inputs:</p>
-<ul>
-<li>Scenario travel demand: A description of the trips and activities made by agents in the region</li>
-<li>Scenario transportation supply: A highway network and additional transit services</li>
-<li>BEAM scenario configurations, including methods for allocating ridehail requests to operators.</li>
-</ul>
-<div id="demand" class="section level3 hasAnchor" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Demand<a href="methodology.html#demand" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The scenario travel demand was created for the WAV and T-SCORE projects. We constructed a synthetic population representing the WFRC / MAG region in 2019 and supplied this synthetic population to the ActivitySim activity-based travel model platform. A calibration exercise adjusted ActivitySim parameters to generally reflect mode split and trip distribution statistics for the Wasatch Front area, though more close calibration to targets is potentially possible.</p>
-<p>Skims for transportation modes converted from WFRC / MAG model</p>
+<p>These requirements are explained in greater detail in the following sections. For a full specification of the inputs, see (&lt;&gt;&lt;&gt;link to github readme?&lt;&gt;&lt;&gt;).</p>
+<div id="configuration-file" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Configuration File<a href="methodology.html#configuration-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The configuration file lists nearly all of the parameters used in the scenario, including aspects such as the number of iterations to run and paths to the other relevant files. This is one of the few input files that differs between the various scenarios we ran, as inputs such as the population and network remained constant. The configuration file is the main file that BEAM uses to set up and run the given scenario.</p>
 </div>
-<div id="networks" class="section level3 hasAnchor" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Networks<a href="methodology.html#networks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="population-and-household-files" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Population and Household Files<a href="methodology.html#population-and-household-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The population, households, and household attributes files are all part of a synthetic population created for the WAV??? and T-SCORE??? projects, constructed to represent the WFRC/MAG region in 2019. The population file consists of an identifier for each member of the population along with attributes such as age, income, and value of time. This file also contains the ID of the household to which each person belongs. The households and household attributes files contain information for each household in the population, including location, size, and auto ownership.</p>
+</div>
+<div id="plans-file" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Plans File<a href="methodology.html#plans-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Skims for transportation modes converted from WFRC / MAG model <strong><em>This statement was included in the methodology outline, but I don’t really know the details regarding the skims</em></strong></p>
+<p>We supplied the aforementioned synthetic population to the ActivitySim activity-based travel model platform, which created an initial travel demand in the form of a plans file. We set ActivitySim to model the demand for a single weekday. This plans file lists each person that made a trip during that day, as well as their corresponding plans, including information on the time, location, and nature of the attended activities, as well as the mode of transportation used for each leg of the trip.</p>
+<p>A calibration exercise adjusted ActivitySim parameters to generally reflect mode split and trip distribution statistics for the Wasatch Front area, though more close calibration to targets is potentially possible.</p>
+</div>
+<div id="network" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Network<a href="methodology.html#network" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong><em>I’m not sure on the details of where the network came from; the following is copied from a previous TAC memo.</em></strong></p>
 <p>Highway networks were retrieved from OpenStreetMap; this network is imperfect, but we were unable to develop a satisfactory all-streets network from the geospatial data available through AGRC. Efforts to create this network are ongoing as part of the T-SCORE project, and if a more suitable network is created this project could benefit from it. Transit services representing autumn 2019 were retrieved from UTA’s GTFS feed.</p>
 </div>
-<div id="configuration" class="section level3 hasAnchor" number="3.3.3">
-<h3><span class="header-section-number">3.3.3</span> Configuration<a href="methodology.html#configuration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="vehicle-fleets-and-types" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> Vehicle Fleets and Types<a href="methodology.html#vehicle-fleets-and-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Several files relate to the various vehicle fleets in the scenario. Central to these is a definition file containing the name and attributes of each vehicle type. We specified a personal vehicle fleet according to the auto ownership information given in the households file, and a microtransit/ODT fleet based on each of the scenarios we included. Section <a href="methodology.html#scenario-configuration">3.4</a> contains more information on the specific fleets we used.</p>
+<p>We included transit data in the form of GTFS archives… <strong><em>Not sure of the details on this one either</em></strong></p>
 </div>
 </div>
 <div id="scenario-configuration" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Scenarios<a href="methodology.html#scenario-configuration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We first needed to assess the performance of BEAM relative to real-world data. As UTA already has a ridehail pilot program underway, we reached out to find the fleet size and shifts for the ridehail vehicles. Shaina Quinn, a researcher at UTA’s Office of Innovative Mobility Solutions, informed us that typically 12 ridehail vehicles provide service at a time. We found the shifts on UTA’s website for the service <span class="citation">(<a href="#ref-SLCSouth" role="doc-biblioref">Utah Transit Authority, 2021</a>)</span>. Since we didn’t have information on fleet size or shifts for any scenario except the existing pilot program, we used the same values for each additional study area as well.</p>
-<p>We created a BEAM scenario modeling this pilot program observed data. UTA reported several metrics, which are presented in Table &lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;. Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.</p>
-<p>Our initial comparison of the reported metrics showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. We therefore needed to calibrate BEAM. Before calibrating BEAM itself, we focused on calibrating ActivitySim. ActivitySim has several coefficients that can be changed to affect both tour and trip mode choice. We calibrated ActivitySim to ####% ridehail in the overall mode split (tours). This was more than our ###% target, but we were unable to affect the mode split further.</p>
-<p>We then generated plans from ActivitySim again as our new input plans to BEAM. From there, we modified BEAM’s coefficients in an attempt to again match our mode split target of ##%, with a 15???% scenario. We again were not able to reach our target, but we figured that the relative performance is more important anyway.</p>
-<p>After comparing our BEAM model of the pilot program with the observed data, we created other scenarios to analyze. A map showing the zones we analyzed is given in &lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;. We were less concerned with modeling each of these zones individually, but rather how the addition of another zone would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in &lt;&gt;&lt;&gt;&lt;&gt;&lt;&gt;. Since the beginning of this project, UTA has started full-time microtransit service in the original pilot program area, as well as in the ‘West City’ area. As such, we included both of these areas in our ‘Existing’ scenario as well as all the others. We also analyzed a ‘split’ scenario, in which the original south Salt Lake county area is divided into an east and west zone.</p>
-<p>!!!Table of scenarios!!!</p>
-<p>Additionally, for each of these areas we defined a ridehail fleet, including fleet size and shifts. We entered all of this information into BEAM, and ran the scenarios.</p>
+<p>We first needed to assess the performance of BEAM relative to real-world data. As UTA already has a microtransit ODT pilot program underway, we reached out to find the fleet size and shifts for the microtransit vehicles. Shaina Quinn, a researcher at UTA’s Office of Innovative Mobility Solutions, informed us that typically 12 microtransit vehicles provide service at a time. We found the shifts on UTA’s website for the service <span class="citation">(<a href="#ref-SLCSouth" role="doc-biblioref">Utah Transit Authority, 2021</a>)</span>. Since we didn’t have information on fleet size or shifts for any scenario except the existing pilot program, we used the same values for each additional study area as well.</p>
+<p>We created a BEAM scenario modeling this pilot program observed data. UTA reported several metrics, which are presented in Table <a href="methodology.html#tab:uta-metrics">3.1</a>. Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:uta-metrics">Table 3.1: </span>Metrics Reported by UTA for the ODT Pilot Program in Salt Lake County
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Month
+</th>
+<th style="text-align:right;">
+Avg wkday ridership
+</th>
+<th style="text-align:right;">
+Utilization
+</th>
+<th style="text-align:right;">
+Avg wait time (minutes)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+DEC
+</td>
+<td style="text-align:right;">
+224
+</td>
+<td style="text-align:right;">
+1.33
+</td>
+<td style="text-align:right;">
+9.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JAN
+</td>
+<td style="text-align:right;">
+334
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+11.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FEB
+</td>
+<td style="text-align:right;">
+392
+</td>
+<td style="text-align:right;">
+2.31
+</td>
+<td style="text-align:right;">
+12.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MAR
+</td>
+<td style="text-align:right;">
+316
+</td>
+<td style="text-align:right;">
+1.88
+</td>
+<td style="text-align:right;">
+11.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+APR
+</td>
+<td style="text-align:right;">
+275
+</td>
+<td style="text-align:right;">
+1.52
+</td>
+<td style="text-align:right;">
+10.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MAY
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:right;">
+0.67
+</td>
+<td style="text-align:right;">
+8.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JUN
+</td>
+<td style="text-align:right;">
+162
+</td>
+<td style="text-align:right;">
+1.10
+</td>
+<td style="text-align:right;">
+9.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JUL
+</td>
+<td style="text-align:right;">
+155
+</td>
+<td style="text-align:right;">
+1.10
+</td>
+<td style="text-align:right;">
+9.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AUG
+</td>
+<td style="text-align:right;">
+193
+</td>
+<td style="text-align:right;">
+1.50
+</td>
+<td style="text-align:right;">
+12.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SEP
+</td>
+<td style="text-align:right;">
+214
+</td>
+<td style="text-align:right;">
+1.60
+</td>
+<td style="text-align:right;">
+12.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OCT
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+1.70
+</td>
+<td style="text-align:right;">
+13.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NOV
+</td>
+<td style="text-align:right;">
+169
+</td>
+<td style="text-align:right;">
+1.70
+</td>
+<td style="text-align:right;">
+13.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Average
+</td>
+<td style="text-align:right;font-weight: bold;">
+228
+</td>
+<td style="text-align:right;font-weight: bold;">
+1.53
+</td>
+<td style="text-align:right;font-weight: bold;">
+10.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Average JAN–MAR
+</td>
+<td style="text-align:right;font-weight: bold;">
+347
+</td>
+<td style="text-align:right;font-weight: bold;">
+2.06
+</td>
+<td style="text-align:right;font-weight: bold;">
+11.3
+</td>
+</tr>
+</tbody>
+</table>
+<p>Our initial comparison of the reported metrics showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. After calibrating several of BEAM’s internal coefficients, the results more closely matched the observed data, and so we retained those calibrated values for all of the scenarios we ran.</p>
+<p><em>Don’t know if I should include more details about calibration. Below is a super rough draft of that. If it is included, maybe it should go in the results section.</em></p>
+<p><em>We therefore needed to run . Before calibrating BEAM itself, we focused on calibrating ActivitySim. ActivitySim has several coefficients that can be changed to affect both tour and trip mode choice. We calibrated ActivitySim to ####% microtransit in the overall mode split (tours). This was more than our ###% target, but we were unable to affect the mode split further.</em></p>
+<p><em>We then generated plans from ActivitySim again as our new input plans to BEAM. From there, we modified BEAM’s coefficients in an attempt to again match our mode split target of ##%, with a 15???% scenario. We again were not able to reach our target, but we figured that the relative performance is more important anyway.</em></p>
+<p>In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the areas we analyzed is given in Figure <a href="methodology.html#fig:zone-map">3.3</a>. For each of these areas we defined a microtransit fleet, including fleet size and operating hours, which can be seen in Table <a href="methodology.html#tab:zone-fleets">3.2</a>. We were less concerned with modeling each of these areas individually, but rather how the addition of another area would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in Table <a href="methodology.html#tab:scenarios-info">3.3</a>.</p>
+<p>Since the beginning of this project, UTA has started full-time microtransit service in the original pilot program area, as well as in the ‘West City’ area. As such, we included both of these areas in our ‘Existing’ scenario as well as most of the others. We also analyzed a ‘split’ scenario, in which the original south Salt Lake county area is divided into an east and west area.</p>
+<div class="figure"><span style="display:block;" id="fig:zone-map"></span>
+<img src="microtransit_areas_files/figure-html/zone-map-1.png" alt="Map of areas studied." width="672" />
+<p class="caption">
+Figure 3.3: Map of areas studied.
+</p>
+</div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:zone-fleets">Table 3.2: </span>Information on Fleets Used in Each Area
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Area
+</th>
+<th style="text-align:right;">
+Fleet Size
+</th>
+<th style="text-align:right;">
+Shift Start (hour)
+</th>
+<th style="text-align:right;">
+Shift End (hour)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Westside SLC
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+24.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South SL Co
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+24.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South SL Co: East
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+24.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South SL Co: West
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+24.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Davis
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+24.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lehi
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+24.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sandy
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+24.25
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:scenarios-info">Table 3.3: </span>Areas Corresponding to Each Scenario
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:left;">
+Zones
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Existing
+</td>
+<td style="text-align:left;">
+South SL Co, Westside SLC
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Split
+</td>
+<td style="text-align:left;">
+South SL Co: East, South SL Co: West, Westside SLC
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+South SL Co, Westside SLC, Davis
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+South SL Co, Westside SLC, Lehi
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+South SL Co, Westside SLC, Sandy
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:left;">
+South SL Co, Westside SLC, Davis, Lehi, Sandy
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="summary-1" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Summary<a href="methodology.html#summary-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -240,6 +679,9 @@ div.csl-indent {
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-beamdocs" class="csl-entry">
+The BEAM Team, 2017. <a href="https://beam.readthedocs.io/en/latest/about.html"><span>BEAM Documentation</span></a>.
+</div>
 <div id="ref-SLCSouth" class="csl-entry">
 Utah Transit Authority, 2021. <a href="https://www.rideuta.com/Services/UTA-On-Demand/Southern-Salt-Lake-County"><span>Southern Salt Lake County</span></a>.
 </div>

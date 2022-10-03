@@ -4,25 +4,25 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Literature Review | Article Long Title</title>
+  <title>Chapter 2 Literature Review | Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM</title>
   <meta name="description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Literature Review | Article Long Title" />
+  <meta property="og:title" content="Chapter 2 Literature Review | Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
-  <meta name="github-repo" content="byu-transpolab/something" />
+  <meta name="github-repo" content="https://github.com/byu-transpolab/microtransit_areas(2)?" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Literature Review | Article Long Title" />
+  <meta name="twitter:title" content="Chapter 2 Literature Review | Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM" />
   
   <meta name="twitter:description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
   
 
 
 
-<meta name="date" content="2022-09-26" />
+<meta name="date" content="2022-10-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,9 +138,11 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#scenario-description"><i class="fa fa-check"></i><b>3.3</b> Scenario Description</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="methodology.html"><a href="methodology.html#demand"><i class="fa fa-check"></i><b>3.3.1</b> Demand</a></li>
-<li class="chapter" data-level="3.3.2" data-path="methodology.html"><a href="methodology.html#networks"><i class="fa fa-check"></i><b>3.3.2</b> Networks</a></li>
-<li class="chapter" data-level="3.3.3" data-path="methodology.html"><a href="methodology.html#configuration"><i class="fa fa-check"></i><b>3.3.3</b> Configuration</a></li>
+<li class="chapter" data-level="3.3.1" data-path="methodology.html"><a href="methodology.html#configuration-file"><i class="fa fa-check"></i><b>3.3.1</b> Configuration File</a></li>
+<li class="chapter" data-level="3.3.2" data-path="methodology.html"><a href="methodology.html#population-and-household-files"><i class="fa fa-check"></i><b>3.3.2</b> Population and Household Files</a></li>
+<li class="chapter" data-level="3.3.3" data-path="methodology.html"><a href="methodology.html#plans-file"><i class="fa fa-check"></i><b>3.3.3</b> Plans File</a></li>
+<li class="chapter" data-level="3.3.4" data-path="methodology.html"><a href="methodology.html#network"><i class="fa fa-check"></i><b>3.3.4</b> Network</a></li>
+<li class="chapter" data-level="3.3.5" data-path="methodology.html"><a href="methodology.html#vehicle-fleets-and-types"><i class="fa fa-check"></i><b>3.3.5</b> Vehicle Fleets and Types</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#scenario-configuration"><i class="fa fa-check"></i><b>3.4</b> Scenarios</a></li>
 <li class="chapter" data-level="3.5" data-path="methodology.html"><a href="methodology.html#summary-1"><i class="fa fa-check"></i><b>3.5</b> Summary</a></li>
@@ -169,7 +171,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Article Long Title</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM</a>
           </h1>
         </div>
 
@@ -199,17 +201,17 @@ div.csl-indent {
 <p>Ronald et al. (2017) looked at three software simulations in more detail: the basic simulation Delphi, the agent-based simulation MATSim, and the traffic microsimulation SUMOoD (SUMO on Demand). The study found that these simulations generally produced similar results with respect to number of vehicles and amount of demand, and noted that all simulations performed as expected based on real-world observations (Schofer et al., 2003). They are also quick to point out that results of these simulations might be optimistic if simplifications to routing are made or if using an undirected network, where a vehicle could pick up passengers on either side of a road no matter the direction of travel.</p>
 <div id="matsim-and-beam" class="section level3 hasAnchor" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> MATSim and BEAM<a href="literature-review.html#matsim-and-beam" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>MATSim (short for “Multi-Agent Transport Simulation”) is an open-source framework for transportation modeling originally developed in Zurich. The framework simulates traffic flows and congestion on a microscopic level, and simulates demand by creating agents and following their daily schedules and decisions. It is designed to model a single day in large-scale scenarios, and uses an iterative process to have each agent optimize their schedule and consider factors such as route choice, mode choice, time choice, and destination choice (Horni et al., 2016). This is similar to how many people would likely use a transportation network: either trying several options and sticking with what works best for them, or using a routing service (such as Google Maps) to find their optimal route. It is important to note that this is different than finding the optimal solution for the whole system (which likely would lead to some agents individually being assigned very poor routing/mode choice/etc.); each individual tries to optimize their own travel, and MATSim outputs the overall equilibrium that results (Horni et al., 2016). MATSim has been used in numerous studies to model various scenarios: Bischoff &amp; Maciejewski (2016) simulated a city-wide replacement of personal vehicles with autonomous taxis in Berlin, Cyganski et al. (2018) introduced autonomous vehicles and ODT to Brunswick via simulation, and Viergutz &amp; Schmidt (2019) modeled ODT vs public transit in the rural town of Colditz.</p>
+<p>MATSim (Multi-Agent Transport Simulation) is an open-source framework for transportation modeling originally developed in Zurich. The framework simulates traffic flows and congestion on a microscopic level, and simulates demand by creating agents and following their daily schedules and decisions. It is designed to model a single day in large-scale scenarios, and uses an iterative process to have each agent optimize their schedule and consider factors such as route choice, mode choice, time choice, and destination choice (Horni et al., 2016). This is similar to how many people would likely use a transportation network: either trying several options and sticking with what works best for them, or using a routing service (such as Google Maps) to find their optimal route. It is important to note that this is different than finding the optimal solution for the whole system (which likely would lead to some agents individually being assigned very poor routing/mode choice/etc.); each individual tries to optimize their own travel, and MATSim outputs the overall equilibrium that results (Horni et al., 2016). MATSim has been used in numerous studies to model various scenarios: Bischoff &amp; Maciejewski (2016) simulated a city-wide replacement of personal vehicles with autonomous taxis in Berlin, Cyganski et al. (2018) introduced autonomous vehicles and ODT to Brunswick via simulation, and Viergutz &amp; Schmidt (2019) modeled ODT vs public transit in the rural town of Colditz.</p>
 <p>BEAM, which stands for Behavior, Energy, Autonomy, and Mobility, is an extension to the MATSim framework, and is maintained by Lawrence Berkeley National Laboratory (BEAM - the Modeling Framework for Behavior, Energy, Autonomy, and Mobility, n.d.). The BEAM documentation (The BEAM Team, 2017) gives a description of some of its functions and purposes. The simulation is designed to simplify running full-scale transportation models, and places an emphasis on within-day agent mode choice and planning (as an example, after an agent requests a ODT vehicle, they may decide the wait time is too long and choose another mode). It is also intended to find the equilibrium point where resource markets (including road capacity and fleet availability) match the demand for service.</p>
 </div>
 </div>
 <div id="real-world-microtransit" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> Real-World Microtransit<a href="literature-review.html#real-world-microtransit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Microtransit/ODT has generally performed well in simulations; however, few ODT services have been implemented in the real world. Perhaps the most notable is Kutsuplus, which was implemented in Helsinki, Finland from 2102–2015. An official report of the system was created, but did not include an analysis regarding the mobility improvements compared with already-existing alternatives (Alonso-González et al., 2018; Kari, 2016).</p>
+<p>Microtransit/ODT has generally performed well in simulations; however, few ODT services have been implemented in the real world. Perhaps the most notable is Kutsuplus, which was implemented in Helsinki, Finland from 2012–2015. An official report of the system was created, but did not include an analysis regarding the mobility improvements compared with already-existing alternatives (Alonso-González et al., 2018; Kari, 2016).</p>
 <div id="uta-on-demand-by-via" class="section level3 hasAnchor" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> UTA On Demand by VIA<a href="literature-review.html#uta-on-demand-by-via" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Another real-world microtransit implementation began in November 2019, when Utah Transit Authority (UTA) partnered with VIA to run a pilot microtransit service, UTA on Demand, in southern Salt Lake County (Robertson et al., 2020). The two main goals of this program were to expand access to public transit, providing first- and last-mile connections, and increase mobility for all users, even on trips not involving fixed-route transit. The purpose of the pilot program was to determine if microtransit would achieve these goals effectively (Office of Communications &amp; Marketing, 2019).</p>
-<p>As of the time of writing, monthly reports on the program are available from December 2019 through November 2020, as well as four quarterly reports. Several metrics were measured and compared to previously set goals in different areas, such as ridership, wait times, and cost per rider. At the end of the first quarter (December–February), the pilot program either met or was on track to meet the 6-month goals for each metric (Office of Communications &amp; Marketing, 2020a). However, due to the COVID-19 pandemic becoming prevalent in Utah beginning mid-March, significantly fewer people have utilized the service, and average ridership from March through November was significantly lower than the 6-month goals (Office of Communications &amp; Marketing, 2020c).</p>
+<p>As of the time of writing, monthly reports on the program are available from December 2019 through November 2020, as well as four quarterly reports. Several metrics were measured and compared to previously set goals in different areas, such as ridership, wait times, and cost per rider. At the end of the first quarter (December–February), the pilot program either met or was on track to meet the 6-month goals for each metric (Office of Communications &amp; Marketing, 2020a). However, due to the COVID-19 pandemic becoming prevalent in Utah beginning mid-March, significantly fewer people have utilized the service since then, and average ridership from March through November was significantly lower than the 6-month goals (Office of Communications &amp; Marketing, 2020c).</p>
 <p>Though the pilot program did not meet the goals that were originally set, UTA renewed its contract with VIA for an additional year (Office of Communications &amp; Marketing, 2020c). This is in part because the program was projected to have met its 6-month goals in absence of the pandemic (Office of Communications &amp; Marketing, 2020b), and also more generally for continued evaluation and testing (Office of Communications &amp; Marketing, 2020c).</p>
 <p>In September 2020, UTA released a report detailing a possible expansion of microtransit services to other areas in Utah following the UTA on Demand pilot program (Robertson et al., 2020). Three characteristics were considered: Transit potential, reflecting population and employment density; transit need, reflecting socio-economic factors that indicate a higher propensity to use transit; and the existing transit service level, based on quality and quantity of transit already available in the area. Based on these characteristics, 19 zones were identified between Brigham City and Santaquin as areas that could potentially benefit from microtransit services. Ridership was estimated based on number of residents and number of workers employed within each zone, as well as a mode share score that VIA developed based on their internal demand model. The report makes no definitive recommendation regarding expanding microtransit services, but does present several results of the analysis for each zone, including how well microtransit would improve transit coverage, provide efficient transit, replace existing bus routes, and increase equity. The report also notes several considerations regarding accessibility (including paratransit) and operations, and that this study will inform UTA’s future transit choices.</p>
 </div>

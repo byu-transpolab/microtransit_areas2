@@ -4,25 +4,25 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Article Long Title</title>
+  <title>Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM</title>
   <meta name="description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Article Long Title" />
+  <meta property="og:title" content="Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
-  <meta name="github-repo" content="byu-transpolab/something" />
+  <meta name="github-repo" content="https://github.com/byu-transpolab/microtransit_areas(2)?" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Article Long Title" />
+  <meta name="twitter:title" content="Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM" />
   
   <meta name="twitter:description" content="A paper about simulating geofenced microtransit in Salt Lake County" />
   
 
 
 
-<meta name="date" content="2022-09-26" />
+<meta name="date" content="2022-10-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,9 +138,11 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="methodology.html"><a href="methodology.html#scenario-description"><i class="fa fa-check"></i><b>3.3</b> Scenario Description</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="methodology.html"><a href="methodology.html#demand"><i class="fa fa-check"></i><b>3.3.1</b> Demand</a></li>
-<li class="chapter" data-level="3.3.2" data-path="methodology.html"><a href="methodology.html#networks"><i class="fa fa-check"></i><b>3.3.2</b> Networks</a></li>
-<li class="chapter" data-level="3.3.3" data-path="methodology.html"><a href="methodology.html#configuration"><i class="fa fa-check"></i><b>3.3.3</b> Configuration</a></li>
+<li class="chapter" data-level="3.3.1" data-path="methodology.html"><a href="methodology.html#configuration-file"><i class="fa fa-check"></i><b>3.3.1</b> Configuration File</a></li>
+<li class="chapter" data-level="3.3.2" data-path="methodology.html"><a href="methodology.html#population-and-household-files"><i class="fa fa-check"></i><b>3.3.2</b> Population and Household Files</a></li>
+<li class="chapter" data-level="3.3.3" data-path="methodology.html"><a href="methodology.html#plans-file"><i class="fa fa-check"></i><b>3.3.3</b> Plans File</a></li>
+<li class="chapter" data-level="3.3.4" data-path="methodology.html"><a href="methodology.html#network"><i class="fa fa-check"></i><b>3.3.4</b> Network</a></li>
+<li class="chapter" data-level="3.3.5" data-path="methodology.html"><a href="methodology.html#vehicle-fleets-and-types"><i class="fa fa-check"></i><b>3.3.5</b> Vehicle Fleets and Types</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="methodology.html"><a href="methodology.html#scenario-configuration"><i class="fa fa-check"></i><b>3.4</b> Scenarios</a></li>
 <li class="chapter" data-level="3.5" data-path="methodology.html"><a href="methodology.html#summary-1"><i class="fa fa-check"></i><b>3.5</b> Summary</a></li>
@@ -169,7 +171,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Article Long Title</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM</a>
           </h1>
         </div>
 
@@ -178,23 +180,18 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Article Long Title</h1>
+<h1 class="title">Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM</h1>
 <p class="author multi-author"><em>Gregory Macfarlane</em></p>
 <address class="author_afil">
 Brigham Young University<br>
 <a class="author_email" href="mailto:#"><a href="mailto:gregmacfarlane@byu.edu" class="email">gregmacfarlane@byu.edu</a></a>
 </address>
-<p class="author multi-author"><em>Cosmo Cougar</em></p>
+<p class="author multi-author"><em>Hayden Atchley</em></p>
 <address class="author_afil">
 Brigham Young University<br>
-<a class="author_email" href="mailto:#"><a href="mailto:bob@example.com" class="email">bob@example.com</a></a>
+<a class="author_email" href="mailto:#"><a href="mailto:atchley.sha@gmail.com" class="email">atchley.sha@gmail.com</a></a>
 </address>
-<p class="author multi-author"><em>Masters Student</em></p>
-<address class="author_afil">
-Brigham Young University<br>
-<a class="author_email" href="mailto:#"><a href="mailto:cat@example.com" class="email">cat@example.com</a></a>
-</address>
-<p class="date"><em>2022-09-26</em></p>
+<p class="date"><em>2022-10-03</em></p>
 <div class="abstract">
 <p class="abstract">Abstract</p>
 <p>A number of regions have begun operating microtransit systems to support first and last mile transit access. In this paper, we modify the ridehailing request handling algorithm in the BEAM microscopic simulation engine to accomodate geographically resetricted microstransit operations. We then examine the ridership operating characteristics for one existing and three proposed geofenced service regions in Salt Lake County, Utah. We find that the simulation generates realistic ridership statistics and wait times, subject to errors likely to be corrected with more thorough choice model calibration. We also found that expanding microtransit services to Sandy or West Jordan might be effective, but might be less so for the area near SLC International Airport.</p>
@@ -224,8 +221,7 @@ Brigham Young University<br>
 <li><strong>Introduction:</strong> This chapter.</li>
 <li><strong>Literature Review:</strong> An overview of previous efforts to understand microtransit systems and forecast their operations.</li>
 <li><strong>Methodology:</strong> Methods and data used to create the initial microsimulation scenario in the Salt Lake City region.</li>
-<li><strong>Existing On-Demand Deployment:</strong> Also, results of the simulation applied to the existing VIA deployment.</li>
-<li><strong>Candidate Regions:</strong> An evaluation of three additional regions selected by UTA and UDOT for simulation analysis.</li>
+<li><strong>Results:</strong> A comparison of initial BEAM modeling to observed data, and an evaluation of three additional regions selected by UTA and UDOT for simulation analysis.</li>
 <li><strong>Recommendations and Conclusions</strong></li>
 </ol>
 

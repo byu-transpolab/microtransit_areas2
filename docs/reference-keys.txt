@@ -1,3 +1,9 @@
+fig:sanfran-polygon
+fig:via-visualization
+tab:uta-metrics
+fig:zone-map
+tab:zone-fleets
+tab:scenarios-info
 tab:existing-comparison
 tab:ridership-compare
 tab:util-compare
@@ -21,9 +27,11 @@ overview-1
 beam
 geofencing-modifications
 scenario-description
-demand
-networks
-configuration
+configuration-file
+population-and-household-files
+plans-file
+network
+vehicle-fleets-and-types
 scenario-configuration
 summary-1
 results
