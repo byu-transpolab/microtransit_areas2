@@ -9,7 +9,6 @@ library(tarchetypes)
 # and tar_read(summary) to view the results.
 
 library(readr)
-library(purrr)
 library(qs)
 
 # Read package list from file
