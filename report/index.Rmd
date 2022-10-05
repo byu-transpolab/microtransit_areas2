@@ -23,7 +23,11 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: article
 layout: "3p, authoryear"
-bibliography: [references.bib, packages.bib]
+bibliography:
+  - references/UTA_pilot.bib
+  - references/packages.bib
+  - references/literature.bib
+  - references/beam.bib
 csl: elsevier-harvard-italics.csl
 always_allow_html: true
 # url: your book url like https://bookdown.org/yihui/bookdown
@@ -51,7 +55,7 @@ knitr::opts_chunk$set(
 )
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
+), 'references/packages.bib')
 
 targets::tar_config_unset("store")
 targets::tar_config_set("store" = here::here(targets::tar_config_get("store")))
