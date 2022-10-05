@@ -6,7 +6,7 @@ This chapter describes the methodology we followed to generate the simulation sc
 
 ## BEAM
 
-Adaptive algorithm
+Adaptive algorithm greedy asynchronous, paper/beamdocs
 
 Ride hailing versus transit
 
@@ -17,7 +17,7 @@ One part of many ODT implementations---including the implementation in Salt Lake
 
 We were able to adapt BEAM's implementation to allow a geofence in the form of an arbitrary polygon. BEAM will check that a request for ODT originates and ends within the specified geofence, and only accept those requests that do. We were also able to allow for multiple geofence polygons, with a fleet specific to each one.
 
-As an example, Figures \@ref(fig:sanfran-polygon) and \@ref(fig:via-visualization) show an implementation we tested with a San Francisco network, one of the default scenarios in BEAM [@beamdocs]. Figure \@ref(fig:sanfran-polygon) shows the polygon we used (chosen arbitrarily), and Figure \@ref(fig:via-visualization) highlights that the ODT vehicles are only traveling within the geofence. This visualization was done with Simunto's VIA software (##ref###).
+As an example, Figures \@ref(fig:sanfran-polygon) and \@ref(fig:via-visualization) show an implementation we tested with a San Francisco network, one of the default scenarios in BEAM [@beamdocs]. Figure \@ref(fig:sanfran-polygon) shows the polygon we used (chosen arbitrarily), and Figure \@ref(fig:via-visualization) highlights that the ODT vehicles are only traveling within the geofence. This visualization was done with Simunto's VIA software [@SimuntoVIA].
 
 ```{r sanfran-polygon}
 #| fig.cap="San Fransisco with example geofencing polygon."
@@ -37,7 +37,6 @@ knitr::include_graphics(c(
 ```
 
 
-
 ## Scenario Description
 The BEAM documentation [@beamdocs] lists the inputs required to run a BEAM scenario. Our implementation of BEAM largely follows these requirements, though there are a few differences. The following is a list of the requirements for our implementation:
 
@@ -51,30 +50,29 @@ The BEAM documentation [@beamdocs] lists the inputs required to run a BEAM scena
 - The microtransit/ODT fleet
 - Transit data in the form of GTFS archives
 
-These requirements are explained in greater detail in the following sections. For a full specification of the inputs, see (<><>link to github readme?<><>).
+These requirements are explained in greater detail in the following sections. For a full specification of the inputs, see the README at [https://github.com/byu-transpolab/microtransit_areas2/README.md]. Much of the work in creating these inputs was done by @MacfarlaneLant previously, though we have made modifications to better fit our analysis.
 
 ### Configuration File
 The configuration file lists nearly all of the parameters used in the scenario, including aspects such as the number of iterations to run and paths to the other relevant files. This is one of the few input files that differs between the various scenarios we ran, as inputs such as the population and network remained constant. The configuration file is the main file that BEAM uses to set up and run the given scenario.
 
 ### Population and Household Files
-The population, households, and household attributes files are all part of a synthetic population created for the WAV??? and T-SCORE??? projects, constructed to represent the WFRC/MAG region in 2019. The population file consists of an identifier for each member of the population along with attributes such as age, income, and value of time. This file also contains the ID of the household to which each person belongs. The households and household attributes files contain information for each household in the population, including location, size, and auto ownership.
+The population, households, and household attributes files are all part of a synthetic population created using PopulationSim. @MacfarlaneLant generated this synthetic population in order to represent the WFRC/MAG region in 2019. We are using the same population in our analysis.
+
+The population file consists of an identifier for each member of the population along with attributes such as age, income, and value of time. This file also contains the ID of the household to which each person belongs. The households and household attributes files contain information for each household in the population, including location, size, and auto ownership.
 
 ### Plans File
-Skims for transportation modes converted from WFRC / MAG model ***This statement was included in the methodology outline, but I don't really know the details regarding the skims***
-
 We supplied the aforementioned synthetic population to the ActivitySim activity-based travel model platform, which created an initial travel demand in the form of a plans file. We set ActivitySim to model the demand for a single weekday. This plans file lists each person that made a trip during that day, as well as their corresponding plans, including information on the time, location, and nature of the attended activities, as well as the mode of transportation used for each leg of the trip.
 
-A calibration exercise adjusted ActivitySim parameters to generally reflect mode split and trip distribution statistics for the Wasatch Front area, though more close calibration to targets is potentially possible.
+#### Network skims
+In order to model destination choice and activity choice, ActivitySim requires network skims. We used the same skims as @MacfarlaneLant, which are modified from the skims in the existing WFRC trip-based model. These skims are not used directly in BEAM, however. A separate network file is required.
 
 ### Network
-***I'm not sure on the details of where the network came from; the following is copied from a previous TAC memo.***
-
-Highway networks were retrieved from OpenStreetMap; this network is imperfect, but we were unable to develop a satisfactory all-streets network from the geospatial data available through AGRC. Efforts to create this network are ongoing as part of the T-SCORE project, and if a more suitable network is created this project could benefit from it. Transit services representing autumn 2019 were retrieved from UTA’s GTFS feed.
+Originally, we planned and attempted to use the network provided by @UGRCnetwork to create an "all-streets" network. However, we ran into several issues with this approach. One issue in particular was that of connectivity: in the provided network file, several roadways did not connect where they should and many highway overpasses were erroneously connected to the roads underneath, among other problems. Because of this, we instead used the network in the Wasatch Front Regional Council's travel demand model [@WFRCnetwork].
 
 ### Vehicle Fleets and Types
 Several files relate to the various vehicle fleets in the scenario. Central to these is a definition file containing the name and attributes of each vehicle type. We specified a personal vehicle fleet according to the auto ownership information given in the households file, and a microtransit/ODT fleet based on each of the scenarios we included. Section \@ref(scenario-configuration) contains more information on the specific fleets we used.
 
-We included transit data in the form of GTFS archives... ***Not sure of the details on this one either***
+Another aspect of this is assigning routes and schedules to transit vehicles. BEAM uses GTFS data for this. In our case, we used the GTFS archives provided by UTA [@UTAgtfs], valid for March--April 2022. In our configuration we chose a specific date of March 30, 2022, which is a Wednesday.
 
 
 ## Scenarios {#scenario-configuration}
@@ -90,13 +88,7 @@ tar_read(UTA_table) %>%
   kable_styling()
 ```
 
-Our initial comparison of the reported metrics showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. After calibrating several of BEAM's internal coefficients, the results more closely matched the observed data, and so we retained those calibrated values for all of the scenarios we ran.
-
-_Don't know if I should include more details about calibration. Below is a super rough draft of that. If it is included, maybe it should go in the results section._
-
-_We therefore needed to run . Before calibrating BEAM itself, we focused on calibrating ActivitySim. ActivitySim has several coefficients that can be changed to affect both tour and trip mode choice. We calibrated ActivitySim to ####% microtransit in the overall mode split (tours). This was more than our ###% target, but we were unable to affect the mode split further._
-
-_We then generated plans from ActivitySim again as our new input plans to BEAM. From there, we modified BEAM's coefficients in an attempt to again match our mode split target of ##%, with a 15???% scenario. We again were not able to reach our target, but we figured that the relative performance is more important anyway._
+Our initial comparison of the reported metrics showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. After calibrating several of BEAM's internal coefficients, the results more closely matched the observed data, and so we retained those calibrated values for all of the scenarios we ran. More information on the calibration process is given in Section \@ref(scenario-calibration).
 
 In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the areas we analyzed is given in Figure \@ref(fig:zone-map). For each of these areas we defined a microtransit fleet, including fleet size and operating hours, which can be seen in Table \@ref(tab:zone-fleets). We were less concerned with modeling each of these areas individually, but rather how the addition of another area would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in Table \@ref(tab:scenarios-info).
 
@@ -122,5 +114,11 @@ tar_read(scenario_key) %>%
 ```
 
 
-## Summary
-Be smart about the figures and tables you include. Figures should be high resolution, and tables should always be table objects. If your table is an image of a table, I will place three pins in the voodoo dolls I keep for each of my RA’s.
+## Calibration {#scenario-calibration}
+Ideally, the results of our model would match observed data when studying the same scenario. In our case, we used the mode shares as our metric. Our initial results significantly over-predicted ridehail usage, so we first looked to calibrate ActivitySim. BEAM takes the results of an ActivitySim model as an input, and so by adjusting ActivitySim to better reflect reality, calibrating BEAM became easier.
+
+ActivitySim has several coefficients that can be changed to affect both tour and trip mode choice. We calibrated ActivitySim to ####% ridehail in the overall tour mode split. We then focused on calibrating the trip mode choice coefficients, but found that there was virtually no effect on overall mode split. Ultimately we were aiming for a ####% ridehail mode share, which is less than what we were able to produce.
+
+We then generated plans from ActivitySim again as our new input plans to BEAM. From there, we modified BEAM's coefficients in an attempt to again match our mode split target of ##%, using a 15% population sample. We were able to shift the mode split from its original values, but the results were similar to that of the ActivitySim calibration.
+
+This sub-optimal calibration is a limitation of this study; however, we are generally more concerned with the relative performance between the scenarios we are studying rather than the absolute performance. This is discussed in more detail in Sections \@ref(Results) and \@ref(Recommendations).
