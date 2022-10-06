@@ -5,15 +5,14 @@ This chapter describes the methodology we followed to generate the simulation sc
 
 
 ## BEAM
+BEAM is a transportation simulation model with a focus on adaptive planning for individual agents. This is very similar to MATSim; in fact, BEAM is itself an extension to MATSim, but differs in an emphasis on within-day planning, rather than MATSim's across-day planning. This allows agents to dynamically respond to the current simulation state, for example to make a decision based on current modeled travel times [@beamdocs].
 
-Adaptive algorithm greedy asynchronous, paper/beamdocs
-
-Ride hailing versus transit
+BEAM has native support for a wide variety of transportation modes, including driving, walking, biking, and transit. There is also a "ridehail" mode (in BEAM this is referred to as "transportation network companies (TNCs)"), which would include taxis and similar modes with non-fixed routes. These modes are able to respond to specific pickup and dropoff requests, and can be configured as a "pooled" option, where multiple passengers with different travel paths can share a vehicle.
 
 In this project, we are representing on-demand transit (ODT) in BEAM as a pooled ridehail option. Agents request a pooled ridehail trip, and a ridehail vehicle services the request. BEAM contains internal algorithms to match ridehail requests with vehicles, and to intelligently pool multiple requests when feasible.
 
 ### Geofencing Modifications
-One part of many ODT implementations---including the implementation in Salt Lake County---is a zone in which the vehicles may travel. BEAM natively offers some support for “geofencing” ODT vehicles, but this is limited as an operating radius.
+One part of many ODT implementations---including the implementation in Salt Lake County---is a zone within which ODT vehicles must stay. BEAM natively offers some support for this “geofencing” of ODT vehicles, but this is limited as an operating radius.
 
 We were able to adapt BEAM's implementation to allow a geofence in the form of an arbitrary polygon. BEAM will check that a request for ODT originates and ends within the specified geofence, and only accept those requests that do. We were also able to allow for multiple geofence polygons, with a fleet specific to each one.
 
