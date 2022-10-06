@@ -7,6 +7,8 @@ This chapter describes the methodology we followed to generate the simulation sc
 ## BEAM
 BEAM is a transportation simulation model with a focus on adaptive planning for individual agents. This is very similar to MATSim; in fact, BEAM is itself an extension to MATSim, but differs in an emphasis on within-day planning, rather than MATSim's across-day planning. This allows agents to dynamically respond to the current simulation state, for example to make a decision based on current modeled travel times [@beamdocs].
 
+BEAM typically will run several iterations of the simulation, so that the results of one iteration (congestion, travel times, etc.) are taken into account at the beginning of the next iteration. In this way, the across-day planning typical of MATSim is still performed.
+
 BEAM has native support for a wide variety of transportation modes, including driving, walking, biking, and transit. There is also a "ridehail" mode (in BEAM this is referred to as "transportation network companies (TNCs)"), which would include taxis and similar modes with non-fixed routes. These modes are able to respond to specific pickup and dropoff requests, and can be configured as a "pooled" option, where multiple passengers with different travel paths can share a vehicle.
 
 In this project, we are representing on-demand transit (ODT) in BEAM as a pooled ridehail option. Agents request a pooled ridehail trip, and a ridehail vehicle services the request. BEAM contains internal algorithms to match ridehail requests with vehicles, and to intelligently pool multiple requests when feasible.
@@ -75,9 +77,9 @@ Another aspect of this is assigning routes and schedules to transit vehicles. BE
 
 
 ## Scenarios {#scenario-configuration}
-We first needed to assess the performance of BEAM relative to real-world data. As UTA already has a microtransit ODT pilot program underway, we reached out to find the fleet size and shifts for the microtransit vehicles. Shaina Quinn, a researcher at UTA's Office of Innovative Mobility Solutions, informed us that typically 12 microtransit vehicles provide service at a time. We found the shifts on UTA's website for the service [@SLCSouth]. Since we didn't have information on fleet size or shifts for any scenario except the existing pilot program, we used the same values for each additional study area as well.
+We first needed to assess the performance of BEAM relative to real-world data. As UTA already has a microtransit ODT pilot program underway, we reached out to find the fleet size and shifts for the microtransit vehicles. Shaina Quinn, a researcher at UTA's Office of Innovative Mobility Solutions, informed us that typically 12 vehicles provide service at a time. We found the shifts on UTA's website for the service [@SLCSouth].
 
-We created a BEAM scenario modeling this pilot program observed data. UTA reported several metrics, which are presented in Table \@ref(tab:uta-metrics). Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.
+UTA reported several metrics, which are presented in Table \@ref(tab:uta-metrics). Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.
 
 ```{r uta-metrics}
 tar_read(UTA_table) %>% 
@@ -87,7 +89,7 @@ tar_read(UTA_table) %>%
   kable_styling()
 ```
 
-Our initial comparison of the reported metrics showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. After calibrating several of BEAM's internal coefficients, the results more closely matched the observed data, and so we retained those calibrated values for all of the scenarios we ran. More information on the calibration process is given in Section \@ref(scenario-calibration).
+We created a scenario in BEAM to model this pilot program, and compared the results with the metrics reported by UTA. Our initial comparison showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. After calibrating several of BEAM's internal coefficients, the results more closely matched the observed data, and so we retained those calibrated values for all of the scenarios we ran. More information on the calibration process is given in Section \@ref(scenario-calibration).
 
 In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the areas we analyzed is given in Figure \@ref(fig:zone-map). For each of these areas we defined a microtransit fleet, including fleet size and operating hours, which can be seen in Table \@ref(tab:zone-fleets). We were less concerned with modeling each of these areas individually, but rather how the addition of another area would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in Table \@ref(tab:scenarios-info).
 
@@ -111,6 +113,11 @@ tar_read(scenario_key) %>%
       caption = "Areas Corresponding to Each Scenario") %>% 
   kable_styling()
 ```
+
+### Common configuration
+All of the scenarios we ran had a nearly identical configuration. The main exception to this was the ODT fleet used. There are many configurable options in BEAM (the full configuration is available at [https://github.com/byu-transpolab/beam_scenarios]), but there are two worth mentioning here: sample size and number of iterations.
+
+Due to the computational power and time required to run BEAM, we were unable to run a full sample for any of our scenarios. We ultimately needed to decide on a balance between sample size and the number of iterations to run, as increasing one necessitated decreasing the other. We decided that 10 iterations was reasonable, as the smaller test scenarios seemed to mostly converge at that point. With 10 iterations, we were able to run a 20% population sample for each of our scenarios. This sampling was done entirely in BEAM; BEAM offers support for this natively.
 
 
 ## Calibration {#scenario-calibration}
