@@ -1,7 +1,7 @@
 # Results
 
 ## Existing scenario evaluation
-UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from December 2019--November 2020. In order to assess the performance of our BEAM simulations when compared with real-world observed data, we compared the results of the two on several metrics (Table \@ref(tab:existing-comparison)).
+UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from December 2019--November 2020. We also created a scenario in BEAM to model this pilot program. In order to assess the performance of our BEAM simulations when compared with real-world observed data, we compared the results of the two on several metrics (Table \@ref(tab:existing-comparison)).
 
 ```{r existing-comparison}
 tar_load(existing_comparison)
@@ -12,16 +12,7 @@ existing_comparison %>%
   kable_styling()
 ```
 
-```{r}
-
-```
-
-**What I wrote below is now wrong, I was using the 'existing' rather than the 'pilot' data for comparison. The 'pilot' comparison is basically spot-on, which I did not expect.**
-
-It is clear from this comparison that BEAM did not perfectly model microtransit, over-predicting ridership by almost a factor of 2. Interestingly, however, utilization is predicted at significantly less than the observed value. This is almost certainly due to the difference in vehicle shifts. Utilization is measured as passengers per vehicle per hour of operation, and our scenarios specify microtransit fleets that operate nearly all day. It is likely that the actual vehicles are in operation for less of the day, and not all vehicles may be in operation at all times. If we take 'hours of operation' to be the actual time spent driving, with or without a passenger, then the predicted utilization jumps to <><><><>####. {{{This is larger than the observed value by a factor of ###. It is clear that the actual operating vehicle-hours are somewhere in-between these two assumptions, but we have no information to clarify this.}}}
-
-The fact that BEAM so over-predicts microtransit ridership is likely due in part to the sample size. Since we used 20% population samples as our inputs to BEAM, there was an overabundance of microtransit vehicles relative to the population. We did reduce the network capacity to 20% to account for this, but we did not scale down the microtransit fleets, as it was unclear how best to do so. By dividing the observed ridership by the predicted ridership, we obtained what we assume to be a rough approximation of the appropriate fleet scaling factor, in this case, about ###.
-<!-- We also assume that this factor is applicable to all of our scenarios, and so scaled down ridership and associated metrics accordingly for those as well, to offer a better approximation of estimated ridership. -->
+At first glance, these results seem to be quite good, as the simulated scenario reports nearly identical metrics to the real-world data. However, it is important to consider that our model scenario uses a 20% population sample, and the observed data reflects the entire population.
 
 
 ## Candidate scenario comparison
