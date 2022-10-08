@@ -152,6 +152,13 @@ analysis_targets <- tar_plan(
   
 )
 
+pilot_targets <- tar_plan(
+  
+  pilot_ridership = get_tot_rh_passengers(pilot),
+  pilot_utilization = get_rh_utilization(pilot_ridership, pilot_fleet),
+  pilot_wait_times = get_avg_rh_wait_time(pilot)
+    
+)
 
 
 viz_targets <- tar_plan(
@@ -160,9 +167,9 @@ viz_targets <- tar_plan(
   
   existing_comparison = compare_existing(
     UTA,
-    get_tot_rh_passengers(pilot),
-    get_rh_utilization(pilot, pilot_fleet),
-    get_avg_rh_wait_time(pilot)),
+    pilot_ridership,
+    pilot_utilization,
+    pilot_wait_times),
   
   ridership_comparison = compare_riders(
     total_riders),
@@ -196,6 +203,7 @@ render_targets <- tar_plan(
 tar_plan(
   data_targets,
   analysis_targets,
+  pilot_targets,
   viz_targets,
   render_targets
 )

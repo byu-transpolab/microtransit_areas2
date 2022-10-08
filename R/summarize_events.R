@@ -30,7 +30,10 @@ get_tot_rh_passengers <- function(scenario, rh_veh_name = "rideHailVehicle"){
     tot_passengers[["leave"]]
   )
   
-  tot_passengers
+  riders <- tot_passengers[["avg"]] %>% 
+    round()
+  
+  riders
 }
 
 
@@ -81,7 +84,7 @@ get_rh_utilization <- function(total_riders, rh_fleet){
   #vehicle is different (though not hugely), so we take
   #an average. There is probably a better solution.
   
-  utilization <- total_riders[["avg"]] %>%
+  utilization <- total_riders %>%
     magrittr::divide_by(
       #sum of shift lengths gives total vehicle-hours
       sum(rh_fleet$shiftHours))
@@ -106,19 +109,19 @@ get_avg_rh_wait_time <- function(scenario, rh_veh_name = "rideHailVehicle"){
     type %in% c("ReserveRideHail", "PersonEntersVehicle")
   ][order(person, time)]
   
-  wait_time <- list()
+  # wait_time <- list()
   
-  wait_time[["times"]] <- scenario_arranged[
-  # wait_time <- scenario_arranged[
+  # wait_time[["times"]] <- scenario_arranged[
+  wait_time <- scenario_arranged[
     ,leadTime := lead(time) - time
   ][type == "ReserveRideHail" & lead(type) == "PersonEntersVehicle" &
       person == lead(person) & str_detect(lead(vehicle), rh_veh_name),
     leadTime] %>%
     magrittr::divide_by(60)
-
-  wait_time[["quantiles"]] <- wait_time[["times"]] %>%
-    quantile(na.rm = TRUE,
-             probs = c(0, .1, .25, .5, .75, .9, 1))
+# 
+#   wait_time[["quantiles"]] <- wait_time[["times"]] %>%
+#     quantile(na.rm = TRUE,
+#              probs = c(0, .1, .25, .5, .75, .9, 1))
   
   wait_time
 }

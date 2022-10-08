@@ -27,9 +27,9 @@ compare_existing <- function(UTA, riders, util, wait){
   
   comparison <- tibble(
     c("UTA Observed Data", "BEAM 'Pilot' Scenario"),
-    c(UTA$Mean[1], riders$avg),
+    c(UTA$Mean[1], riders),
     c(UTA$Mean[2], util),
-    c(UTA$Mean[3], wait$quantiles["50%"])
+    c(UTA$Mean[3], mean(wait))
   )
   
   colnames(comparison) <- c(

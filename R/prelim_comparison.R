@@ -4,20 +4,19 @@ compare_riders <- function(riders){
   
   scenarios <- names(riders)
   
-  enters <- riders %>% 
-    unlist() %>% 
-    {.[names(.) %>%
-         str_detect("enter")]}
-  
-  leaves <- riders %>% 
-    unlist() %>% 
-    {.[names(.) %>%
-         str_detect("leave")]}
+  # enters <- riders %>% 
+  #   unlist() %>% 
+  #   {.[names(.) %>%
+  #        str_detect("enter")]}
+  # 
+  # leaves <- riders %>% 
+  #   unlist() %>% 
+  #   {.[names(.) %>%
+  #        str_detect("leave")]}
   
   comparison <- tibble(
     Scenario = scenarios,
-    Entering = enters,
-    Leaving = leaves
+    Passengers = riders
   )
   
   comparison
@@ -33,15 +32,20 @@ compare_utilization <- function(util, size){
 
 
 
-compare_wait_times <- function(wait){
+compare_wait_times <- function(wait_times){
   
-  times <- list()
+  # times <- list()
+  # 
+  # for (i in names(wait)){
+  #   times[[as.character(i)]] <- wait[[i]]$times
+  # }
 
-  for (i in names(wait)){
-    times[[as.character(i)]] <- wait[[i]]$times
-  }
-
-  comparison <- bind_rows(times)
+  # comparison <- bind_rows(times)
+  comparison <- tibble(
+    Scenario = names(unlist(wait_times)) %>% 
+      str_remove("\\d+"),
+    wait_time = unlist(wait_times)
+  )
 
   comparison
    
