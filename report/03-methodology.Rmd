@@ -73,7 +73,7 @@ Originally, we planned and attempted to use the network provided by @UGRCnetwork
 ### Vehicle Fleets and Types
 Several files relate to the various vehicle fleets in the scenario. Central to these is a definition file containing the name and attributes of each vehicle type. We specified a personal vehicle fleet according to the auto ownership information given in the households file, and a microtransit/ODT fleet based on each of the scenarios we included. Section \@ref(scenario-configuration) contains more information on the specific fleets we used.
 
-Another aspect of this is assigning routes and schedules to transit vehicles. BEAM uses GTFS data for this. In our case, we used the GTFS archives provided by UTA [@UTAgtfs], valid for March--April 2022. In our configuration we chose a specific date of March 30, 2022, which is a Wednesday.
+Another aspect of this is assigning routes and schedules to transit vehicles. BEAM uses GTFS data for this. In our case, we used the GTFS archives provided by UTA, valid for March--April 2022. In our configuration we chose a specific date of March 30, 2022, which is a Wednesday.
 
 
 ## Scenarios {#scenario-configuration}
@@ -127,4 +127,4 @@ ActivitySim has several coefficients that can be changed to affect both tour and
 
 We then generated plans from ActivitySim again as our new input plans to BEAM. From there, we modified BEAM's coefficients in an attempt to again match our mode split target of ##%, using a 15% population sample. We were able to shift the mode split from its original values, but the results were similar to that of the ActivitySim calibration.
 
-This sub-optimal calibration is a limitation of this study; however, we are generally more concerned with the relative performance between the scenarios we are studying rather than the absolute performance. This is discussed in more detail in Sections \@ref(Results) and \@ref(Recommendations).
+This sub-optimal calibration is a limitation of this study; however, we are generally more concerned with the relative performance between the scenarios we are studying rather than the absolute performance. This is discussed in more detail in Sections \@ref(results) and \@ref(recommendations).

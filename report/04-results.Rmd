@@ -16,7 +16,7 @@ At first glance, these results seem to be quite good, as the simulated scenario 
 
 
 ## Candidate scenario comparison
-We then ran each of our scenarios as described in section \@ref(scenario-configuration), and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes <><Other metrics><>. These comparisons are given in Tables \@ref(tab:ridership-compare)--\@ref(tab:wait-time-compare).
+We then ran each of our scenarios as described in section \@ref(scenario-configuration), and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes <><Other metrics><>. These comparisons are given in Tables \@ref(tab:ridership-compare) and \@ref(tab:util-compare), as well as \@ref(fig:wait-time-compare).
 
 ```{r ridership-compare}
 tar_read(ridership_comparison) %>% 
@@ -33,10 +33,11 @@ tar_read(utilization_comparison) %>%
 ```
 
 ```{r wait-time-compare}
+#| fig.cap="Comparison of ODT wait times in each scenario."
+
 tar_read(wait_time_comparison) %>% 
-  kbl(booktabs = TRUE, digits = 2,
-      caption = "Comparison of Wait Times Across Scenarios") %>% 
-  kable_styling()
+ ggplot() +
+  geom_violin(aes(x = wait_time, y = Scenario, fill = Scenario))
 ```
 
 
