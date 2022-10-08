@@ -31,7 +31,7 @@ BEAM, which stands for Behavior, Energy, Autonomy, and Mobility, is an extension
 
 ## Real-World Microtransit
 
-Microtransit/ODT has generally performed well in simulations; however, few ODT services have been implemented in the real world. Perhaps the most notable is Kutsuplus, which was implemented in Helsinki, Finland from 2012–2015. An official report of the system was created, but did not include an analysis regarding the mobility improvements compared with already-existing alternatives [@Gonzalez2018; @Kari2016].
+Microtransit/ODT has generally performed well in simulations; however, few ODT services have been implemented in the real world. Perhaps the most notable is Kutsuplus, which was implemented in Helsinki, Finland from 2012–2015. An official report of the system was created, but did not include an analysis regarding the mobility improvements compared with already-existing alternatives [@Alonso-Gonzalez2018; @Kari2016].
 
 ### UTA On Demand by VIA
 
