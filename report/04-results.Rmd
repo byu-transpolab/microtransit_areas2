@@ -12,11 +12,15 @@ existing_comparison %>%
   kable_styling()
 ```
 
-At first glance, these results seem to be quite good, as the simulated scenario reports nearly identical metrics to the real-world data. However, it is important to consider that our model scenario uses a 20% population sample, and the observed data reflects the entire population.
+At first glance, these results seem to be quite good, as the simulated scenario reports similar ridership and wait time metrics to the real-world data. However, it is important to consider that our model scenario uses a 20% population sample, and the observed data reflects the entire population. The model ODT fleet, on the other hand, was not scaled down to match the population sample size, and so represents the full fleet available in the real-world pilot program.
+
+The fact that the predicted ridership is so similar to the actual, measured ridership is nevertheless encouraging. This suggests that the predicted ridership in the other modeled scenarios is a somewhat realistic forecast, albeit a rough approximation.
+
+There is also a significant discrepancy in the utilization measurements. Because of the way utilization is calculated (passengers per hour per vehicle), the vehicle operating hours can greatly affect this metric. In our model scenario, all 12 of the ODT vehicles are operational nearly all day, and it is likely that in off-peak hours the actual pilot program had fewer vehicles available. If operating hours are taken to be only time that the ODT vehicles are in motion, then our modeled utilization becomes **TODO:** calculate this number.
 
 
 ## Candidate scenario comparison
-We then ran each of our scenarios as described in section \@ref(scenario-configuration), and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes <><Other metrics><>. These comparisons are given in Table \@ref(tab:scenario-compare), and a plot of the wait times in Figure \@ref(fig:wait-time-compare).
+We then ran each of our scenarios as described in section \@ref(scenario-configuration), and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also include ***Other metrics***. These comparisons are given in Table \@ref(tab:scenario-compare), and a plot of the wait times in Figure \@ref(fig:wait-time-compare).
 
 ```{r scenario-compare}
 tar_read(scenario_comparison) %>% 
@@ -24,6 +28,8 @@ tar_read(scenario_comparison) %>%
       caption = "Comparison Across BEAM Scenarios") %>% 
   kable_styling()
 ```
+
+It is clear that in the scenarios with more microtransit vehicles available, ridership greatly increases. Interestingly, utilization does not vary much at all, which implies that at least in these specific scenarios there is a roughly linear relationship between number of vehicles and number of riders. This relationship can also be seen in the ratios of passengers to fleet size, as all of the vehicle operating hours are identical. In fact, fitting a linear model to this data gives a predicted increase of about 28 passengers per ODT vehicle. **TODO:** calculate this number in R.
 
 ```{r wait-time-compare}
 #| fig.cap="Comparison of ODT wait times in each scenario."
@@ -37,8 +43,15 @@ tar_read(wait_time_list) %>%
        y = "Scenario")
 ```
 
+Wait times also hardly are affected in the various scenarios. Not only are the average wait times nearly identical between scenarios (as shown in Table \@ref(tab:scenario-compare)), the distribution of wait times is essentially the same as well. It is important to note though that these wait times represent only _fulfilled_ ODT requests. In BEAM, when an agent makes an ODT request they may afterward re-plan and choose a different mode. Often this decision is largely based on the projected wait time for the ODT vehicle, so a request that returns a long wait time will often result in a change to mode choice. Table \@ref(tab:odt-fulfillment) compares the proportion of fulfilled requests in each scenario. **TODO:** create this table.
 
-It is clear that in the scenarios with more microtransit vehicles available, ridership greatly increases. Interestingly, utilization does not vary much at all, which implies that at least in these specific scenarios there is a roughly linear relationship between number of vehicles and number of riders. Wait times also hardly are affected in the various scenarios.
+```{r odt-fulfillment}
+# tar_read(rh_fulfillment_comparison) %>% 
+#   kbl(booktabs = TRUE, digits = c(0,0,0,0,2), #scenario, #req, #ful, #not, proportion
+#       caption = "Comparison of Fulfilled and Unfulfilled ODT Requests") %>% 
+#   kable_styling()
+```
+
 
 ## Summary
 
