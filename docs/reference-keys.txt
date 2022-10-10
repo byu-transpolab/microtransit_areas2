@@ -5,9 +5,9 @@ fig:zone-map
 tab:zone-fleets
 tab:scenarios-info
 tab:existing-comparison
-tab:ridership-compare
-tab:util-compare
+tab:scenario-compare
 fig:wait-time-compare
+tab:odt-fulfillment
 introduction
 problem-statement
 objectives

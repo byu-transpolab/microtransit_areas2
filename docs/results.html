@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-10-08" />
+<meta name="date" content="2022-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -237,90 +237,33 @@ BEAM ‘Pilot’ Scenario
 </tr>
 </tbody>
 </table>
-<p>At first glance, these results seem to be quite good, as the simulated scenario reports nearly identical metrics to the real-world data. However, it is important to consider that our model scenario uses a 20% population sample, and the observed data reflects the entire population.</p>
+<p>At first glance, these results seem to be quite good, as the simulated scenario reports similar ridership and wait time metrics to the real-world data. However, it is important to consider that our model scenario uses a 20% population sample, and the observed data reflects the entire population. The model ODT fleet, on the other hand, was not scaled down to match the population sample size, and so represents the full fleet available in the real-world pilot program.</p>
+<p>The fact that the predicted ridership is so similar to the actual, measured ridership is nevertheless encouraging. This suggests that the predicted ridership in the other modeled scenarios is a somewhat realistic forecast, albeit a rough approximation.</p>
+<p>There is also a significant discrepancy in the utilization measurements. Because of the way utilization is calculated (passengers per hour per vehicle), the vehicle operating hours can greatly affect this metric. In our model scenario, all 12 of the ODT vehicles are operational nearly all day, and it is likely that in off-peak hours the actual pilot program had fewer vehicles available. If operating hours are taken to be only time that the ODT vehicles are in motion, then our modeled utilization becomes <strong>TODO:</strong> calculate this number.</p>
 </div>
 <div id="candidate-scenario-comparison" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Candidate scenario comparison<a href="results.html#candidate-scenario-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We then ran each of our scenarios as described in section <a href="methodology.html#scenario-configuration">3.4</a>, and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes &lt;&gt;<Other metrics>&lt;&gt;. These comparisons are given in Tables <a href="results.html#tab:ridership-compare">4.2</a> and <a href="results.html#tab:util-compare">4.3</a>, as well as <a href="results.html#fig:wait-time-compare">4.1</a>.</p>
+<p>We then ran each of our scenarios as described in section <a href="methodology.html#scenario-configuration">3.4</a>, and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also include <strong><em>Other metrics</em></strong>. These comparisons are given in Table <a href="results.html#tab:scenario-compare">4.2</a>, and a plot of the wait times in Figure <a href="results.html#fig:wait-time-compare">4.1</a>.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:ridership-compare">Table 4.2: </span>Comparison of Weekday Ridership Across Scenarios
+<span id="tab:scenario-compare">Table 4.2: </span>Comparison Across BEAM Scenarios
 </caption>
 <thead>
 <tr>
 <th style="text-align:left;">
 Scenario
 </th>
-<th style="text-align:left;">
+<th style="text-align:right;">
+Fleet Size
+</th>
+<th style="text-align:right;">
 Passengers
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-existing
-</td>
-<td style="text-align:left;">
-667
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-split
-</td>
-<td style="text-align:left;">
-781
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-932
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-833
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-C
-</td>
-<td style="text-align:left;">
-1079
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-D
-</td>
-<td style="text-align:left;">
-1571
-</td>
-</tr>
-</tbody>
-</table>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:util-compare">Table 4.3: </span>Comparison of Utilization Across Scenarios
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Scenario
 </th>
 <th style="text-align:right;">
 Utilization
 </th>
 <th style="text-align:right;">
-Fleet size
+Avg. Wait Time (minutes)
 </th>
 </tr>
 </thead>
@@ -330,10 +273,16 @@ Fleet size
 existing
 </td>
 <td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+667
+</td>
+<td style="text-align:right;">
 1.32
 </td>
 <td style="text-align:right;">
-25
+9.7
 </td>
 </tr>
 <tr>
@@ -341,10 +290,16 @@ existing
 split
 </td>
 <td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+781
+</td>
+<td style="text-align:right;">
 1.33
 </td>
 <td style="text-align:right;">
-29
+9.7
 </td>
 </tr>
 <tr>
@@ -352,10 +307,16 @@ split
 A
 </td>
 <td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+932
+</td>
+<td style="text-align:right;">
 1.39
 </td>
 <td style="text-align:right;">
-33
+9.6
 </td>
 </tr>
 <tr>
@@ -363,10 +324,16 @@ A
 B
 </td>
 <td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+833
+</td>
+<td style="text-align:right;">
 1.29
 </td>
 <td style="text-align:right;">
-32
+9.7
 </td>
 </tr>
 <tr>
@@ -374,10 +341,16 @@ B
 C
 </td>
 <td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+1079
+</td>
+<td style="text-align:right;">
 1.30
 </td>
 <td style="text-align:right;">
-41
+9.6
 </td>
 </tr>
 <tr>
@@ -385,21 +358,47 @@ C
 D
 </td>
 <td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+1571
+</td>
+<td style="text-align:right;">
 1.39
 </td>
 <td style="text-align:right;">
-56
+9.5
 </td>
 </tr>
 </tbody>
 </table>
+<p>It is clear that in the scenarios with more microtransit vehicles available, ridership greatly increases. Interestingly, utilization does not vary much at all, which implies that at least in these specific scenarios there is a roughly linear relationship between number of vehicles and number of riders. This relationship can also be seen in the ratios of passengers to fleet size, as all of the vehicle operating hours are identical. In fact, fitting a linear model to this data gives a predicted increase of about 28 passengers per ODT vehicle. <strong>TODO:</strong> calculate this number in R.</p>
 <div class="figure"><span style="display:block;" id="fig:wait-time-compare"></span>
 <img src="microtransit_areas_files/figure-html/wait-time-compare-1.png" alt="Comparison of ODT wait times in each scenario." width="672" />
 <p class="caption">
 Figure 4.1: Comparison of ODT wait times in each scenario.
 </p>
 </div>
-<p>It is clear that in the scenarios with more microtransit vehicles available, ridership greatly increases. Interestingly, utilization does not vary much at all, which implies that at least in these specific scenarios there is a roughly linear relationship between number of vehicles and number of riders. Wait times also hardly are affected in the various scenarios.</p>
+<p>Wait times also hardly are affected in the various scenarios. Not only are the average wait times nearly identical between scenarios (as shown in Table <a href="results.html#tab:scenario-compare">4.2</a>), the distribution of wait times is essentially the same as well. It is important to note though that these wait times represent only <em>fulfilled</em> ODT requests. In BEAM, when an agent makes an ODT request they may afterward re-plan and choose a different mode. Often this decision is largely based on the projected wait time for the ODT vehicle, so a request that returns a long wait time will often result in a change to mode choice. Table <a href="results.html#tab:odt-fulfillment">4.3</a> compares the proportion of fulfilled requests in each scenario. <strong>TODO:</strong> create this table.</p>
+<table>
+<caption>
+<span id="tab:odt-fulfillment">Table 4.3: </span>temp
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+"temp"
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+temp
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="summary-1" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Summary<a href="results.html#summary-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
