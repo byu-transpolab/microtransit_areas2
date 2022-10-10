@@ -39,7 +39,7 @@ list_wait_times <- function(wait_times){
 model_ridership <- function(comparison){
   model <- lm(Passengers ~ `Fleet Size`, comparison)
   
-  riders_per_vehicle <- model$coefficients[`Fleet Size`] %>% 
+  riders_per_vehicle <- model$coefficients["`Fleet Size`"] %>% 
     round()
   
   riders_per_vehicle
@@ -48,5 +48,5 @@ model_ridership <- function(comparison){
 
 
 compare_rh_fulfillment <- function(fulfillments){
-  "temp"
+  table <- tibble(fulfillments)
 }

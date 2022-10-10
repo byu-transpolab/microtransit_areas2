@@ -126,13 +126,15 @@ get_rh_fulfillment <- function(scenario, rh_veh_name = "rideHailVehicle"){
   request_results <- scenario[
     type %in% c("ReserveRideHail", "PersonEntersVehicle", "Replanning")
   ][order(person, time)] %>% 
+    as_tibble() %>% 
     mutate(result = case_when(
       type == "ReserveRideHail" & lead(type) == "PersonEntersVehicle" &
         person == lead(person) & str_detect(lead(vehicle), rh_veh_name) ~
         "fulfilled",
       type == "ReserveRideHail" & lead(type) == "Replanning" &
         person == lead(person) ~ "replan",
-    ))[!is.na(result)]
+    )) %>% 
+    filter(!is.na(result))
   
   results_count <- request_results %>% 
     count(result)
