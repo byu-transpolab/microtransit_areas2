@@ -1,6 +1,6 @@
 ####### Comparisons for preliminary analysis #######
 
-compare_riders <- function(riders){
+compare_scenarios <- function(riders, util, size, wait){
   
   scenarios <- names(riders)
   
@@ -16,7 +16,10 @@ compare_riders <- function(riders){
   
   comparison <- tibble(
     Scenario = scenarios,
-    Passengers = riders
+    "Fleet Size" = size,
+    Passengers = riders,
+    Utilization = util %>% unlist(),
+    "Avg. Wait Time (minutes)" = mean(wait) %>% unlist()
   )
   
   comparison
@@ -32,7 +35,7 @@ compare_utilization <- function(util, size){
 
 
 
-compare_wait_times <- function(wait_times){
+list_wait_times <- function(wait_times){
   
   # times <- list()
   # 

@@ -171,24 +171,31 @@ viz_targets <- tar_plan(
     pilot_utilization,
     pilot_wait_times),
   
-  ridership_comparison = compare_riders(
-    total_riders),
-  
-  utilization_comparison = compare_utilization(
+  scenario_comparison = compare_scenarios(
+    total_riders,
     utilization,
-    fleet_sizes),
+    fleet_sizes,
+    average_wait_times
+  ),
   
-  wait_time_comparison = compare_wait_times(
+  # ridership_comparison = compare_riders(
+  #   total_riders),
+  # 
+  # utilization_comparison = compare_utilization(
+  #   utilization,
+  #   fleet_sizes),
+  
+  wait_time_list = list_wait_times(
     average_wait_times),
   
   
   # Combine all comparisons for easy loading/viewing
-  all_comparisons = list(
-    "Existing comparison" = existing_comparison,
-    "Ridership comparison" = ridership_comparison,
-    "Utilization comparison" = utilization_comparison,
-    "Wait time comparison" = wait_time_comparison
-  )
+  # all_comparisons = list(
+  #   "Existing comparison" = existing_comparison,
+  #   "Ridership comparison" = ridership_comparison,
+  #   "Utilization comparison" = utilization_comparison,
+  #   "Wait time comparison" = wait_time_comparison
+  # )
   
 )
 

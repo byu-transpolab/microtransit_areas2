@@ -16,28 +16,25 @@ At first glance, these results seem to be quite good, as the simulated scenario 
 
 
 ## Candidate scenario comparison
-We then ran each of our scenarios as described in section \@ref(scenario-configuration), and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes <><Other metrics><>. These comparisons are given in Tables \@ref(tab:ridership-compare) and \@ref(tab:util-compare), as well as \@ref(fig:wait-time-compare).
+We then ran each of our scenarios as described in section \@ref(scenario-configuration), and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes <><Other metrics><>. These comparisons are given in Table \@ref(tab:scenario-compare), and a plot of the wait times in Figure \@ref(fig:wait-time-compare).
 
-```{r ridership-compare}
-tar_read(ridership_comparison) %>% 
-  kbl(booktabs = TRUE, digits = 0,
-      caption = "Comparison of Weekday Ridership Across Scenarios") %>% 
-  kable_styling()
-```
-
-```{r util-compare}
-tar_read(utilization_comparison) %>% 
-  kbl(booktabs = TRUE, digits = 2,
-      caption = "Comparison of Utilization Across Scenarios") %>% 
+```{r scenario-compare}
+tar_read(scenario_comparison) %>% 
+  kbl(booktabs = TRUE, digits = c(0,0,0,2,1),
+      caption = "Comparison Across BEAM Scenarios") %>% 
   kable_styling()
 ```
 
 ```{r wait-time-compare}
 #| fig.cap="Comparison of ODT wait times in each scenario."
 
-tar_read(wait_time_comparison) %>% 
+tar_read(wait_time_list) %>% 
  ggplot() +
-  geom_violin(aes(x = wait_time, y = Scenario, fill = Scenario))
+  geom_violin(aes(x = wait_time, y = Scenario, fill = Scenario)) +
+  theme_pander() +
+  easy_remove_legend("fill") +
+  labs(x = "Time between ODT request and fulfillment",
+       y = "Scenario")
 ```
 
 

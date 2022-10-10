@@ -5,6 +5,7 @@ sf
 kableExtra
 ggspatial
 ggthemes
+ggeasy
 wesanderson
 flowme
 here
