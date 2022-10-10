@@ -148,7 +148,12 @@ analysis_targets <- tar_plan(
     scenarios,
     get_avg_rh_wait_time),
   
-  # ridehail_to_transit = c(number, percent, am, pm)
+  # ridehail_to_transit = c(number, percent, am, pm),
+  
+  rh_fulfillment = purrr::map(
+    scenarios,
+    get_rh_fulfillment
+  )
   
 )
 
@@ -178,24 +183,12 @@ viz_targets <- tar_plan(
     average_wait_times
   ),
   
-  # ridership_comparison = compare_riders(
-  #   total_riders),
-  # 
-  # utilization_comparison = compare_utilization(
-  #   utilization,
-  #   fleet_sizes),
+  rh_fulfillment_comparison = compare_rh_fulfillment(rh_fulfillment),
+  
+  model_riders_per_vehicle = model_ridership(scenario_comparison),
   
   wait_time_list = list_wait_times(
     average_wait_times),
-  
-  
-  # Combine all comparisons for easy loading/viewing
-  # all_comparisons = list(
-  #   "Existing comparison" = existing_comparison,
-  #   "Ridership comparison" = ridership_comparison,
-  #   "Utilization comparison" = utilization_comparison,
-  #   "Wait time comparison" = wait_time_comparison
-  # )
   
 )
 
