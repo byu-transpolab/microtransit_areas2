@@ -17,9 +17,9 @@ compare_scenarios <- function(riders, util, size, wait){
   comparison <- tibble(
     Scenario = scenarios,
     "Fleet Size" = size,
-    Passengers = riders,
+    Passengers = riders %>% unlist(),
     Utilization = util %>% unlist(),
-    "Avg. Wait Time (minutes)" = mean(wait) %>% unlist()
+    "Avg. Wait Time (minutes)" = purrr::map(wait, mean) %>% unlist()
   )
   
   comparison
@@ -50,10 +50,8 @@ list_wait_times <- function(wait_times){
     wait_time = unlist(wait_times)
   ) %>% 
     mutate(Scenario = factor(
-      Scenario, levels = c(
-        "existing", "split", "A", "B", "C", "D"),
-      labels = c(
-        "Existing", "Split", "A", "B", "C", "D")))
+      Scenario, levels = c("existing", "split", "A", "B", "C", "D") %>% rev(),
+      labels = c("Existing", "Split", "A", "B", "C", "D") %>% rev()))
 
   comparison
    
