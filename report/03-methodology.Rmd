@@ -119,6 +119,8 @@ All of the scenarios we ran had a nearly identical configuration. The main excep
 
 Due to the computational power and time required to run BEAM, we were unable to run a full sample for any of our scenarios. We ultimately needed to decide on a balance between sample size and the number of iterations to run, as increasing one necessitated decreasing the other. We decided that 10 iterations was reasonable, as the smaller test scenarios seemed to mostly converge at that point. With 10 iterations, we were able to run a 20% population sample for each of our scenarios. This sampling was done entirely in BEAM; BEAM offers support for this natively.
 
+However, we were not sure of the best, if any, way to scale the ODT fleets. We didn't simply scale the fleets to the same degree as the population, as that would create fleets containing a fractional number of vehicles. There was also a concern for availability: 
+
 
 ## Calibration {#scenario-calibration}
 Ideally, the results of our model would match observed data when studying the same scenario. In our case, we used the mode shares as our metric. Our initial results significantly over-predicted ridehail usage, so we first looked to calibrate ActivitySim. BEAM takes the results of an ActivitySim model as an input, and so by adjusting ActivitySim to better reflect reality, calibrating BEAM became easier.
