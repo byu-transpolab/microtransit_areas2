@@ -48,7 +48,12 @@ list_wait_times <- function(wait_times){
     Scenario = names(unlist(wait_times)) %>% 
       str_remove("\\d+"),
     wait_time = unlist(wait_times)
-  )
+  ) %>% 
+    mutate(Scenario = factor(
+      Scenario, levels = c(
+        "existing", "split", "A", "B", "C", "D"),
+      labels = c(
+        "Existing", "Split", "A", "B", "C", "D")))
 
   comparison
    
