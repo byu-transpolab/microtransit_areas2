@@ -43,14 +43,14 @@ tar_read(wait_time_list) %>%
        y = "Scenario")
 ```
 
-Wait times also hardly are affected in the various scenarios. Not only are the average wait times nearly identical between scenarios (as shown in Table \@ref(tab:scenario-compare)), the distribution of wait times is essentially the same as well. It is important to note though that these wait times represent only _fulfilled_ ODT requests. In BEAM, when an agent makes an ODT request they may afterward re-plan and choose a different mode. Often this decision is largely based on the projected wait time for the ODT vehicle, so a request that returns a long wait time will often result in a change to mode choice. Table \@ref(tab:odt-fulfillment) compares the proportion of fulfilled requests in each scenario. **TODO:** create this table.
+Wait times also hardly are affected in the various scenarios. Not only are the average wait times nearly identical between scenarios (as shown in Table \@ref(tab:scenario-compare)), the distribution of wait times is essentially the same as well. It is important to note though that these wait times represent only _fulfilled_ ODT requests. In BEAM, when an agent makes an ODT request they may afterward re-plan and choose a different mode. Often this decision is largely based on the projected wait time for the ODT vehicle, so a request that returns a long wait time will often result in a change to mode choice. Table \@ref(tab:odt-fulfillment) compares the proportion of fulfilled requests in each scenario.
 
 ```{r odt-fulfillment}
-tibble("temp") %>% kbl(caption = "temp")
-# tar_read(rh_fulfillment_comparison) %>% 
-#   kbl(booktabs = TRUE, digits = c(0,0,0,0,2), #scenario, #req, #ful, #not, proportion
-#       caption = "Comparison of Fulfilled and Unfulfilled ODT Requests") %>% 
-#   kable_styling()
+tar_read(rh_fulfillment_comparison) %>%
+  kbl(booktabs = TRUE, digits = c(0,0,0,0,3),
+      caption = "Comparison of Fulfilled and Unfulfilled ODT Requests") %>%
+  add_header_above(c("", "ODT Requests" = 3, "")) %>% 
+  kable_styling()
 ```
 
 

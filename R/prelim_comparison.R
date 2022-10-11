@@ -28,8 +28,7 @@ list_wait_times <- function(wait_times){
     wait_time = unlist(wait_times)
   ) %>% 
     mutate(Scenario = factor(
-      Scenario, levels = c("existing", "split", "A", "B", "C", "D") %>% rev(),
-      labels = c("Existing", "Split", "A", "B", "C", "D") %>% rev()))
+      Scenario, levels = c("Existing", "Split", "A", "B", "C", "D") %>% rev()))
 
   comparison
 }
@@ -48,5 +47,21 @@ model_ridership <- function(comparison){
 
 
 compare_rh_fulfillment <- function(fulfillments){
-  table <- tibble(fulfillments)
+  result <- data.frame(fulfillments) %>% 
+    rownames()
+  
+  table <- as_tibble(fulfillments) %>% 
+    mutate(result = result) %>% 
+    pivot_longer(-result) %>% 
+    pivot_wider(names_from = result) %>% 
+    mutate(
+      total = fulfilled + replan,
+      prop_replan = replan / total
+    ) %>% 
+    relocate(total, .after = name) %>% 
+    `colnames<-`(c(
+      "Scenario", "Total", "Fulfilled", "Replanned", "Proporiton Replanned"
+    ))
+  
+  table
 }

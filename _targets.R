@@ -57,8 +57,8 @@ data_targets <- tar_plan(
   pilot_fleet = read_ridehail_fleet(Pilot_fleet_file),
   
   scenarios = list(
-    existing = data.table::fread(file = EX, select = event_cols),
-    split = data.table::fread(file = Split, select = event_cols),
+    Existing = data.table::fread(file = EX, select = event_cols),
+    Split = data.table::fread(file = Split, select = event_cols),
     A = data.table::fread(file = A, select = event_cols),
     B = data.table::fread(file = B, select = event_cols),
     C = data.table::fread(file = C, select = event_cols),
@@ -66,8 +66,8 @@ data_targets <- tar_plan(
   ),
   
   fleets = list(
-    existing = read_ridehail_fleet(EX_fleet),
-    split = read_ridehail_fleet(Split_fleet),
+    Existing = read_ridehail_fleet(EX_fleet),
+    Split = read_ridehail_fleet(Split_fleet),
     A = read_ridehail_fleet(A_fleet),
     B = read_ridehail_fleet(B_fleet),
     C = read_ridehail_fleet(C_fleet),
