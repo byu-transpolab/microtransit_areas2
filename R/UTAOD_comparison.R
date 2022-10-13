@@ -33,7 +33,7 @@ compare_existing <- function(UTA, riders, util, wait){
   )
   
   colnames(comparison) <- c(
-    " ", "Ridership", "Utilization", "Avg. wait time (min)")
+    " ", "Ridership", "Utilization", "Avg. Wait Time (min)")
   
   comparison
   

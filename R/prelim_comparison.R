@@ -4,9 +4,9 @@ compare_scenarios <- function(riders, util, size, wait){
   comparison <- tibble(
     Scenario = names(riders),
     "Fleet Size" = size,
-    Passengers = riders %>% unlist(),
+    Ridership = riders %>% unlist(),
     Utilization = util %>% unlist(),
-    "Avg. Wait Time (minutes)" = purrr::map(wait, mean) %>% unlist())
+    "Avg. Wait Time (min)" = purrr::map(wait, mean) %>% unlist())
   
   comparison
 }
@@ -38,7 +38,7 @@ list_wait_times <- function(wait_times){
 
 
 model_ridership <- function(comparison){
-  model <- lm(Passengers ~ `Fleet Size`, comparison)
+  model <- lm(Ridership ~ `Fleet Size`, comparison)
   
   riders_per_vehicle <- model$coefficients["`Fleet Size`"] %>% 
     round()
