@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-10-10" />
+<meta name="date" content="2022-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -270,7 +270,7 @@ Avg. Wait Time (minutes)
 <tbody>
 <tr>
 <td style="text-align:left;">
-existing
+Existing
 </td>
 <td style="text-align:right;">
 25
@@ -287,7 +287,7 @@ existing
 </tr>
 <tr>
 <td style="text-align:left;">
-split
+Split
 </td>
 <td style="text-align:right;">
 29
@@ -379,22 +379,142 @@ D
 Figure 4.1: Comparison of ODT wait times in each scenario.
 </p>
 </div>
-<p>Wait times also hardly are affected in the various scenarios. Not only are the average wait times nearly identical between scenarios (as shown in Table <a href="results.html#tab:scenario-compare">4.2</a>), the distribution of wait times is essentially the same as well. It is important to note though that these wait times represent only <em>fulfilled</em> ODT requests. In BEAM, when an agent makes an ODT request they may afterward re-plan and choose a different mode. Often this decision is largely based on the projected wait time for the ODT vehicle, so a request that returns a long wait time will often result in a change to mode choice. Table <a href="results.html#tab:odt-fulfillment">4.3</a> compares the proportion of fulfilled requests in each scenario. <strong>TODO:</strong> create this table.</p>
-<table>
+<p>Wait times also hardly are affected in the various scenarios. Not only are the average wait times nearly identical between scenarios (as shown in Table <a href="results.html#tab:scenario-compare">4.2</a>), the distribution of wait times is essentially the same as well. It is important to note though that these wait times represent only <em>fulfilled</em> ODT requests. In BEAM, when an agent makes an ODT request they may afterward re-plan and choose a different mode. Often this decision is largely based on the projected wait time for the ODT vehicle, so a request that returns a long wait time will often result in a change to mode choice. Table <a href="results.html#tab:odt-fulfillment">4.3</a> compares the proportion of fulfilled requests in each scenario.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:odt-fulfillment">Table 4.3: </span>temp
+<span id="tab:odt-fulfillment">Table 4.3: </span>Comparison of Fulfilled and Unfulfilled ODT Requests
 </caption>
 <thead>
 <tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+ODT Requests
+</div>
+</th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+</tr>
+<tr>
 <th style="text-align:left;">
-"temp"
+Scenario
+</th>
+<th style="text-align:right;">
+Total
+</th>
+<th style="text-align:right;">
+Fulfilled
+</th>
+<th style="text-align:right;">
+Replanned
+</th>
+<th style="text-align:right;">
+Proporiton Replanned
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-temp
+Existing
+</td>
+<td style="text-align:right;">
+1066
+</td>
+<td style="text-align:right;">
+642
+</td>
+<td style="text-align:right;">
+424
+</td>
+<td style="text-align:right;">
+0.398
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Split
+</td>
+<td style="text-align:right;">
+1319
+</td>
+<td style="text-align:right;">
+752
+</td>
+<td style="text-align:right;">
+567
+</td>
+<td style="text-align:right;">
+0.430
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+1633
+</td>
+<td style="text-align:right;">
+899
+</td>
+<td style="text-align:right;">
+734
+</td>
+<td style="text-align:right;">
+0.449
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+1419
+</td>
+<td style="text-align:right;">
+801
+</td>
+<td style="text-align:right;">
+618
+</td>
+<td style="text-align:right;">
+0.436
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+1850
+</td>
+<td style="text-align:right;">
+1038
+</td>
+<td style="text-align:right;">
+812
+</td>
+<td style="text-align:right;">
+0.439
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:right;">
+2605
+</td>
+<td style="text-align:right;">
+1515
+</td>
+<td style="text-align:right;">
+1090
+</td>
+<td style="text-align:right;">
+0.418
 </td>
 </tr>
 </tbody>
