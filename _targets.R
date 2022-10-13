@@ -59,19 +59,19 @@ data_targets <- tar_plan(
   scenarios = list(
     Existing = data.table::fread(file = EX, select = event_cols),
     Split = data.table::fread(file = Split, select = event_cols),
-    A = data.table::fread(file = A, select = event_cols),
-    B = data.table::fread(file = B, select = event_cols),
-    C = data.table::fread(file = C, select = event_cols),
-    D = data.table::fread(file = D, select = event_cols)
+    "EX + Davis" = data.table::fread(file = A, select = event_cols),
+    "EX + Lehi" = data.table::fread(file = B, select = event_cols),
+    "EX + Sandy" = data.table::fread(file = C, select = event_cols),
+    All = data.table::fread(file = D, select = event_cols)
   ),
   
   fleets = list(
     Existing = read_ridehail_fleet(EX_fleet),
     Split = read_ridehail_fleet(Split_fleet),
-    A = read_ridehail_fleet(A_fleet),
-    B = read_ridehail_fleet(B_fleet),
-    C = read_ridehail_fleet(C_fleet),
-    D = read_ridehail_fleet(D_fleet)
+    "EX + Davis" = read_ridehail_fleet(A_fleet),
+    "EX + Lehi" = read_ridehail_fleet(B_fleet),
+    "EX + Sandy" = read_ridehail_fleet(C_fleet),
+    All = read_ridehail_fleet(D_fleet)
   ),
   
   fleet_sizes = get_fleet_sizes(fleets),

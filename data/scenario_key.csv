@@ -1,7 +1,7 @@
 Name,Zones
 Existing,"South SL Co, Westside SLC"
 Split,"South SL Co: East, South SL Co: West, Westside SLC"
-A,"South SL Co, Westside SLC, Davis"
-B,"South SL Co, Westside SLC, Lehi"
-C,"South SL Co, Westside SLC, Sandy"
-D,"South SL Co, Westside SLC, Davis, Lehi, Sandy"
+"EX + Davis"","South SL Co, Westside SLC, Davis"
+"EX + Lehi"","South SL Co, Westside SLC, Lehi"
+"EX + Sandy"","South SL Co, Westside SLC, Sandy"
+All,"South SL Co, Westside SLC, Davis, Lehi, Sandy"
