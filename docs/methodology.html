@@ -479,8 +479,8 @@ Average JAN–MAR
 </tbody>
 </table>
 <p>We created a scenario in BEAM to model this pilot program, and compared the results with the metrics reported by UTA. Our initial comparison showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data. After calibrating several of BEAM’s internal coefficients, the results more closely matched the observed data, and so we retained those calibrated values for all of the scenarios we ran. More information on the calibration process is given in Section <a href="methodology.html#scenario-calibration">3.5</a>.</p>
-<p>In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the areas we analyzed is given in Figure <a href="methodology.html#fig:zone-map">3.3</a>. For each of these areas we defined a microtransit fleet, including fleet size and operating hours, which can be seen in Table <a href="methodology.html#tab:zone-fleets">3.2</a>. We were less concerned with modeling each of these areas individually, but rather how the addition of another area would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in Table <a href="methodology.html#tab:scenarios-info">3.3</a>.</p>
-<p>Since the beginning of this project, UTA has started full-time microtransit service in the original pilot program area, as well as in the ‘West City’ area. As such, we included both of these areas in our ‘Existing’ scenario as well as most of the others. We also analyzed a ‘split’ scenario, in which the original south Salt Lake county area is divided into an east and west area.</p>
+<p>In addition to modeling the existing pilot program, we created other scenarios to analyze. A map showing the areas we analyzed is given in Figure <a href="methodology.html#fig:zone-map">3.3</a>. For each of these areas we defined a microtransit fleet, including fleet size and operating hours, which can be seen in Table <a href="methodology.html#tab:zone-fleets">3.2</a>. The size of the fleet for each area was determined from population and employment, based on the actual fleet sizes for the South SL Co and Westside SLC areas. The operating hours were likewise copied from the existing service hours. We were less concerned with modeling each of these areas individually, but rather how the addition of another area would affect the whole. We therefore created several scenarios as combinations of these areas, which are given in Table <a href="methodology.html#tab:scenarios-info">3.3</a>.</p>
+<p>Since the beginning of this project, UTA has started full-time microtransit service in the original pilot program area, as well as in the “Westside SLC” area. As such, we included both of these areas in our “Existing” scenario as well as most of the others. We also analyzed a “Split” scenario, in which the original south Salt Lake county area is divided into an east and west area.</p>
 <div class="figure"><span style="display:block;" id="fig:zone-map"></span>
 <img src="microtransit_areas_files/figure-html/zone-map-1.png" alt="Map of areas studied." width="672" />
 <p class="caption">
@@ -641,31 +641,31 @@ South SL Co: East, South SL Co: West, Westside SLC
 </tr>
 <tr>
 <td style="text-align:left;">
-A
+EX + Davis”,South SL Co
 </td>
 <td style="text-align:left;">
-South SL Co, Westside SLC, Davis
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-South SL Co, Westside SLC, Lehi
+Westside SLC, Davis”
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-C
+EX + Lehi”,South SL Co
 </td>
 <td style="text-align:left;">
-South SL Co, Westside SLC, Sandy
+Westside SLC, Lehi”
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-D
+EX + Sandy”,South SL Co
+</td>
+<td style="text-align:left;">
+Westside SLC, Sandy”
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+All
 </td>
 <td style="text-align:left;">
 South SL Co, Westside SLC, Davis, Lehi, Sandy
