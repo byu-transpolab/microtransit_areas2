@@ -56,11 +56,11 @@ compare_rh_fulfillment <- function(fulfillments){
     pivot_wider(names_from = result) %>% 
     mutate(
       total = fulfilled + replan,
-      prop_replan = replan / total
+      prop_replan = fulfilled / total
     ) %>% 
     relocate(total, .after = name) %>% 
     `colnames<-`(c(
-      "Scenario", "Total", "Fulfilled", "Replanned", "Proporiton Replanned"
+      "Scenario", "Total", "Fulfilled", "Replanned", "Proporiton Fulfilled"
     ))
   
   table

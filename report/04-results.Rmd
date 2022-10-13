@@ -35,10 +35,11 @@ It is clear that in the scenarios with more microtransit vehicles available, rid
 #| fig.cap="Comparison of ODT wait times in each scenario."
 
 tar_read(wait_time_list) %>% 
- ggplot() +
-  geom_violin(aes(x = wait_time, y = Scenario, fill = Scenario)) +
+ ggplot(aes(x = wait_time, y = Scenario, fill = Scenario)) +
+  geom_violin() +
+  stat_summary(fun = mean, geom = "crossbar") +
   theme_pander() +
-  easy_remove_legend("fill") +
+  guides(fill = "none") +
   labs(x = "Time between ODT request and fulfillment",
        y = "Scenario")
 ```
@@ -53,7 +54,9 @@ tar_read(rh_fulfillment_comparison) %>%
   kable_styling()
 ```
 
+The proportion of ODT requests that were fulfilled also does not vary much between the scenarios. Notably, though, the values in the "Existing" and "D" scenarios are somewhat higher than the rest.
+
 
 ## Summary
 
-More Text
+In these scenarios, we found that there is a roughly linear relationship between ridership and fleet size, and that utilization and wait times are essentially unaffected. Additionally, the differences between the "Existing" and Split" scenarios were minimal. It appears that the demand for ODT service is a direct result of the supply; none of these scenarios are over-supplying ODT vehicles.
