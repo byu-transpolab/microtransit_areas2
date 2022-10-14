@@ -9,12 +9,13 @@ bookdown::gitbook:
     edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
     # download: ["pdf", "epub"]
     
-# bookdown::pdf_book:
-#   includes:
-#     in_header: preamble.tex
-#   latex_engine: lualatex
-#   keep_tex: yes
-#   
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: lualatex
+  keep_tex: yes
+  toc: true
+
 # bookdown::epub_book: default
 
 # bookdown::word_document2:

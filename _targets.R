@@ -195,7 +195,9 @@ viz_targets <- tar_plan(
 
 
 render_targets <- tar_plan(
-  flowme::tar_bookdown(input_dir = "report")
+  flowme::tar_bookdown(
+    input_dir = "report",
+    output_format = "all"),
 )
 
 ########### Run all targets ####################################################
