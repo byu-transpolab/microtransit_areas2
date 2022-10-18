@@ -128,7 +128,7 @@
 
 \title{Modeling and Analysis of On-Demand Transit in Salt Lake County Using BEAM}
 \author{true \and true}
-\date{2022-10-13}
+\date{2022-10-18}
 
 \begin{document}
 \maketitle
@@ -481,17 +481,19 @@ We then ran each of our scenarios as described in section \ref{scenario-configur
 
 \caption{\label{tab:scenario-compare}Comparison Across BEAM Scenarios}
 \centering
-\begin{tabular}[t]{lrrrr}
+\begin{tabular}[t]{lrrrrrr}
 \toprule
-Scenario & Fleet Size & Ridership & Utilization & Avg. Wait Time (min)\\
+\multicolumn{5}{c}{ } & \multicolumn{2}{c}{Median Income (USD)} \\
+\cmidrule(l{3pt}r{3pt}){6-7}
+Scenario & Fleet Size & Ridership & Utilization & Avg. Wait Time (min) & ODT Users & Others\\
 \midrule
-Existing & 25 & 667 & 1.32 & 9.7\\
-Split & 29 & 781 & 1.33 & 9.7\\
-EX + Davis & 33 & 932 & 1.39 & 9.6\\
-EX + Lehi & 32 & 833 & 1.29 & 9.7\\
-EX + Sandy & 41 & 1079 & 1.30 & 9.6\\
+Existing & 25 & 667 & 1.32 & 9.7 & 42266 & 53099\\
+Split & 29 & 781 & 1.33 & 9.7 & 41831 & 53099\\
+EX + Davis & 33 & 932 & 1.39 & 9.6 & 49555 & 53099\\
+EX + Lehi & 32 & 833 & 1.29 & 9.7 & 41170 & 53099\\
+EX + Sandy & 41 & 1079 & 1.30 & 9.6 & 42770 & 53099\\
 \addlinespace
-All & 56 & 1571 & 1.39 & 9.5\\
+All & 56 & 1571 & 1.39 & 9.5 & 40919 & 53099\\
 \bottomrule
 \end{tabular}
 \end{table}
