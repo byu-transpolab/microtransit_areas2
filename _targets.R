@@ -82,6 +82,8 @@ data_targets <- tar_plan(
   tar_target(zone_info_file, "data/zone_info.csv", format = "file"),
   zone_info = get_zone_info(zone_info_file),
   
+  tar_target(areas_file, "data/areas.geojson", format = "file"),
+  
   
   tar_target(persons_file, "data/common/persons.csv.gz", format = "file"),
   persons = read_csv(persons_file),
@@ -178,7 +180,8 @@ pilot_targets <- tar_plan(
 
 viz_targets <- tar_plan(
   
-  areas_map = make_areas_map(crs, SLCSouth, WestCity, Sandy, WestJordan),
+  aareas_map = make_areas_map(crs, SLCSouth, WestCity, Sandy, WestJordan),
+  areas_map = make_areas_map(crs, areas_file),
   
   existing_comparison = compare_existing(
     UTA,

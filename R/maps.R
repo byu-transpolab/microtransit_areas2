@@ -1,5 +1,5 @@
 
-make_areas_map <- function(crs, SLCSouth, WestCity, Sandy, WestJordan){
+mmake_areas_map <- function(crs, SLCSouth, WestCity, Sandy, WestJordan){
   pal <- wesanderson::wes_palette("Moonrise2")
   colors <- c("SLCSouth" = pal[1],
               "WestCity" = pal[2],
@@ -14,6 +14,17 @@ make_areas_map <- function(crs, SLCSouth, WestCity, Sandy, WestJordan){
     geom_sf(data = SLCSouth, aes(fill = "SLCSouth"), inherit.aes = F, alpha = 0.8) +
     theme_map() +
     scale_fill_manual(name = "Zones", values = colors)
+}
+
+make_areas_map <- function(crs, areas_file){
+  
+  areas <- st_read(areas_file)
+  
+  ggplot() +
+    annotation_map_tile("cartolight", zoom = 12) +
+    layer_spatial(areas, aes(fill = name), alpha = 0.5) +
+    theme_map()
+  
 }
 
 #' 
