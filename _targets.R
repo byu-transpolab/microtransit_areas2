@@ -83,6 +83,10 @@ data_targets <- tar_plan(
   zone_info = get_zone_info(zone_info_file),
   
   
+  tar_target(persons_file, "data/common/persons.csv.gz", format = "file"),
+  persons = read_csv(persons_file),
+  
+  
   #Names and types of cols to keep for events files
   tar_target(event_cols_file, "data/eventCols.csv", format = "file"),
   event_cols = get_event_cols(event_cols_file),
@@ -153,6 +157,12 @@ analysis_targets <- tar_plan(
   rh_fulfillment = purrr::map(
     scenarios,
     get_rh_fulfillment
+  ),
+  
+  user_incomes = purrr::map(
+    scenarios,
+    get_rh_incomes,
+    persons
   )
   
 )
@@ -180,15 +190,18 @@ viz_targets <- tar_plan(
     total_riders,
     utilization,
     fleet_sizes,
-    average_wait_times
+    average_wait_times,
+    income_comparison
   ),
+  
+  income_comparison = compare_incomes(user_incomes),
   
   rh_fulfillment_comparison = compare_rh_fulfillment(rh_fulfillment),
   
   model_riders_per_vehicle = model_ridership(scenario_comparison),
   
   wait_time_list = list_wait_times(
-    average_wait_times),
+    average_wait_times)
   
 )
 

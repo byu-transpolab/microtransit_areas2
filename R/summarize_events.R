@@ -30,6 +30,10 @@ get_tot_rh_passengers <- function(scenario, rh_veh_name = "rideHailVehicle"){
     tot_passengers[["leave"]]
   )
   
+  #The number of passengers entering and leaving a RH
+  #vehicle is different (though not hugely), so we take
+  #an average. There is probably a better solution.
+  
   riders <- tot_passengers[["avg"]] %>% 
     round()
   
@@ -37,6 +41,45 @@ get_tot_rh_passengers <- function(scenario, rh_veh_name = "rideHailVehicle"){
 }
 
 
+get_rh_incomes <- function(scenario, persons, rh_veh_name = "rideHailVehicle"){
+  
+  rh_person_ids <- scenario[
+    type == "PersonEntersVehicle" &
+      str_detect(vehicle, rh_veh_name),
+    person
+  ] %>% 
+    as.integer() %>% 
+    {.[!is.na(.)]} %>% 
+    unique()
+  
+  rh_incomes <- persons %>% 
+    filter(personId %in% rh_person_ids,
+           income >= 0) %>% 
+    {.$income}
+  
+  
+  other_ids <- scenario[
+    !person %in% rh_person_ids,
+    person
+  ] %>% 
+    as.integer() %>% 
+    {.[!is.na(.)]} %>% 
+    unique()
+    
+ other_incomes <- persons %>% 
+   filter(personId %in% other_ids,
+          income >= 0) %>% 
+   {.$income}
+ 
+ 
+ all_incomes <- list(
+   "rh" = rh_incomes,
+   "other" = other_incomes
+ )
+ 
+ all_incomes
+  
+}
 
 #' Calculate ridehail trips and percentage
 #' 
@@ -79,10 +122,6 @@ get_rh_utilization <- function(total_riders, rh_fleet){
   # Utilization as UTA is using the term is 'passengers per
   # vehicle per hour'. So we take the total ridership and
   # divide by the total vehicle-hours of the fleet.
-  
-  #The number of passengers entering and leaving a RH
-  #vehicle is different (though not hugely), so we take
-  #an average. There is probably a better solution.
   
   utilization <- total_riders %>%
     magrittr::divide_by(
@@ -143,4 +182,12 @@ get_rh_fulfillment <- function(scenario, rh_veh_name = "rideHailVehicle"){
     `names<-`(results_count$result)
   
   results
+}
+
+combine_incomes <- function(incomes){
+  tibble(
+    scenario = str_extract(names(incomes), "\\w+\\."),
+    type = str_extract(names(incomes), "\\.\\p{L}+"),
+    income = incomes
+  )
 }

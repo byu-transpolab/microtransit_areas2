@@ -1,12 +1,13 @@
 ####### Comparisons for preliminary analysis #######
 
-compare_scenarios <- function(riders, util, size, wait){
+compare_scenarios <- function(riders, util, size, wait, income){
   comparison <- tibble(
     Scenario = names(riders),
     "Fleet Size" = size,
     Ridership = riders %>% unlist(),
     Utilization = util %>% unlist(),
-    "Avg. Wait Time (min)" = purrr::map(wait, mean) %>% unlist())
+    "Avg. Wait Time (min)" = purrr::map(wait, mean) %>% unlist()) %>% 
+    left_join(income, by = "Scenario")
   
   comparison
 }
@@ -66,4 +67,23 @@ compare_rh_fulfillment <- function(fulfillments){
     ))
   
   table
+}
+
+
+compare_incomes <- function(incomes){
+  
+  tibble(
+    Scenario = names(incomes),
+    rh_incomes = purrr::map(
+      incomes,
+      ~ median(.$rh)) %>% 
+      unlist(),
+    other_incomes = purrr::map(
+      incomes,
+      ~ median(.$other)) %>% 
+      unlist()
+  ) %>% 
+    rename("ODT Users" = rh_incomes,
+           "Others" = other_incomes)
+  
 }

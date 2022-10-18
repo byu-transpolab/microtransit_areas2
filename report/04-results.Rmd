@@ -24,8 +24,9 @@ We then ran each of our scenarios as described in section \@ref(scenario-configu
 
 ```{r scenario-compare}
 tar_read(scenario_comparison) %>% 
-  kbl(booktabs = TRUE, digits = c(0,0,0,2,1),
+  kbl(booktabs = TRUE, digits = c(0,0,0,2,1,0,0),
       caption = "Comparison Across BEAM Scenarios") %>% 
+  add_header_above(c(" " = 5, "Median Income (USD)" = 2)) %>% 
   kable_styling()
 ```
 
