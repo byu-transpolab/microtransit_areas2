@@ -23,7 +23,11 @@ make_areas_map <- function(crs, areas_file){
   ggplot() +
     annotation_map_tile("cartolight", zoom = 12) +
     layer_spatial(areas, aes(fill = name), alpha = 0.5) +
-    theme_map()
+    annotation_scale(width_hint = 0.8, unit_category = "imperial") +
+    annotation_north_arrow(style = north_arrow_fancy_orienteering) +
+    theme(axis.text = element_blank(),
+          axis.ticks = element_blank()) +
+    labs(fill = "Area")
   
 }
 
