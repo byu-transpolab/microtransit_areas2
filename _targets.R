@@ -106,20 +106,6 @@ data_targets <- tar_plan(
     filter(Month %in% good_months) %>%
     pivot_uta(),
   
-  
-  #### Zones #################################
-  
-  tar_target(SLCSouth_file, "data/Zones/SLCSouth/SLCSouth_polygon.shp", format = "file"),
-  tar_target(WestCity_file, "data/Zones/WestCity/WestCity_polygon.shp", format = "file"),
-  tar_target(Sandy_file, "data/Zones/Sandy/Sandy_polygon.shp", format = "file"),
-  tar_target(WestJordan_file, "data/Zones/WestJordan/WestJordan_polygon.shp", format = "file"),
-  
-  crs = 3587,
-  
-  SLCSouth = read_shapefile(SLCSouth_file, crs),
-  WestCity = read_shapefile(WestCity_file, crs),
-  Sandy = read_shapefile(Sandy_file, crs),
-  WestJordan = read_shapefile(WestJordan_file, crs),
 )
 
 
@@ -180,8 +166,7 @@ pilot_targets <- tar_plan(
 
 viz_targets <- tar_plan(
   
-  aareas_map = make_areas_map(crs, SLCSouth, WestCity, Sandy, WestJordan),
-  areas_map = make_areas_map(crs, areas_file),
+  areas_map = make_areas_map(areas_file),
   
   existing_comparison = compare_existing(
     UTA,

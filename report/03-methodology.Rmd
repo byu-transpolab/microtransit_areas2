@@ -97,7 +97,7 @@ Since the beginning of this project, UTA has started full-time microtransit serv
 
 ```{r zone-map}
 #| fig.cap="Map of areas studied."
-tar_read(areas_map)
+knitr::include_graphics("image/areas_map.png")
 ```
 
 ```{r zone-fleets}
