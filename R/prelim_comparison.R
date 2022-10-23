@@ -63,7 +63,7 @@ compare_rh_fulfillment <- function(fulfillments){
     ) %>% 
     relocate(total, .after = name) %>% 
     `colnames<-`(c(
-      "Scenario", "Total", "Fulfilled", "Replanned", "Proporiton Fulfilled"
+      "Scenario", "Total", "Fulfilled", "Replanned", "Prop. Fulfilled"
     ))
   
   table

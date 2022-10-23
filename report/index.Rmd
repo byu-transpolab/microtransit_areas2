@@ -21,7 +21,7 @@ footnote:
     text: "Present affiliation: some nice job"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-documentclass: article
+documentclass: report
 layout: "3p, authoryear"
 bibliography:
   - references/UTA_pilot.bib

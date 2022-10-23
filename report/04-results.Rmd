@@ -1,26 +1,34 @@
 # Results
 
 ## Existing scenario evaluation
-UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from December 2019--November 2020. We also created a scenario in BEAM to model this pilot program. In order to assess the performance of our BEAM simulations when compared with real-world observed data, we compared the results of the two on several metrics (Table \@ref(tab:existing-comparison)).
+UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from December 2019--November 2020. UTA reported several metrics from this program, which are presented in Table \@ref(tab:uta-metrics). Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.
+
+```{r uta-metrics}
+tar_read(UTA_table) %>%
+  kbl(booktabs = TRUE, digits = c(0,0,2,1), linesep = c(rep("", 12), "\\addlinespace"),
+      caption = "Metrics Reported by UTA for the ODT Pilot Program in Salt Lake County") %>%
+  row_spec(row = 13:14, bold = TRUE) %>%
+  kable_styling()
+```
+
+We compared the results of our BEAM model of this program to the observed data. Our initial comparison showed that BEAM significantly over-predicted microtransit ridership and under-predicted wait times relative to the reported data, though after our calibration efforts, the results more closely matched the observed data. This comparison (with the calibrated BEAM scenario) is given in Table \@ref(tab:existing-comparison).
 
 ```{r existing-comparison}
 tar_load(existing_comparison)
 
 existing_comparison %>%
   kbl(booktabs = TRUE, digits = c(0,0,2,1),
-      caption = "Comparison of Observed Data with 'Existing' BEAM Scenario") %>%
+      caption = "Comparison of Observed Data with 'Pilot' BEAM Scenario") %>%
   kable_styling()
 ```
 
-At first glance, these results seem to be quite good, as the simulated scenario reports similar ridership and wait time metrics to the real-world data. However, it is important to consider that our model scenario uses a 20% population sample, and the observed data reflects the entire population. The model ODT fleet, on the other hand, was not scaled down to match the population sample size, and so represents the full fleet available in the real-world pilot program.
-
-The fact that the predicted ridership and wait time is so similar to the actual, measured values is nevertheless encouraging. This suggests that the predicted ridership and wait times in the other modeled scenarios are a somewhat realistic forecast, albeit a rough approximation.
+At first glance, these results seem to be quite good, as the simulated scenario reports similar ridership and wait time metrics to the real-world data. However, it is important to consider that our model scenario uses a 20% population sample, and the observed data reflects the entire population. The model ODT fleet, on the other hand, was not scaled down to match the population sample size, and so represents the full fleet available in the real-world pilot program. The fact that the predicted ridership and wait time is so similar to the actual, measured values is nevertheless encouraging. This suggests that the predicted ridership and wait times in the other modeled scenarios are a somewhat realistic forecast, albeit a rough approximation.
 
 There is also a significant discrepancy in the utilization measurements. Because of the way utilization is calculated (passengers per hour per vehicle), the vehicle operating hours can greatly affect this metric. In our model scenario, all 12 of the ODT vehicles are operational nearly all day, and it is likely that in off-peak hours the actual pilot program had fewer vehicles available. If operating hours are taken to be only time that the ODT vehicles are in motion, then our modeled utilization becomes **TODO:** calculate this number.
 
 
 ## Candidate scenario comparison
-We then ran each of our scenarios as described in section \@ref(scenario-configuration), and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also include ***Other metrics***. These comparisons are given in Table \@ref(tab:scenario-compare), and a plot of the wait times in Figure \@ref(fig:wait-time-compare).
+We then ran each of our scenarios as described in section \@ref(scenario-configuration), and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes median income of ODT users. These comparisons are given in Table \@ref(tab:scenario-compare), and a plot of the wait times in Figure \@ref(fig:wait-time-compare).
 
 ```{r scenario-compare}
 tar_read(scenario_comparison) %>% 
