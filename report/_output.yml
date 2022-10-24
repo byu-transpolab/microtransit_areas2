@@ -18,7 +18,7 @@ bookdown::pdf_book:
 
 # bookdown::epub_book: default
 
-# bookdown::word_document2:
-#   toc: true
-#   reference_docx: reference.docx
-#   number_sections: true
+bookdown::word_document2:
+  toc: true
+  reference_docx: reference.docx
+  number_sections: true
