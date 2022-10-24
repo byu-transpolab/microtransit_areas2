@@ -1,6 +1,7 @@
 # Results
 
 ## Existing scenario evaluation
+
 UTA, in partnership with VIA, ran a pilot program of microtransit service in south Salt Lake County from December 2019--November 2020. UTA reported several metrics from this program, which are presented in Table \@ref(tab:uta-metrics). Much of the data in that report, however, is not necessarily representative, due to the COVID-19 pandemic and its onset in late March 2020. We also considered that the data for December was not necessarily valuable: since the service was new, people who would otherwise have used it may not have been accustomed to or even known about it. We therefore decided to use the average of the data from January through March as our benchmark.
 
 ```{r uta-metrics}
@@ -28,6 +29,7 @@ There is also a significant discrepancy in the utilization measurements. Because
 
 
 ## Candidate scenario comparison
+
 We then ran each of our scenarios as described in section \@ref(scenario-configuration), and compared several metrics. These metrics include total ridership, utilization, and wait time, as in the previous comparison, but also includes median income of ODT users. These comparisons are given in Table \@ref(tab:scenario-compare), and a plot of the wait times in Figure \@ref(fig:wait-time-compare).
 
 ```{r scenario-compare}
@@ -49,6 +51,8 @@ tar_read(scenario_comparison) %>%
 
 It is clear that in the scenarios with more microtransit vehicles available, ridership greatly increases. Interestingly, utilization does not vary much at all, which implies that at least in these specific scenarios there is a roughly linear relationship between number of vehicles and number of riders. This relationship can also be seen in the ratios of passengers to fleet size, as all of the vehicle operating hours are identical.
 
+The median income of all persons is the same in each scenario, namely \$53,100. In nearly all of the model scenarios, the median income of ODT users is over \$10,000 less than this value. This comparison highlights the question of equity: ODT services seem to offer significantly more benefit to lower-income individuals. This suggests that ODT services would be most effective, at least from an equity standpoint, in lower-income areas.
+
 ```{r wait-time-compare}
 #| fig.cap="Comparison of ODT wait times in each scenario."
 
@@ -62,7 +66,7 @@ tar_read(wait_time_list) %>%
        y = "Scenario")
 ```
 
-Wait times also hardly are affected in the various scenarios. Not only are the average wait times nearly identical between scenarios (as shown in Table \@ref(tab:scenario-compare)), the distribution of wait times is essentially the same as well. It is important to note though that these wait times represent only _fulfilled_ ODT requests. In BEAM, when an agent makes an ODT request they may afterward re-plan and choose a different mode. This decision is largely based on the projected wait time for the ODT vehicle, so a request that returns a long wait time will often result in a change to mode choice. Table \@ref(tab:odt-fulfillment) compares the proportion of fulfilled requests in each scenario.
+Wait times for ODT services are very similar in each scenario. Not only are the average wait times nearly identical between scenarios (as shown in Table \@ref(tab:scenario-compare)), the distribution of wait times is essentially the same as well. It is important to note though that these wait times represent only _fulfilled_ ODT requests. In BEAM, when an agent makes an ODT request they may afterward re-plan and choose a different mode. This decision is largely based on the projected wait time for the ODT vehicle, so a request that returns a long wait time will often result in a change to mode choice. Table \@ref(tab:odt-fulfillment) compares the proportion of fulfilled requests in each scenario.
 
 ```{r odt-fulfillment}
 tar_read(rh_fulfillment_comparison) %>%
@@ -72,11 +76,4 @@ tar_read(rh_fulfillment_comparison) %>%
   kable_styling()
 ```
 
-The proportion of ODT requests that were fulfilled does not vary much between the scenarios, though none of these values are particularly high. This shows that around 40%--45% of ODT requests return wait times considered too long, which results in a replanning of mode choice. This is 
-
-Notably, though, the value in the "Existing" scenario is somewhat higher than the rest. 
-
-
-## Summary
-
-In these scenarios, we found that there is a roughly linear relationship between ridership and fleet size, and that utilization and wait times are essentially unaffected. Additionally, the differences between the "Existing" and "Split" scenarios were minimal. It appears that the demand for ODT service is a direct result of the supply; none of these scenarios are over-supplying ODT vehicles.
+The proportion of ODT requests that were fulfilled does not vary much between the scenarios, though none of these values are particularly high. This shows that around 40%--45% of ODT requests return wait times considered too long, which results in a replanning of mode choice. The demand for ODT is clearly much higher than the supply, and so in our simulations the ODT fleets are fully saturated, regardless of which scenario is being run. This is further evidenced by the roughly linear relationship between fleet size and ridership (Table \@ref(tab:scenario-compare)). In fact, the proportion of unfulfilled ODT requests may be a good measure of fleet over-saturation, which could be useful in determining the optimal fleet size to match demand.
