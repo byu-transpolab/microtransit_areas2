@@ -32,13 +32,22 @@ We then ran each of our scenarios as described in section \@ref(scenario-configu
 
 ```{r scenario-compare}
 tar_read(scenario_comparison) %>% 
-  kbl(booktabs = TRUE, digits = c(0,0,0,2,1,0,0),
+  select(-Others) %>% 
+  mutate(`ODT Users` = paste0(
+    "$",
+    format(
+      `ODT Users`,
+      digits - 0,
+      big.mark = ","))
+  ) %>% 
+  rename("Median Income of ODT Users" = `ODT Users`) %>% 
+  kbl(booktabs = TRUE, digits = c(0,0,0,2,1,0),
       caption = "Comparison Across BEAM Scenarios") %>% 
-  add_header_above(c(" " = 5, "Median Income (USD)" = 2)) %>% 
+  # add_header_above(c(" " = 5, "Median Income (USD)" = 2)) %>% 
   kable_styling()
 ```
 
-It is clear that in the scenarios with more microtransit vehicles available, ridership greatly increases. Interestingly, utilization does not vary much at all, which implies that at least in these specific scenarios there is a roughly linear relationship between number of vehicles and number of riders. This relationship can also be seen in the ratios of passengers to fleet size, as all of the vehicle operating hours are identical. In fact, fitting a linear model to this data gives a predicted increase of about `r tar_read(model_riders_per_vehicle)` passengers per ODT vehicle.
+It is clear that in the scenarios with more microtransit vehicles available, ridership greatly increases. Interestingly, utilization does not vary much at all, which implies that at least in these specific scenarios there is a roughly linear relationship between number of vehicles and number of riders. This relationship can also be seen in the ratios of passengers to fleet size, as all of the vehicle operating hours are identical.
 
 ```{r wait-time-compare}
 #| fig.cap="Comparison of ODT wait times in each scenario."
@@ -53,7 +62,7 @@ tar_read(wait_time_list) %>%
        y = "Scenario")
 ```
 
-Wait times also hardly are affected in the various scenarios. Not only are the average wait times nearly identical between scenarios (as shown in Table \@ref(tab:scenario-compare)), the distribution of wait times is essentially the same as well. It is important to note though that these wait times represent only _fulfilled_ ODT requests. In BEAM, when an agent makes an ODT request they may afterward re-plan and choose a different mode. Often this decision is largely based on the projected wait time for the ODT vehicle, so a request that returns a long wait time will often result in a change to mode choice. Table \@ref(tab:odt-fulfillment) compares the proportion of fulfilled requests in each scenario.
+Wait times also hardly are affected in the various scenarios. Not only are the average wait times nearly identical between scenarios (as shown in Table \@ref(tab:scenario-compare)), the distribution of wait times is essentially the same as well. It is important to note though that these wait times represent only _fulfilled_ ODT requests. In BEAM, when an agent makes an ODT request they may afterward re-plan and choose a different mode. This decision is largely based on the projected wait time for the ODT vehicle, so a request that returns a long wait time will often result in a change to mode choice. Table \@ref(tab:odt-fulfillment) compares the proportion of fulfilled requests in each scenario.
 
 ```{r odt-fulfillment}
 tar_read(rh_fulfillment_comparison) %>%
@@ -63,7 +72,9 @@ tar_read(rh_fulfillment_comparison) %>%
   kable_styling()
 ```
 
-The proportion of ODT requests that were fulfilled also does not vary much between the scenarios. Notably, though, the values in the "Existing" and "All" scenarios are somewhat higher than the rest.
+The proportion of ODT requests that were fulfilled does not vary much between the scenarios, though none of these values are particularly high. This shows that around 40%--45% of ODT requests return wait times considered too long, which results in a replanning of mode choice. This is 
+
+Notably, though, the value in the "Existing" scenario is somewhat higher than the rest. 
 
 
 ## Summary
