@@ -46,8 +46,7 @@ The BEAM documentation [@beamdocs] lists the inputs required to run a BEAM scena
 - The microtransit/ODT fleet
 - Transit data in the form of GTFS archives
 
-These requirements are explained in greater detail in the following sections. For a full specification of the inputs, see the README at [https://github.com/byu-transpolab/microtransit_areas2/README.md]. Much of the work in creating these inputs was done by @MacfarlaneLant previously, though we have made modifications to better fit our analysis.
-
+<!-- These requirements are explained in greater detail in the following paragraphs. Much of the work in creating these inputs was done by @MacfarlaneLant previously, though we have made modifications to better fit our analysis. -->
 
 The configuration file lists nearly all of the parameters used in the scenario, including aspects such as the number of iterations to run and paths to the other relevant files. This is one of the few input files that differs between the various scenarios we ran, as inputs such as the population and network remained constant. The configuration file is the main file that BEAM uses to set up and run the given scenario.
 
@@ -88,7 +87,7 @@ tar_read(scenario_key) %>%
   kable_styling()
 ```
 
-All of the scenarios we ran had a nearly identical configuration. The main exception to this was the ODT fleet used. There are many configurable options in BEAM (the full configuration is available at [https://github.com/byu-transpolab/beam_scenarios]), but there are two worth mentioning here: sample size and number of iterations.
+All of the scenarios we ran had a nearly identical configuration. The main exception to this was the ODT fleet used. There are many configurable options in BEAM (the full configuration we used is available at (https://github.com/byu-transpolab/beam_scenarios/blob/main/scenarios/wfrc/configs/wfrc_base.conf)), but there are two worth mentioning here: sample size and number of iterations.
 
 Due to the computational power and time required to run BEAM, we were unable to run a full sample for any of our scenarios. We ultimately needed to decide on a balance between sample size and the number of iterations to run, as increasing one necessitated decreasing the other. We decided that 10 iterations was reasonable, as the smaller test scenarios seemed to mostly converge at that point. With 10 iterations, we were able to run a 20% population sample for each of our scenarios. This sampling was done entirely in BEAM; BEAM offers support for this natively. BEAM also offers scaling factors for network capacity, which we set to match our population sample size.
 
