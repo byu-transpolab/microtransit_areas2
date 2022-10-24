@@ -7,7 +7,14 @@ compare_scenarios <- function(riders, util, size, wait, income){
     Ridership = riders %>% unlist(),
     Utilization = util %>% unlist(),
     "Avg. Wait Time (min)" = purrr::map(wait, mean) %>% unlist()) %>% 
-    left_join(income, by = "Scenario")
+    left_join(income, by = "Scenario") %>% 
+    select(-Others) %>% 
+    mutate(
+      `ODT Users` = `ODT Users` %>% 
+        as.integer() %>% 
+        format(big.mark = ",") %>%
+        {paste0("$", .)}) %>% 
+    rename("Median Income of ODT Users" = `ODT Users`)
   
   comparison
 }
