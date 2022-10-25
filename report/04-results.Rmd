@@ -25,7 +25,8 @@ existing_comparison %>%
 
 At first glance, these results seem to be quite good, as the simulated scenario reports similar ridership and wait time metrics to the real-world data. However, it is important to consider that our model scenario uses a 20% population sample, and the observed data reflects the entire population. The model ODT fleet, on the other hand, was not scaled down to match the population sample size, and so represents the full fleet available in the real-world pilot program. The fact that the predicted ridership and wait time is so similar to the actual, measured values is nevertheless encouraging. This suggests that the predicted ridership and wait times in the other modeled scenarios are a somewhat realistic forecast, albeit a rough approximation.
 
-There is also a significant discrepancy in the utilization measurements. Because of the way utilization is calculated (passengers per hour per vehicle), the vehicle operating hours can greatly affect this metric. In our model scenario, all 12 of the ODT vehicles are operational nearly all day, and it is likely that in off-peak hours the actual pilot program had fewer vehicles available. If operating hours are taken to be only time that the ODT vehicles are in motion, then our modeled utilization becomes **TODO:** calculate this number.
+There is also a significant discrepancy in the utilization measurements. Because of the way utilization is calculated (passengers per hour per vehicle), the vehicle operating hours can greatly affect this metric. In our model scenario, all 12 of the ODT vehicles are operational nearly all day, and it is likely that in off-peak hours the actual pilot program had fewer vehicles available.
+<!-- If operating hours are taken to be only time that the ODT vehicles are in motion, then our modeled utilization becomes **TODO:** calculate this number. -->
 
 ## Candidate scenario comparison
 
