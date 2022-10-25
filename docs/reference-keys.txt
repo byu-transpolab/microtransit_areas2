@@ -11,9 +11,7 @@ outline-of-report
 literature-review
 overview
 purposes-and-description-of-on-demand-transit
-analysis-framework
 previous-attempts-to-model-on-demand-transit
-matsim-and-beam
 real-world-microtransit
 uta-on-demand-by-via
 summary
