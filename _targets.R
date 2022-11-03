@@ -168,6 +168,9 @@ viz_targets <- tar_plan(
   
   areas_map = make_areas_map(areas_file),
   
+  tar_target(flowchart_text, "report/flowchart", format = "file"),
+  flowchart = grViz(flowchart_text),
+  
   existing_comparison = compare_existing(
     UTA,
     pilot_ridership,
@@ -198,7 +201,7 @@ viz_targets <- tar_plan(
 render_targets <- tar_plan(
   flowme::tar_bookdown(
     input_dir = "report",
-    output_format = "all"),
+    output_format = "all")
 )
 
 ########### Run all targets ####################################################

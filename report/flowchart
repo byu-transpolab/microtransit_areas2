@@ -1,0 +1,36 @@
+digraph {
+
+  # sim nodes
+  node [shape = oval]
+  
+  ps [label = "PopulationSim", group = center]
+  as [label = "ActivitySim", group = center]
+  bm [label = "BEAM", group = center]
+  
+  # file nodes
+  node [shape = rectangle]
+  
+  cens [label = "Census \n Data"]
+  synth [label = "Synthetic \n Population", group = center]
+  choicea [label = "Choice \n Coefficients"]
+  se [label = "Zonal \n SE Data"]
+  skims [label = "Network \n Skims"]
+  plans [label = "Projected \n Plans", group = center]
+  choiceb [label = "Choice \n Coefficients"]
+  net [label = "Network"]
+  fleet [label = "ODT \n Fleet"]
+  gtfs [label = "Transit (GTFS) \n Information"]
+  config [label = "Configuration"]
+  out [label = "Output \n Plans/Events"]
+  
+  
+  # links
+  cens -> ps
+  ps -> synth
+  { choicea synth se skims } -> as
+  {rank=same choicea -> synth [style=invis]}
+  as -> plans
+  { plans choiceb net fleet gtfs config } -> bm
+  {rank=same fleet -> plans [style=invis]}
+  bm -> out
+}
