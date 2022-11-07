@@ -1,13 +1,11 @@
 digraph {
 
-  node [style = filled, fillcolor = powderblue]
-
   # sim nodes
   node [shape = oval]
   
   ps [label = "PopulationSim", group = center]
   as [label = "ActivitySim", group = center]
-  bm [label = "BEAM", group = center, fillcolor = none]
+  bm [label = "BEAM", group = center]
   
   # file nodes
   node [shape = rectangle]
@@ -18,9 +16,6 @@ digraph {
   se [label = "Zonal \n SE Data"]
   skims [label = "Network \n Skims"]
   plans [label = "Projected \n Plans", group = center]
-  
-  node [fillcolor = none]
-  
   choiceb [label = "Choice \n Parameters"]
   net [label = "Network"]
   fleet [label = "ODT \n Fleet"]
@@ -32,10 +27,10 @@ digraph {
   # links
   cens -> ps
   ps -> synth
-  { choicea synth se skims } -> as
+  {choicea synth se skims} -> as
   {rank=same choicea -> synth [style=invis]}
   as -> plans
-  { plans choiceb net fleet gtfs config } -> bm
+  {plans choiceb net fleet gtfs config} -> bm
   {rank=same fleet -> plans [style=invis]}
   bm -> out
 }
