@@ -1,0 +1,15 @@
+﻿label,text,group,shape,style
+p,PopulationSim,center,oval,solid
+a,ActivitySim,center,oval,solid
+b,BEAM,center,oval,solid
+cens,Census \n Data,center,rectangle,filled
+synth,Synthetic \n Population,center,rectangle,filled
+mca,Mode Choice \n Parameters,,rectangle,solid
+se,Zonal \n SE Data,,rectangle,filled
+skim,Network \n Skims,,rectangle,filled
+dap,Initial \n Population DAP,center,rectangle,solid
+mcb,Mode Choice \n Parameters,,rectangle,solid
+net,Network,,rectangle,solid
+odt,ODT \n Fleet,,rectangle,solid
+gtfs,Transit (GTFS) \n Information,,rectangle,solid
+out,Output \n Plans/Events,center,rectangle,solid
