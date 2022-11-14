@@ -7,7 +7,8 @@ ggspatial
 ggthemes
 ggeasy
 wesanderson
-flowme
 here
 targets
 DiagrammeR
+DiagrammeRsvg
+rsvg

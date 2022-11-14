@@ -29,7 +29,8 @@ r_files <- c(
   "R/summarize_events.R",
   "R/UTAOD_comparison.R",
   "R/prelim_comparison.R",
-  "R/maps.R"
+  "R/maps.R",
+  "R/flowchart.R"
 )
 purrr::map(r_files, source)
 
@@ -106,6 +107,12 @@ data_targets <- tar_plan(
     filter(Month %in% good_months) %>%
     pivot_uta(),
   
+  
+  #### Flowchart ###########################
+  
+  tar_target(fc_nodes, "data/flowchart_nodes.csv", format = "file"),
+  tar_target(fc_edges, "data/flowchart_edges.csv", format = "file")
+  
 )
 
 
@@ -168,8 +175,7 @@ viz_targets <- tar_plan(
   
   areas_map = make_areas_map(areas_file),
   
-  tar_target(flowchart_text, "report/flowchart", format = "file"),
-  flowchart = grViz(flowchart_text),
+  flowchart = create_pipeline_flowchart("image/flowchart.png", "png", 900, 900),
   
   existing_comparison = compare_existing(
     UTA,
@@ -196,20 +202,11 @@ viz_targets <- tar_plan(
   
 )
 
-
-
-render_targets <- tar_plan(
-  flowme::tar_bookdown(
-    input_dir = "report",
-    output_format = "all")
-)
-
 ########### Run all targets ####################################################
 
 tar_plan(
   data_targets,
   analysis_targets,
   pilot_targets,
-  viz_targets,
-  render_targets
+  viz_targets
 )
