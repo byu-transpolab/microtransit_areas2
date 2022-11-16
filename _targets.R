@@ -111,7 +111,13 @@ data_targets <- tar_plan(
   #### Flowchart ###########################
   
   tar_target(fc_nodes, "data/flowchart_nodes.csv", format = "file"),
-  tar_target(fc_edges, "data/flowchart_edges.csv", format = "file")
+  tar_target(fc_edges, "data/flowchart_edges.csv", format = "file"),
+  
+  
+  #### BEAM Calibration ####################
+  
+  tar_target(bm_targets, "data/beamtriptargets.csv", format = "file"),
+  tar_target(bm_calib_shares, "data/calibration_shares.csv", format = "file")
   
 )
 
