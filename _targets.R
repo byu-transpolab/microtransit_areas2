@@ -30,7 +30,7 @@ r_files <- c(
   "R/UTAOD_comparison.R",
   "R/prelim_comparison.R",
   "R/maps.R",
-  "R/flowchart.R"
+  "R/misc_viz.R"
 )
 purrr::map(r_files, source)
 
@@ -182,6 +182,9 @@ viz_targets <- tar_plan(
   areas_map = make_areas_map(areas_file),
   
   flowchart = create_pipeline_flowchart("image/flowchart.png", "png", 900, 900),
+  
+  beam_calib_graph = graph_beam_calibration(bm_calib_shares, bm_targets),
+  beam_calib_table = table_beam_calibration(bm_calib_shares, bm_targets),
   
   existing_comparison = compare_existing(
     UTA,
