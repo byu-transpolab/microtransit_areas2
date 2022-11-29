@@ -173,3 +173,40 @@ write_tables <- function(tables){
   }
   
 }
+
+
+# Graph mode choice convergence at iteration 11
+
+graph_mc_converge <- function(mc){
+  
+  mc2 <- mc %>% 
+    pivot_longer(-iterations, names_to = "mode", values_to = "trips") %>% 
+    mutate(mode = case_when(
+      str_detect(mode, "hov") ~ "Car",
+      str_detect(mode, "ride_hail") ~ "Ridehail",
+      str_detect(mode, "transit") ~ "Transit",
+      TRUE ~ str_to_title(mode))) %>% 
+    group_by(iterations, mode) %>% 
+    summarise(tot_trips = sum(trips)) %>% 
+    mutate(mode_share = tot_trips/sum(tot_trips))
+  
+  graph <- mc2 %>% 
+    ggplot(aes(x = iterations, y = mode_share, color = mode)) +
+    geom_line() +
+    geom_vline(aes(xintercept = 11)) +
+    theme_bw() +
+    labs(x = "Iteration",
+         y = "Mode Share",
+         color = "Mode")
+  
+  ggsave(
+    "image/mode_choice_convergence.png",
+    graph,
+    width = 6.5,
+    height = 4,
+    units = "in"
+  )
+  
+  graph
+  
+}

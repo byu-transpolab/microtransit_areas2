@@ -84,10 +84,11 @@ data_targets <- tar_plan(
   
   tar_target(areas_file, "data/areas.geojson", format = "file"),
   
-  
   tar_target(persons_file, "data/common/persons.csv.gz", format = "file"),
   persons = read_csv(persons_file),
   
+  tar_target(mc_converge_file, "data/modeChoiceConvergence.csv", format = "file"),
+  mc_converge = read_csv(mc_converge_file),
   
   #Names and types of cols to keep for events files
   tar_target(event_cols_file, "data/eventCols.csv", format = "file"),
@@ -184,6 +185,8 @@ viz_targets <- tar_plan(
   
   beam_calib_graph = graph_beam_calibration(bm_calib_shares, bm_targets),
   beam_calib_table = table_beam_calibration(bm_calib_shares, bm_targets),
+  
+  mode_choice_convergence_graph = graph_mc_converge(mc_converge),
   
   existing_comparison = compare_existing(
     UTA,

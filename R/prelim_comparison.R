@@ -103,16 +103,10 @@ graph_wait_times <- function(times_list){
   plot <- times_list %>% 
     ggplot(aes(x = wait_time, y = Scenario)) +
     geom_violin() +
-    stat_summary(fun = mean, geom = "crossbar", aes(color="Mean"),
-                 key_glyph = "vline") +
-    scale_color_manual(values = "black") +
+    stat_summary(fun = mean, geom = "crossbar") +
     labs(x = "Time between ODT request and fulfillment (minutes)",
-         y = "Scenario",
-         color = "") +
-    theme_bw() +
-    theme(legend.position = c(.9,.2),
-          legend.background = element_rect(color = "black"),
-          legend.title = element_blank())
+         y = "Scenario") +
+    theme_bw()
   
   ggsave(
     "image/wait_times_graph.png",
