@@ -37,7 +37,7 @@ list_wait_times <- function(wait_times){
   ) %>% 
     mutate(Scenario = factor(
       Scenario, levels = c(
-        "Existing", "Split", "EX + Davis", "EX + Lehi", "EX + Sandy", "All") %>%
+        "Existing", "Split", "Existing + Davis", "Existing + Lehi", "Existing + Sandy", "All") %>%
         rev()))
 
   comparison
@@ -93,4 +93,34 @@ compare_incomes <- function(incomes){
     rename("ODT Users" = rh_incomes,
            "Others" = other_incomes)
   
+}
+
+
+# Graph wait times
+
+graph_wait_times <- function(times_list){
+  
+  plot <- times_list %>% 
+    ggplot(aes(x = wait_time, y = Scenario)) +
+    geom_violin() +
+    stat_summary(fun = mean, geom = "crossbar", aes(color="Mean"),
+                 key_glyph = "vline") +
+    scale_color_manual(values = "black") +
+    labs(x = "Time between ODT request and fulfillment (minutes)",
+         y = "Scenario",
+         color = "") +
+    theme_bw() +
+    theme(legend.position = c(.9,.2),
+          legend.background = element_rect(color = "black"),
+          legend.title = element_blank())
+  
+  ggsave(
+    "image/wait_times_graph.png",
+    plot,
+    width = 6.5,
+    height = 4,
+    units = "in"
+  )
+  
+  plot
 }

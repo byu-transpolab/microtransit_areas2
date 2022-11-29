@@ -29,7 +29,6 @@ r_files <- c(
   "R/summarize_events.R",
   "R/UTAOD_comparison.R",
   "R/prelim_comparison.R",
-  "R/maps.R",
   "R/misc_viz.R"
 )
 purrr::map(r_files, source)
@@ -38,14 +37,14 @@ purrr::map(r_files, source)
 
 data_targets <- tar_plan(
   
-  tar_target(EX, "data/wfrc_existing_events.csv.gz", format = "file"),
+  tar_target(Existing, "data/wfrc_existing_events.csv.gz", format = "file"),
   tar_target(Split, "data/wfrc_split_events.csv.gz", format = "file"),
   tar_target(A, "data/wfrc_A_events.csv.gz", format = "file"),
   tar_target(B, "data/wfrc_B_events.csv.gz", format = "file"),
   tar_target(C, "data/wfrc_C_events.csv.gz", format = "file"),
   tar_target(D, "data/wfrc_D_events.csv.gz", format = "file"),
   
-  tar_target(EX_fleet, "data/rh_fleets/rhFleet_Existing.csv", format = "file"),
+  tar_target(Existing_fleet, "data/rh_fleets/rhFleet_Existing.csv", format = "file"),
   tar_target(Split_fleet, "data/rh_fleets/rhFleet_Split.csv", format = "file"),
   tar_target(A_fleet, "data/rh_fleets/rhFleet_A.csv", format = "file"),
   tar_target(B_fleet, "data/rh_fleets/rhFleet_B.csv", format = "file"),
@@ -58,20 +57,20 @@ data_targets <- tar_plan(
   pilot_fleet = read_ridehail_fleet(Pilot_fleet_file),
   
   scenarios = list(
-    Existing = data.table::fread(file = EX, select = event_cols),
+    Existing = data.table::fread(file = Existing, select = event_cols),
     Split = data.table::fread(file = Split, select = event_cols),
-    "EX + Davis" = data.table::fread(file = A, select = event_cols),
-    "EX + Lehi" = data.table::fread(file = B, select = event_cols),
-    "EX + Sandy" = data.table::fread(file = C, select = event_cols),
+    "Existing + Davis" = data.table::fread(file = A, select = event_cols),
+    "Existing + Lehi" = data.table::fread(file = B, select = event_cols),
+    "Existing + Sandy" = data.table::fread(file = C, select = event_cols),
     All = data.table::fread(file = D, select = event_cols)
   ),
   
   fleets = list(
-    Existing = read_ridehail_fleet(EX_fleet),
+    Existing = read_ridehail_fleet(Existing_fleet),
     Split = read_ridehail_fleet(Split_fleet),
-    "EX + Davis" = read_ridehail_fleet(A_fleet),
-    "EX + Lehi" = read_ridehail_fleet(B_fleet),
-    "EX + Sandy" = read_ridehail_fleet(C_fleet),
+    "Existing + Davis" = read_ridehail_fleet(A_fleet),
+    "Existing + Lehi" = read_ridehail_fleet(B_fleet),
+    "Existing + Sandy" = read_ridehail_fleet(C_fleet),
     All = read_ridehail_fleet(D_fleet)
   ),
   
@@ -206,8 +205,21 @@ viz_targets <- tar_plan(
   
   model_riders_per_vehicle = model_ridership(scenario_comparison),
   
-  wait_time_list = list_wait_times(
-    average_wait_times)
+  wait_time_list = list_wait_times(average_wait_times),
+  
+  wait_times_graph = graph_wait_times(wait_time_list)
+  
+  
+  
+  # written_tables <- write_tables(list(
+  #   beam_calibration = beam_calib_table,
+  #   zone_fleets = zone_info,
+  #   scenarios_info = scenario_key,
+  #   uta_metrics = UTA_table,
+  #   ex_comparison = existing_comparison,
+  #   scen_comparison = scenario_comparison,
+  #   rh_fulfillment = rh_fulfillment_comparison
+  # ))
   
 )
 
